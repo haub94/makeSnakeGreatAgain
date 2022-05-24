@@ -52,7 +52,7 @@ public class SoundManager : MonoBehaviour
         UpdateButtonIcon();
     }
 
-    // Daniel - 24.05.2022 - ButtonIcon ändern An->Aus bzw. Aus->An
+    // Daniel - 24.05.2022 - ButtonIcon aendern An->Aus bzw. Aus->An
     private void UpdateButtonIcon()
     {
         if (muted == false)

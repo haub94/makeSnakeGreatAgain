@@ -6,6 +6,14 @@ public class PauseMenu : MonoBehaviour
 {
 
     public GameObject pauseMenu;
+    public GameObject menu2;
+    public GameObject menu3;
+    public GameObject menu4;
+    public GameObject menu5;
+    public GameObject menu6;
+    public GameObject menu7;
+    public GameObject menu8;
+    public GameObject menu9;
     public bool gamePaused;
 
 void Start()
@@ -15,7 +23,7 @@ void Start()
 
 void Update()
 {
-    if (Input.GetKeyDown(KeyCode.Space))
+    if (Input.GetButtonDown("PauseMenu"))
     {
         PauseOrResume();
     }
@@ -47,6 +55,14 @@ public void Pause()
 public void Resume()
 {
     Time.timeScale = 1f;
-    pauseMenu.SetActive(false);
-}
+        pauseMenu.SetActive(false);
+        menu2.SetActive(false);
+        menu3.SetActive(false);
+        menu4.SetActive(false);
+        menu5.SetActive(false);
+        menu6.SetActive(false);
+        menu7.SetActive(false);
+        menu8.SetActive(false);
+        menu9.SetActive(false);
+    }
 }
