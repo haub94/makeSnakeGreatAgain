@@ -17,7 +17,7 @@ public class LevelGrid {
 
         SpawnFood();
 
-        FunctionPeriodic.Create(SpawnFood, 1f);
+        FunctionPeriodic.Create(SpawnFood, 1f);     //M: müsste das nicht (SpawnFood(), 1f) sein?
     }
     public void Setup (Snake snake) {
         this.snake = snake;

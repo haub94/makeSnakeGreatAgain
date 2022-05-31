@@ -9,7 +9,7 @@ public class Snake : MonoBehaviour
     private float gridMoveTimer;
     private float gridMoveTimerMax;
     private LevelGrid levelGrid;
-
+    public int lenght; //Markus: number of bodyparts for scoreCalculation()
     public void Setup(LevelGrid levelGrid) {
         this.levelGrid = levelGrid;
 
@@ -20,6 +20,9 @@ public class Snake : MonoBehaviour
         gridMoveTimerMax = 1f;
         gridMoveTimer = 0f;
         gridMoveDirection = new Vector2Int(1, 0);
+
+        //Markus: test-lenght scorCalculation()
+        lenght = 5;
     }
 
     private void Update() {

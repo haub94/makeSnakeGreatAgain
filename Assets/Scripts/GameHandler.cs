@@ -7,7 +7,7 @@ using CodeMonkey.Utils;
 public class GameHandler : MonoBehaviour {
 
     
-    [SerializeField] private Snake snake;
+    [SerializeField] private Snake snake;   //M: [SerializeField] und private sind equivalent -> nur eins von Beiden verwenden
     private LevelGrid levelGrid;
     
     private void Start() {
