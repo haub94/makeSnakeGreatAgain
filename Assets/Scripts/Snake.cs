@@ -9,8 +9,19 @@ public class Snake : MonoBehaviour
     private LevelGrid levelGrid;
     private float gridMoveTimer;
     private float gridMoveTimerMax;
-	public int lenght; //Markus: number of bodyparts for scoreCalculation()
+	private int lenght; //Markus: number of bodyparts for scoreCalculation()
 	
+    //getter and setter
+    //lenght
+    public void setLenght(int value) {
+        lenght = value;
+    }
+    public int getLenght() {
+        int returnLenght;
+
+        return returnLenght;
+    }
+
     public void Setup(LevelGrid levelGrid)
     {
         this.levelGrid = levelGrid;
@@ -28,6 +39,8 @@ public class Snake : MonoBehaviour
     {
         HandleInput();
         HandleGridMovement();
+        //test
+        setLenght(10);
     }
 
     private void HandleInput()
