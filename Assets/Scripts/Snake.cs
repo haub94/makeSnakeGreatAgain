@@ -9,15 +9,16 @@ public class Snake : MonoBehaviour
     private LevelGrid levelGrid;
     private float gridMoveTimer;
     private float gridMoveTimerMax;
-	private int lenght; //Markus: number of bodyparts for scoreCalculation()
+	[SerializeField] int lenght; //Markus: number of bodyparts for scoreCalculation()
 	
     //getter and setter
     //lenght
-    public void setLenght(int value) {
+    public void setLenght(int value) {  //funktioniert noch nicht 
         lenght = value;
+        
     }
     public int getLenght() {
-        int returnLenght;
+        int returnLenght = lenght;
 
         return returnLenght;
     }
@@ -29,18 +30,16 @@ public class Snake : MonoBehaviour
 
     private void Awake()
     {
-        gridPosition = new Vector2Int(10, 10);
-        gridMoveTimerMax = .3f;
+        gridPosition = new Vector2Int(3200, 500);
+        gridMoveTimerMax = .1f;
         gridMoveTimer = gridMoveTimerMax;
-        gridMoveDirection = new Vector2Int(1, 0);
+        gridMoveDirection = new Vector2Int(0, 1);
     }
 
     private void Update()
     {
         HandleInput();
         HandleGridMovement();
-        //test
-        setLenght(10);
     }
 
     private void HandleInput()

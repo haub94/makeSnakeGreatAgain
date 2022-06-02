@@ -44,9 +44,6 @@ public class scoreCalculator : MonoBehaviour
         //hier die berechnung machen
         Debug.Log("act snakelenght: " + snake.getLenght());
         setScorefield(snake.getLenght().ToString());
-
-        //show actual score in gamefield
         
-
     }
 }
