@@ -30,7 +30,7 @@ public class Snake : MonoBehaviour
 
     private void Awake()
     {
-        gridPosition = new Vector2Int(3200, 500);
+        gridPosition = new Vector2Int(100, 100);
         gridMoveTimerMax = .1f;
         gridMoveTimer = gridMoveTimerMax;
         gridMoveDirection = new Vector2Int(0, 1);
