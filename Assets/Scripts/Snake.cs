@@ -33,7 +33,7 @@ public class Snake : MonoBehaviour
         gridPosition = new Vector2Int(100, 100);
         gridMoveTimerMax = .5f; // Faktor fuer Aktualisierung der Schrittfrequenz ( 1f = 1sec )
         gridMoveTimer = gridMoveTimerMax;
-        gridMoveDirection = new Vector2Int(0, 50); // Daniel - 05.06.2022 - Werte geaendert für Movement in groeßeren Schritten zu Beginn (0, 1) -> (0, 50)
+        gridMoveDirection = new Vector2Int(0, 50); // Daniel - 05.06.2022 - Werte geaendert für Movement in groesseren Schritten zu Beginn (0, 1) -> (0, 50)
     }
 
     private void Update()
@@ -42,7 +42,7 @@ public class Snake : MonoBehaviour
         HandleGridMovement();
     }
 
-    // Daniel - 05.06.2022 - Werte geaendert für Movement in groeßeren Schritten ( 1 -> 50 )           !!!!!! Werte muessen aber noch an das Grid angepasst werden
+    // Daniel - 05.06.2022 - Werte geaendert fuer Movement in groesseren Schritten ( 1 -> 50 )           !!!!!! Werte muessen aber noch an das Grid angepasst werden
     private void HandleInput()
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
