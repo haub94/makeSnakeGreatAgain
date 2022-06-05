@@ -44,13 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f144ed8e70aa29640979ca584c1ac33d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseMenu: {fileID: 0}
-  menu2: {fileID: 0}
-  menu3: {fileID: 0}
-  menu4: {fileID: 0}
-  menu5: {fileID: 0}
-  menu6: {fileID: 0}
-  menu7: {fileID: 0}
-  menu8: {fileID: 0}
-  menu9: {fileID: 0}
+  pauseMenuButton: {fileID: 7671265816978344666, guid: 2df9b150389b74fb5a48c7ec5b3d2302, type: 3}
+  resumeGameButton: {fileID: 3605993708345196040, guid: f97ffbd11175a42b191bf0b3269c21fd, type: 3}
+  buttonPauseMenu: {fileID: 7671265816978344660, guid: 2df9b150389b74fb5a48c7ec5b3d2302, type: 3}
+  buttonAudioOnOff: {fileID: 8741114020824738707, guid: a767859b31f2647f9a75c0a1b1c0faac, type: 3}
+  pauseMenu: {fileID: 7714910227530681236, guid: df3c4e23c235347bb825b27780201859, type: 3}
+  einstellungsMenu: {fileID: 5736579328700020230, guid: 95938b4dbc47649498f8a06dfebae60b, type: 3}
+  anleitungsMenu: {fileID: 8746772146981330787, guid: 4c6d6152af7a345babea069fad9084db, type: 3}
+  highScoreMenu: {fileID: 2511493791463328992, guid: 6e49e4d5536124403811ff0021f3b92a, type: 3}
   gamePaused: 0
