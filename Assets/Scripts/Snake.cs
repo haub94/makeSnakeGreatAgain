@@ -31,9 +31,9 @@ public class Snake : MonoBehaviour
     private void Awake()
     {
         gridPosition = new Vector2Int(100, 100);
-        gridMoveTimerMax = .1f;
+        gridMoveTimerMax = .5f; // Faktor fuer Aktualisierung der Schrittfrequenz ( 1f = 1sec )
         gridMoveTimer = gridMoveTimerMax;
-        gridMoveDirection = new Vector2Int(0, 1);
+        gridMoveDirection = new Vector2Int(0, 50); // Daniel - 05.06.2022 - Werte geaendert für Movement in groeßeren Schritten zu Beginn (0, 1) -> (0, 50)
     }
 
     private void Update()
@@ -42,37 +42,38 @@ public class Snake : MonoBehaviour
         HandleGridMovement();
     }
 
+    // Daniel - 05.06.2022 - Werte geaendert für Movement in groeßeren Schritten ( 1 -> 50 )           !!!!!! Werte muessen aber noch an das Grid angepasst werden
     private void HandleInput()
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            if (gridMoveDirection.y != -1)
+            if (gridMoveDirection.y != -50)
             {
                 gridMoveDirection.x = 0;
-                gridMoveDirection.y = +1;
+                gridMoveDirection.y = 50;
             }
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            if (gridMoveDirection.y != +1)
+            if (gridMoveDirection.y != 50)
             {
                 gridMoveDirection.x = 0;
-                gridMoveDirection.y = -1;
+                gridMoveDirection.y = -50;
             }
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            if (gridMoveDirection.x != +1)
+            if (gridMoveDirection.x != 50)
             {
-                gridMoveDirection.x = -1;
+                gridMoveDirection.x = -50;
                 gridMoveDirection.y = 0;
             }
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if (gridMoveDirection.x != -1)
+            if (gridMoveDirection.x != -50)
             {
-                gridMoveDirection.x = +1;
+                gridMoveDirection.x = 50;
                 gridMoveDirection.y = 0;
             }
         }
