@@ -24,7 +24,7 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("PauseMenuSPACE") || Input.GetButtonDown("PauseMenuESC"))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             PauseOrResume();
         }
@@ -36,19 +36,18 @@ public class PauseMenu : MonoBehaviour
         if (gamePaused)
         {
             Resume();
-            gamePaused = false;
         }
         else
         {
             Pause();
-            gamePaused = true;
         }
     }
 
-    // Daniel - 24.05.2022 - Spiel anhalten und Menue anzeigen
+    // Daniel - 24.05.2022 - 05.06.2022 geupdatet - Spiel anhalten und Menue anzeigen
     public void Pause()
     {
         Time.timeScale = 0f;
+        gamePaused = true;
         buttonPauseMenu.SetActive(false);
         buttonAudioOnOff.SetActive(false);
         pauseMenu.SetActive(true);
@@ -57,9 +56,10 @@ public class PauseMenu : MonoBehaviour
         highScoreMenu.SetActive(false);
     }
 
-    // Daniel - 24.05.2022 - Spiel fortsetzen und Menue ausblenden
+    // Daniel - 24.05.2022 - 05.06.2022 geupdatet - Spiel fortsetzen und Menue ausblenden
     public void Resume()
     {
+        gamePaused = false;
         buttonPauseMenu.SetActive(true);
         buttonAudioOnOff.SetActive(true);
         pauseMenu.SetActive(false);

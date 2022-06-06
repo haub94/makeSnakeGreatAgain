@@ -9,15 +9,23 @@ public class Snake : MonoBehaviour
     private LevelGrid levelGrid;
     private float gridMoveTimer;
     private float gridMoveTimerMax;
-	[SerializeField] int lenght; //Markus: number of bodyparts for scoreCalculation()
-	
+    [SerializeField] int lenght; //Markus: number of bodyparts for scoreCalculation()
+    PauseMenu myPauseMenu;
+
+    public void Start()
+    {
+        myPauseMenu = GameObject.Find("Pause - Menu - Manager").GetComponent<PauseMenu>(); // Daniel - 06.06.2022 - Zugriff auf Variable aus PauseMenu Script
+    }
+
     //getter and setter
     //lenght
-    public void setLenght(int value) {  //funktioniert noch nicht 
+    public void setLenght(int value)
+    {  //funktioniert noch nicht 
         lenght = value;
-        
+
     }
-    public int getLenght() {
+    public int getLenght()
+    {
         int returnLenght = lenght;
 
         return returnLenght;
@@ -45,54 +53,60 @@ public class Snake : MonoBehaviour
     // Daniel - 05.06.2022 - Werte geaendert fuer Movement in groesseren Schritten ( 1 -> 50 )           !!!!!! Werte muessen aber noch an das Grid angepasst werden
     private void HandleInput()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (!myPauseMenu.gamePaused) // <- if-Befehl sperrt Bewegung wenn im Pausemenu - Daniel - 06.06.2022
         {
-            if (gridMoveDirection.y != -50)
+            if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                gridMoveDirection.x = 0;
-                gridMoveDirection.y = 50;
+                if (gridMoveDirection.y != -50)
+                {
+                    gridMoveDirection.x = 0;
+                    gridMoveDirection.y = 50;
+                }
             }
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            if (gridMoveDirection.y != 50)
+            if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                gridMoveDirection.x = 0;
-                gridMoveDirection.y = -50;
+                if (gridMoveDirection.y != 50)
+                {
+                    gridMoveDirection.x = 0;
+                    gridMoveDirection.y = -50;
+                }
             }
-        }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            if (gridMoveDirection.x != 50)
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                gridMoveDirection.x = -50;
-                gridMoveDirection.y = 0;
+                if (gridMoveDirection.x != 50)
+                {
+                    gridMoveDirection.x = -50;
+                    gridMoveDirection.y = 0;
+                }
             }
-        }
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            if (gridMoveDirection.x != -50)
+            if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                gridMoveDirection.x = 50;
-                gridMoveDirection.y = 0;
+                if (gridMoveDirection.x != -50)
+                {
+                    gridMoveDirection.x = 50;
+                    gridMoveDirection.y = 0;
+                }
             }
         }
     }
 
     private void HandleGridMovement()
     {
-        gridMoveTimer += Time.deltaTime;
-        if (gridMoveTimer >= gridMoveTimerMax)
+        if (!myPauseMenu.gamePaused) // <- if-Befehl sperrt Bewegung wenn im Pausemenu - Daniel - 06.06.2022
         {
-            gridMoveTimer -= gridMoveTimerMax;
-            gridPosition += gridMoveDirection;
-        }    
-        // snake head directions
+            gridMoveTimer += Time.deltaTime;
+            if (gridMoveTimer >= gridMoveTimerMax)
+            {
+                gridMoveTimer -= gridMoveTimerMax;
+                gridPosition += gridMoveDirection;
+            }
+            // snake head directions
             transform.position = new Vector3(gridPosition.x, gridPosition.y);
             transform.eulerAngles = new Vector3(0, 0, GetAngleFromVector(gridMoveDirection) - 90);
 
             levelGrid.SnakeMoved(gridPosition);
         }
+    }
 
     private float GetAngleFromVector(Vector2Int dir)
     {
@@ -100,7 +114,8 @@ public class Snake : MonoBehaviour
         if (n < 0) n += 360;
         return n;
     }
-    public Vector2Int GetGridPosition() {
+    public Vector2Int GetGridPosition()
+    {
         return gridPosition;
     }
 }
