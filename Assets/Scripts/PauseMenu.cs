@@ -13,6 +13,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject einstellungsMenu;
     public GameObject anleitungsMenu;
     public GameObject highScoreMenu;
+    public GameObject creditsMenu;
     public bool gamePaused;
 
     void Start()
@@ -54,6 +55,7 @@ public class PauseMenu : MonoBehaviour
         einstellungsMenu.SetActive(false);
         anleitungsMenu.SetActive(false);
         highScoreMenu.SetActive(false);
+        creditsMenu.SetActive(false);
     }
 
     // Daniel - 24.05.2022 - 05.06.2022 geupdatet - Spiel fortsetzen und Menue ausblenden
@@ -66,6 +68,7 @@ public class PauseMenu : MonoBehaviour
         einstellungsMenu.SetActive(false);
         anleitungsMenu.SetActive(false);
         highScoreMenu.SetActive(false);
+        creditsMenu.SetActive(false);
         Time.timeScale = 1f;
     }
 }
