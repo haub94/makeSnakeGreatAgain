@@ -1,12 +1,14 @@
 using System.Diagnostics;
-/*
-*Name:          scoreCalculator
-*Description:   The script calculates the highscore depending on the lenght of
-*               the snake and playtime.
-*Author(s):     Markus Haubold
-*Date:          2022-05-31
-*Version:       V1.0 
-*/
+/******************************************************************************
+Name:          scoreCalculator
+Description:   The script calculates the highscore depending on the lenght of
+               the snake and playtime.
+Author(s):     Markus Haubold
+Date:          2022-05-31
+Version:       V1.0 
+TODO:          - rename to scoreController
+               - 
+******************************************************************************/
 
 using System;
 using System.Collections;
@@ -39,8 +41,9 @@ public class scoreCalculator : MonoBehaviour
         setScorefield("0");
     }
 
-    //calculate the score (depends actually on snakelenght and playtime)
-    private double calculate(int lenght, float playtime, int bonusFactor1, int bonusFactor2) {
+    //calculate the actual score (depends on snakelenght)
+    private double calculate(int lenght, float playtime, int bonusFactor1, 
+    int bonusFactor2) {
         //function parameters
         double score = 0;
         const double a = 3.0;
@@ -51,15 +54,24 @@ public class scoreCalculator : MonoBehaviour
 
         if (x == 0) {
             score = 0;
-        
         } else
         {
             //function= (a*e^k*(x-(c)))+d with x=snakelenght
-        score = Math.Round(((a * Math.Exp(k*(x - (c)))) + d) * 100); // + (funktion playtime) + (function bF1) + (function bF2)    
+            score = Math.Round(((a * Math.Exp(k*(x - (c)))) + d) * 100); 
+            // + (funktion playtime) + (function bF1) + (function bF2)    
         }
         
         return score;
     }
+
+    //Wall of fame aka top five highscores
+
+
+
+
+
+
+
 
     // Update is called once per frame
     void Update()
