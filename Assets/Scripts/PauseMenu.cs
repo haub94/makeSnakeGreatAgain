@@ -1,68 +1,71 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
-
+    public Button pauseMenuButton;
+    public Button resumeGameButton;
+    public GameObject buttonPauseMenu;
+    public GameObject buttonAudioOnOff;
     public GameObject pauseMenu;
-    public GameObject menu2;
-    public GameObject menu3;
-    public GameObject menu4;
-    public GameObject menu5;
-    public GameObject menu6;
-    public GameObject menu7;
-    public GameObject menu8;
-    public GameObject menu9;
+    public GameObject einstellungsMenu;
+    public GameObject anleitungsMenu;
+    public GameObject highScoreMenu;
     public bool gamePaused;
 
-void Start()
-{
-    gamePaused = false;
-}
-
-void Update()
-{
-    if (Input.GetButtonDown("PauseMenu"))
+    void Start()
     {
-        PauseOrResume();
+        gamePaused = false;
+        pauseMenuButton.onClick.AddListener(Pause);
+        resumeGameButton.onClick.AddListener(Resume);
     }
-}
+
+    void Update()
+    {
+        if (Input.GetButtonDown("PauseMenuSPACE") || Input.GetButtonDown("PauseMenuESC"))
+        {
+            PauseOrResume();
+        }
+    }
 
     // Daniel - 24.05.2022 - pausiere das Spiel bzw. setze das Spiel fort
-public void PauseOrResume()
-{
-    if (gamePaused)
+    public void PauseOrResume()
     {
-        Resume();
-        gamePaused = false;
+        if (gamePaused)
+        {
+            Resume();
+            gamePaused = false;
+        }
+        else
+        {
+            Pause();
+            gamePaused = true;
+        }
     }
-    else
-    {
-        Pause();
-        gamePaused = true;
-    }
-}
 
     // Daniel - 24.05.2022 - Spiel anhalten und Menue anzeigen
-public void Pause()
-{
-    Time.timeScale = 0f;
-    pauseMenu.SetActive(true);
-}
+    public void Pause()
+    {
+        Time.timeScale = 0f;
+        buttonPauseMenu.SetActive(false);
+        buttonAudioOnOff.SetActive(false);
+        pauseMenu.SetActive(true);
+        einstellungsMenu.SetActive(false);
+        anleitungsMenu.SetActive(false);
+        highScoreMenu.SetActive(false);
+    }
 
     // Daniel - 24.05.2022 - Spiel fortsetzen und Menue ausblenden
-public void Resume()
-{
-    Time.timeScale = 1f;
+    public void Resume()
+    {
+        buttonPauseMenu.SetActive(true);
+        buttonAudioOnOff.SetActive(true);
         pauseMenu.SetActive(false);
-        menu2.SetActive(false);
-        menu3.SetActive(false);
-        menu4.SetActive(false);
-        menu5.SetActive(false);
-        menu6.SetActive(false);
-        menu7.SetActive(false);
-        menu8.SetActive(false);
-        menu9.SetActive(false);
+        einstellungsMenu.SetActive(false);
+        anleitungsMenu.SetActive(false);
+        highScoreMenu.SetActive(false);
+        Time.timeScale = 1f;
     }
 }
