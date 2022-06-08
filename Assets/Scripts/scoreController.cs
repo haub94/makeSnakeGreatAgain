@@ -16,9 +16,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class scoreCalculator : MonoBehaviour
+public class scoreController : MonoBehaviour
 {
     Snake snake;
+
+    //Highscore list output 
+    //names
+    public TextMeshProUGUI playername1;
+    [SerializeField] TextMeshProUGUI playername2;
+    [SerializeField] TextMeshProUGUI playername3;
+    [SerializeField] TextMeshProUGUI playername4;
+    [SerializeField] TextMeshProUGUI playername5;
+    //scores
+    public TextMeshProUGUI playerscore1;
+    [SerializeField] TextMeshProUGUI playerscore2;
+    [SerializeField] TextMeshProUGUI playerscore3;
+    [SerializeField] TextMeshProUGUI playerscore4;
+    [SerializeField] TextMeshProUGUI playerscore5;
+    
+    //scorefield gamefield
     private TextMeshProUGUI scorefield;
     
     //getter and setter
@@ -78,6 +94,7 @@ public class scoreCalculator : MonoBehaviour
     {
         //calculate and update score
         setScorefield(calculate(snake.getLenght(), 1, 1, 1).ToString());
-        
+        playername1.text = "hans";
+        playerscore1.text = "1000";
     }
 }
