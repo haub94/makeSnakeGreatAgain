@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PauseMenu : MonoBehaviour
+public class PauseMenu : MonoBehaviour /////////////////////////////////////////////////////////////////    pruefen ob bereits ein Spielername vergeben wurde und ein Inputfenster einblenden + evtl. var erstellen um startscreen frei zu geben
 {
     public Button pauseMenuButton;
     public Button resumeGameButton;
+    public Button startSingleplayerButton;
+    public Button startMultiplayerButton;
     public GameObject buttonPauseMenu;
     public GameObject buttonAudioOnOff;
     public GameObject pauseMenu;
@@ -14,18 +16,24 @@ public class PauseMenu : MonoBehaviour
     public GameObject anleitungsMenu;
     public GameObject highScoreMenu;
     public GameObject creditsMenu;
+    public GameObject startscreenMenu;
+    public bool gameStarted;
     public bool gamePaused;
 
     void Start()
     {
-        gamePaused = false;
+        gamePaused = true;
+        gameStarted = false;
+        // Daniel - 24.05.2022 - 08.06.2022 geupdatet - ClickEvent fuer IngameButtons. Diese starten folgende Funktionen
         pauseMenuButton.onClick.AddListener(Pause);
         resumeGameButton.onClick.AddListener(Resume);
+        startSingleplayerButton.onClick.AddListener(StartGame);
+        startMultiplayerButton.onClick.AddListener(StartGame);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (gameStarted && Input.GetKeyDown(KeyCode.Escape))
         {
             PauseOrResume();
         }
@@ -42,6 +50,13 @@ public class PauseMenu : MonoBehaviour
         {
             Pause();
         }
+    }
+    
+    // Daniel - 08.06.2022 - schaltet Variable fuer den Spielstart auf true und schlieﬂt Menue
+    public void StartGame()
+    {
+        gameStarted = true;
+        Resume();
     }
 
     // Daniel - 24.05.2022 - 05.06.2022 geupdatet - Spiel anhalten und Menue anzeigen
@@ -69,6 +84,7 @@ public class PauseMenu : MonoBehaviour
         anleitungsMenu.SetActive(false);
         highScoreMenu.SetActive(false);
         creditsMenu.SetActive(false);
+        startscreenMenu.SetActive(false);
         Time.timeScale = 1f;
     }
 }
