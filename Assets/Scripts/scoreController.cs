@@ -6,8 +6,8 @@ Description:   The script calculates the highscore depending on the lenght of
 Author(s):     Markus Haubold
 Date:          2022-05-31
 Version:       V1.0 
-TODO:          - rename to scoreController
-               - 
+TODO:          - scorefield genauso wie playername (public)
+               - private array, in welches die public textdaten eingepflegt werden
 ******************************************************************************/
 
 using System;
@@ -56,20 +56,18 @@ public class scoreController : MonoBehaviour
         scorefield = GetComponent<TextMeshProUGUI>();
         setScorefield("0");
 
-        //initialize Highscorelist
+        //initialize highscorelist
         //the very first run of the game => set keynames
         if (PlayerPrefs.GetString("playername1") == "") {
-            //Playerprefs empty
-            PlayerPrefs.SetString("playername1" , "who will be the 1st?!");
-            PlayerPrefs.SetString("playerscore1" , "000");
-            PlayerPrefs.SetString("playername2" , "who will be the 2nd?!");
-            PlayerPrefs.SetString("playerscore2" , "000");
-            PlayerPrefs.SetString("playername3" , "who will be the 3rd?!");
-            PlayerPrefs.SetString("playerscore3" , "000");
-            PlayerPrefs.SetString("playername4" , "who will be the 4th?!");
-            PlayerPrefs.SetString("playerscore4" , "000");
-            PlayerPrefs.SetString("playername5" , "who will be the 5th?!");
-            PlayerPrefs.SetString("playerscore5" , "000");
+            String keynameName;
+            String keynameScore;
+
+            for (int index = 1; index < 6; index++) {
+                keynameName = "playername" + index;
+                keynameScore = "playerscore" + index;
+                PlayerPrefs.SetString(keynameName , "Wer wird Platz " + index + " belegen?!");
+                PlayerPrefs.SetString(keynameScore , "000");
+            }
         }
         //read values from playerprefs
         playername1.text = PlayerPrefs.GetString("playername1");
@@ -109,21 +107,26 @@ public class scoreController : MonoBehaviour
 
     //Wall of fame aka top five highscores
     public bool refreshHighscoreList() {
+        int[] oldPlayerscore = new int[6];
         
+        playerscore1.text = "999999"; //nur für debug
+        //prepare scoretext for for-sequenz
+        oldPlayerscore[1] = Int32.Parse(playerscore1.text);
+        oldPlayerscore[2] = Int32.Parse(playerscore2.text);
+        oldPlayerscore[3] = Int32.Parse(playerscore3.text);
+        oldPlayerscore[4] = Int32.Parse(playerscore4.text);
+        oldPlayerscore[5] = Int32.Parse(playerscore5.text);
+
+
         return true;
     }
-
-
-
-
-
 
 
     // Update is called once per frame
     void Update()
     {
-        //calculate and update score
+        //calculate and update scorefield
         setScorefield(calculate(snake.getLenght(), 1, 1, 1).ToString());
-
+        bool tmp = refreshHighscoreList();
     }
 }
