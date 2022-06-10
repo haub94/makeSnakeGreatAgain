@@ -1,3 +1,14 @@
+/******************************************************************************
+Name:          
+Description:   
+               
+Author(s):     
+Date:          
+Version:       V1.0 
+TODO:          - comments in english!!!
+               - camelCase-notation!!!
+******************************************************************************/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,7 +52,7 @@ public class Snake : MonoBehaviour
         gridPosition = new Vector2Int(100, 100);
         gridMoveTimerMax = .5f; // Faktor fuer Aktualisierung der Schrittfrequenz ( 1f = 1sec )
         gridMoveTimer = gridMoveTimerMax;
-        gridMoveDirection = new Vector2Int(0, 50); // Daniel - 05.06.2022 - Werte geaendert für Movement in groesseren Schritten zu Beginn (0, 1) -> (0, 50)
+        gridMoveDirection = new Vector2Int(0, 50); // Daniel - 05.06.2022 - Werte geaendert fï¿½r Movement in groesseren Schritten zu Beginn (0, 1) -> (0, 50)
     }
 
     private void Update()
