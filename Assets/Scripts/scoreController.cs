@@ -93,7 +93,6 @@ public class scoreController : MonoBehaviour
         return  returnValue;
     }
     public void setPlayerscoreAsInt(int index, int value, bool initialize) {
-        UnityEngine.Debug.Log("converter" + initialize);
         //int returnValue = 0;
         if (initialize) {   //initialize array
             playerscoreAsInt[1] = Int32.Parse(playerscore1.text);
@@ -102,7 +101,6 @@ public class scoreController : MonoBehaviour
             playerscoreAsInt[4] = Int32.Parse(playerscore4.text);
             playerscoreAsInt[5] = Int32.Parse(playerscore5.text);*/
             
-
             //debug
             if (debugModeOn) {
                 UnityEngine.Debug.Log("INIT DONE: " + 
@@ -141,7 +139,7 @@ public class scoreController : MonoBehaviour
         return score;
     }
 
-    //wall of fame aka top five highscores
+    //refresh / upddate highscore window
     public bool refreshHighscoreList() {
         
         
@@ -150,22 +148,36 @@ public class scoreController : MonoBehaviour
         return true;
     }
 
-    //write Playerprefs for debug
-    private void debugWritePlayerpref(String keyname, String value) {
-        PlayerPrefs.SetString(keyname , value);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //calculate and update scorefield
-        setScorefield(calculate(snake.getLenght(), 1, 1, 1).ToString());
-        
+    //debug stuff
+    //main debug
+    private void debugArea() {
         debugWritePlayerpref("playername1", "debugPlayername");
         debugWritePlayerpref("playerscore1", "123456");
 
         setPlayerscoreAsInt(0, 0, true);
-        UnityEngine.Debug.Log("playerscore: " + getPlayerscoreAsInt(1));
+        log("playerscore: ", getPlayerscoreAsInt(1), 0);
+    }
+    //write Playerprefs for debug
+    private void debugWritePlayerpref(String keyname, String value) {
+        PlayerPrefs.SetString(keyname , value);
+    }
+    //log shorthand
+    private void log(String message, int intValue1, int intValue2) {
+        UnityEngine.Debug.Log(message + " " + intValue1 + " " + intValue2);
+    }
+
+
+    // Update is called once per frame
+    void Update()
+    {
+       if (debugModeOn) {
+        debugArea();
+        log("DEBUG-MODE ACTIVE!!!", 0, 0);
+       }
+
+        //calculate and update scorefield
+        setScorefield(calculate(snake.getLenght(), 1, 1, 1).ToString());
+        
 
     }
 }
