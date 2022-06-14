@@ -1,14 +1,16 @@
-/******************************************************************************
-Name:          LevelGrid
+/**********************************************************************************************************************
+Name:           LevelGrid
 Description:   
                
-Author(s):     
+Author(s):      Adel Kharbout
+                Markus Haubold (function and dependencies: spawnFood())
 Date:          
 Version:       V1.0 
 TODO:          - implement postionController(): check every frame: collision snake<->snake && snake<-->wall
                - destroy food after eat it
-               - camelCase-notation!!!
-******************************************************************************/
+               - camelCase-notation
+               - getter and setter
+**********************************************************************************************************************/
 
 using System.Collections;
 using System.Collections.Generic;
@@ -25,14 +27,11 @@ public class LevelGrid
     private int width;
     private int height;
 
-    private bool testModeSpawnOn = true;  //true = spawn apple in rectangle 200x200
-
-    public LevelGrid(int width, int height)
-    {
+    public LevelGrid(int width, int height) {
         this.width = width;
         this.height = height;
 
-        spawnFood();    //spawn first and after eating
+        spawnFood();    //spawn the very first food
         //FunctionPeriodic.Create(SpawnFood, 0.001f); OLD but do not delete!
     }
 
@@ -41,16 +40,12 @@ public class LevelGrid
         this.snake = snake;
     }
 
-    private void spawnFood()
-    {
-        if (testModeSpawnOn == true) {
-            foodGridPosition = new Vector2Int(Random.Range(borderFoodSpawn, 500), 
-            Random.Range(borderFoodSpawn, 500));
-        } else {
-            foodGridPosition = new Vector2Int(Random.Range(borderFoodSpawn, width), 
-            Random.Range(borderFoodSpawn, height));
-        }
-        
+    
+    private void spawnFood() {
+        //generate random position 
+        foodGridPosition = new Vector2Int(Random.Range(borderFoodSpawn, width), 
+        Random.Range(borderFoodSpawn, height));
+        //foodGameObject settings
         foodGameObject = new GameObject("Food", typeof(SpriteRenderer));
         foodGameObject.GetComponent<Renderer>().sortingOrder = 4;                               //set food at layer 4 (green background = layer 1 to 3)
         foodGameObject.GetComponent<Renderer>().transform.localScale = foodScale;               //scale food
@@ -71,16 +66,11 @@ public class LevelGrid
     */
     }
 
-    public void SnakeMoved(Vector2Int snakeGridPosition)
-    {
-        Debug.Log("snakeMoved executed!!!!!");
-        if ((snakeGridPosition.x == foodGridPosition.x) && (snakeGridPosition.y == foodGridPosition.y)) //not tested!
-        {
+    public void SnakeMoved(Vector2Int snakeGridPosition) {
+        if (snakeGridPosition == foodGridPosition) {
             Debug.Log("snake auf food!!!!!");
             Object.Destroy(foodGameObject);
-            spawnFood();
+            spawnFood();    //Markus: spawn new food if the old one was eaten
         }
-
-
     }
 }
