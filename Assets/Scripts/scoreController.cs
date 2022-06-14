@@ -2,6 +2,7 @@
 Name:          scoreCalculator
 Description:   The script calculates the highscore depending on the lenght of
                the snake and playtime.
+               read data: PlayerPrefs <-- Textfield <-- playerScoreAsInt
 Author(s):     Markus Haubold
 Date:          2022-05-31
 Version:       V1.0 
@@ -36,7 +37,7 @@ public class scoreController : MonoBehaviour
     
     //scorefield gamefield
     private TextMeshProUGUI scorefield;
-    private int[] playerscoreAsInt = new int[6];
+    private int[] playerscoreAsInt = new int[6]; //value max highscores in list +1 for actual score (see bubblesort)
     //switch on for debug stuff
     private const bool debugModeOn = true;
     public string snakePlayerName = "horstiHorst94"; //Platzhalter
@@ -82,35 +83,47 @@ public class scoreController : MonoBehaviour
     //playerscoreAsInt
     public int getPlayerscoreAsInt(int index) {
         int returnValue = 0;
-        returnValue = playerscoreAsInt[index];
-        
+        //read playerscore only if the index is within the range of the array (0-5)
+        if (index.InRangeOf(0, 5)) {
+            log("test io", 0, 0);
+        }
+
+        if ((index >= 0) && (index <= 5)) {
+            returnValue = playerscoreAsInt[index];
+        }
         return  returnValue;
     }
     public void setPlayerscoreAsInt(bool all, byte index, int value) {
         //int returnValue = 0;
         if (all) {   //initialize array
-            playerscoreAsInt[1] = Int32.Parse(playerscore1.text);
-            playerscoreAsInt[2] = Int32.Parse(playerscore2.text);
-            playerscoreAsInt[3] = Int32.Parse(playerscore3.text);
-            playerscoreAsInt[4] = Int32.Parse(playerscore4.text);
-            playerscoreAsInt[5] = Int32.Parse(playerscore5.text);
+            playerscoreAsInt[0] = Int32.Parse(playerscore1.text);
+            playerscoreAsInt[1] = Int32.Parse(playerscore2.text);
+            playerscoreAsInt[2] = Int32.Parse(playerscore3.text);
+            playerscoreAsInt[3] = Int32.Parse(playerscore4.text);
+            playerscoreAsInt[4] = Int32.Parse(playerscore5.text);
+            playerscoreAsInt[5] = 0; //needed for bubblesort
             
             //debug
             if (debugModeOn) {
                 UnityEngine.Debug.Log("INIT DONE: " + 
+                playerscoreAsInt[0] + " | " +
                 playerscoreAsInt[1] + " | " +
                 playerscoreAsInt[2] + " | " +
                 playerscoreAsInt[3] + " | " +
-                playerscoreAsInt[4] + " | " +
-                playerscoreAsInt[5]);
+                playerscoreAsInt[4]);
             }
-        } 
-        if (!all && (index > 0)) {
+        }
+        //write single index only if the index is within the range of the array (0-5)
+        if (!all && (index >= 0) && (index <= 5)) {
             playerscoreAsInt[index] = value;
         }
     }
     
     
+
+
+
+
     private void copyPlayerprefsToHighscore(bool all, byte index) {
         if (all) {
             playername1.text = PlayerPrefs.GetString("playername1");
@@ -149,7 +162,9 @@ public class scoreController : MonoBehaviour
         }
     }
 
-
+    private bool inRangeOfInt(int value, int lowBound, int highBound) {
+        if ((value >=) && ())
+    }
 
     //calculate the actual score (depends on snakelenght)
     private double calculate(int lenght, float playtime, int bonusFactor1, int bonusFactor2) {
@@ -175,17 +190,30 @@ public class scoreController : MonoBehaviour
 
     //refresh / upddate highscore window
     public bool refreshHighscoreList() {
-        for (byte index = 1; index < 6; index++) {
-            if (Int32.Parse(getScorefield()) >= getPlayerscoreAsInt(index)) {
+        int actualScore = Int32.Parse(getScorefield());
+    
+        
+        //do nothing with the score if it is lower that the one from the 5th place 
+        if (actualScore < getPlayerscoreAsInt(5)) {
+            //quitt
+            return true;
+        }
+        
+
+
+
+        //geht nicht 
+        /*for (byte index = 1; index < 6; index++) {
+            if (actualScore >= getPlayerscoreAsInt(index)) {
                 //sort scores if necessary
-                PlayerPrefs.SetString("playername" + index, snakePlayerName);    //name wahrscheinlich nochmal anpassen, wenn in snake vorhanden
+                PlayaerPrefs.SetString("playername" + index, snakePlayerName);    //name wahrscheinlich nochmal anpassen, wenn in snake vorhanden
                 PlayerPrefs.SetString("playerscore" + index, getScorefield());
                 copyPlayerprefsToHighscore(false, index);
 
                 log("highscore refresh done", Int32.Parse(getScorefield()), getPlayerscoreAsInt(index));
                 return true;
             } 
-        }
+        }*/
         return false;
     }
 
@@ -193,7 +221,7 @@ public class scoreController : MonoBehaviour
     //main debug
     private void debugArea() {
         log("DEBUG-MODE ACTIVE!!!", 0, 0);
-        
+        setPlayerscoreAsInt(false, 1, 1);
     }
     //write Playerprefs for debug
     private void debugWritePlayerpref(String keyname, String value) {
