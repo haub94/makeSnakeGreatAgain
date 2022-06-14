@@ -23,26 +23,25 @@ public class scoreController : MonoBehaviour
 
     //Highscore list output 
     //names
-    public TextMeshProUGUI playername1;
-    public TextMeshProUGUI playername2;
-    public TextMeshProUGUI playername3;
-    public TextMeshProUGUI playername4;
-    public TextMeshProUGUI playername5;
+    public TextMeshProUGUI highscoreName0;
+    public TextMeshProUGUI highscoreName1;
+    public TextMeshProUGUI highscoreName2;
+    public TextMeshProUGUI highscoreName3;
+    public TextMeshProUGUI highscoreName4;
     //scores
-    public TextMeshProUGUI playerscore1;
-    public TextMeshProUGUI playerscore2;
-    public TextMeshProUGUI playerscore3;
-    public TextMeshProUGUI playerscore4;
-    public TextMeshProUGUI playerscore5;
+    public TextMeshProUGUI highscoreValue0;
+    public TextMeshProUGUI highscoreValue1;
+    public TextMeshProUGUI highscoreValue2;
+    public TextMeshProUGUI highscoreValue3;
+    public TextMeshProUGUI highscoreValue4;
     
     //scorefield gamefield
     private TextMeshProUGUI scorefield;
-    private int[] playerscoreAsInt = new int[6]; //value max highscores in list +1 for actual score (see bubblesort)
+    private int[] highscoreAsInt = new int[6]; //value max highscores in list +1 for actual score (see bubblesort)
     //switch on for debug stuff
-    private const bool debugModeOn = true;
+    private const bool debugModeOn = false;
     public string snakePlayerName = "horstiHorst94"; //Platzhalter
     public bool gameover;   //PLatzhalter
-
 
     public string testScore;
 
@@ -56,15 +55,15 @@ public class scoreController : MonoBehaviour
         //initialize highscorelist
         //the very first run of the game => set keynames for Playerprefs
         //check only the 1st place because if there was a first game, the score will be the 1st place
-        if (PlayerPrefs.GetString("playername1") == "") {
+        if (PlayerPrefs.GetString("highscoreName1") == "") {
             for (byte index = 1; index < 6; index++) {
-                PlayerPrefs.SetString("playername" + index , "Wer wird Platz " + index + " belegen?!");
-                PlayerPrefs.SetString("playerscore" + index , "123");
+                PlayerPrefs.SetString("highscoreName" + index , "Wer wird Platz " + index + " belegen?!");
+                PlayerPrefs.SetString("highscoreValue" + index , "123");
             }
         }
         //values from playerprefs --> playername/score.text --> playername/scoreAsInt
-        copyPlayerprefsToHighscore(true, 0);
-        setPlayerscoreAsInt(true, 0, 0);
+        copyPlayerprefsToTextfields(true, 0);
+        setHighscoreAsInt(true, 0, 0);
 
         //initilize array from setPlayerscoreAsInt
         
@@ -81,89 +80,96 @@ public class scoreController : MonoBehaviour
         scorefield.text = value;
     }
     //playerscoreAsInt
-    public int getPlayerscoreAsInt(int index) {
+    public int getHighscoreAsInt(int index) {
         int returnValue = 0;
         //read playerscore only if the index is within the range of the array (0-5)
-        if (index.InRangeOf(0, 5)) {
-            log("test io", 0, 0);
+        if (inRangeOfInt(index, 0, 5)) {
+            returnValue = highscoreAsInt[index];
         }
 
-        if ((index >= 0) && (index <= 5)) {
-            returnValue = playerscoreAsInt[index];
-        }
         return  returnValue;
     }
-    public void setPlayerscoreAsInt(bool all, byte index, int value) {
+    public void setHighscoreAsInt(bool all, int index, int value) {
         //int returnValue = 0;
         if (all) {   //initialize array
-            playerscoreAsInt[0] = Int32.Parse(playerscore1.text);
-            playerscoreAsInt[1] = Int32.Parse(playerscore2.text);
-            playerscoreAsInt[2] = Int32.Parse(playerscore3.text);
-            playerscoreAsInt[3] = Int32.Parse(playerscore4.text);
-            playerscoreAsInt[4] = Int32.Parse(playerscore5.text);
-            playerscoreAsInt[5] = 0; //needed for bubblesort
-            
-            //debug
-            if (debugModeOn) {
-                UnityEngine.Debug.Log("INIT DONE: " + 
-                playerscoreAsInt[0] + " | " +
-                playerscoreAsInt[1] + " | " +
-                playerscoreAsInt[2] + " | " +
-                playerscoreAsInt[3] + " | " +
-                playerscoreAsInt[4]);
-            }
+            highscoreAsInt[0] = Int32.Parse(highscoreValue0.text);
+            highscoreAsInt[1] = Int32.Parse(highscoreValue1.text);
+            highscoreAsInt[2] = Int32.Parse(highscoreValue2.text);
+            highscoreAsInt[3] = Int32.Parse(highscoreValue3.text);
+            highscoreAsInt[4] = Int32.Parse(highscoreValue4.text);
+            highscoreAsInt[5] = 0; //needed for bubblesort
         }
         //write single index only if the index is within the range of the array (0-5)
-        if (!all && (index >= 0) && (index <= 5)) {
-            playerscoreAsInt[index] = value;
+        if (!all && inRangeOfInt(index, 0, 5)) {
+            highscoreAsInt[index] = value;
+            log("setHighscore: ", index, value);
         }
     }
     
     
-
-
-
-
-    private void copyPlayerprefsToHighscore(bool all, byte index) {
+    private void copyPlayerprefsToTextfields(bool all, byte index) {
         if (all) {
-            playername1.text = PlayerPrefs.GetString("playername1");
-            playerscore1.text = PlayerPrefs.GetString("playerscore1");
-            playername2.text = PlayerPrefs.GetString("playername2");
-            playerscore2.text = PlayerPrefs.GetString("playerscore2");
-            playername3.text = PlayerPrefs.GetString("playername3");
-            playerscore3.text = PlayerPrefs.GetString("playerscore3");
-            playername4.text = PlayerPrefs.GetString("playername4");
-            playerscore4.text = PlayerPrefs.GetString("playerscore4");
-            playername5.text = PlayerPrefs.GetString("playername5");
-            playerscore5.text = PlayerPrefs.GetString("playerscore5");
+            highscoreName0.text = PlayerPrefs.GetString("highscoreName0");
+            highscoreValue0.text = PlayerPrefs.GetString("highscoreValue0");
+            highscoreName1.text = PlayerPrefs.GetString("highscoreName1");
+            highscoreValue1.text = PlayerPrefs.GetString("highscoreValue1");
+            highscoreName2.text = PlayerPrefs.GetString("highscoreName2");
+            highscoreValue2.text = PlayerPrefs.GetString("highscoreValue2");
+            highscoreName3.text = PlayerPrefs.GetString("highscoreName3");
+            highscoreValue3.text = PlayerPrefs.GetString("highscoreValue3");
+            highscoreName4.text = PlayerPrefs.GetString("highscoreName4");
+            highscoreValue4.text = PlayerPrefs.GetString("highscoreValue4");
         } else {
             switch (index) {
                 case 1:
-                    playername1.text = PlayerPrefs.GetString("playername1");
-                    playerscore1.text = PlayerPrefs.GetString("playerscore1");
+                    highscoreName0.text = PlayerPrefs.GetString("highscoreName0");
+                    highscoreValue0.text = PlayerPrefs.GetString("highscoreValue0");
                     break;
                 case 2:
-                    playername2.text = PlayerPrefs.GetString("playername2");
-                    playerscore2.text = PlayerPrefs.GetString("playerscore2");
+                    highscoreName1.text = PlayerPrefs.GetString("highscoreName0");
+                    highscoreValue1.text = PlayerPrefs.GetString("highscoreValue0");
                     break;
                 case 3:
-                    playername3.text = PlayerPrefs.GetString("playername3");
-                    playerscore3.text = PlayerPrefs.GetString("playerscore3");
+                    highscoreName2.text = PlayerPrefs.GetString("highscoreName0");
+                    highscoreValue3.text = PlayerPrefs.GetString("highscoreValue0");
                     break;
                 case 4:
-                    playername4.text = PlayerPrefs.GetString("playername4");
-                    playerscore4.text = PlayerPrefs.GetString("playerscore4");
+                    highscoreName3.text = PlayerPrefs.GetString("highscoreName0");
+                    highscoreValue3.text = PlayerPrefs.GetString("highscoreValue0");
                     break;
                 case 5:
-                    playername5.text = PlayerPrefs.GetString("playername5");
-                    playerscore5.text = PlayerPrefs.GetString("playerscore5");
+                    highscoreName4.text = PlayerPrefs.GetString("highscoreName0");
+                    highscoreValue4.text = PlayerPrefs.GetString("highscoreValue0");
                     break;
             }
         }
     }
 
+    private void copyHighscoreToPlayerPrefs(bool all, int index) {
+        int actualScore;
+        string keyname;
+        if (all) {
+            for (int internalIndex = 0; internalIndex < 5; internalIndex++) {
+                actualScore = getHighscoreAsInt(internalIndex);
+                keyname = "highscoreValue" + internalIndex;
+                PlayerPrefs.SetString(keyname, actualScore.ToString());
+            }
+        }
+        if (!all && inRangeOfInt(index, 0, 4)) {
+            actualScore = getHighscoreAsInt(index);
+            keyname = "highscoreValue" + index;
+            PlayerPrefs.SetString(keyname, actualScore.ToString());
+        }
+        PlayerPrefs.Save();
+    }
+
+    //check if the given value is within a range 
     private bool inRangeOfInt(int value, int lowBound, int highBound) {
-        if ((value >=) && ())
+        if ((value >= lowBound) && (value <= highBound)) {
+            return true;
+        }
+
+        return false;
     }
 
     //calculate the actual score (depends on snakelenght)
@@ -178,8 +184,7 @@ public class scoreController : MonoBehaviour
 
         if (x == 0) {
             score = 0;
-        } else
-        {
+        } else {
             //function= (a*e^k*(x-(c)))+d with x=snakelenght
             score = Math.Round(((a * Math.Exp(k*(x - (c)))) + d) * 100); 
             // + (funktion playtime) + (function bF1) + (function bF2)    
@@ -190,30 +195,46 @@ public class scoreController : MonoBehaviour
 
     //refresh / upddate highscore window
     public bool refreshHighscoreList() {
-        int actualScore = Int32.Parse(getScorefield());
-    
-        
-        //do nothing with the score if it is lower that the one from the 5th place 
-        if (actualScore < getPlayerscoreAsInt(5)) {
+        int actualScore;
+        int tempMemory;
+        int.TryParse(getScorefield(), out actualScore);
+        setHighscoreAsInt(false, 5, actualScore);
+
+        //do nothing with the score if it is lower than the one from the 5th place 
+        /*if (actualScore < getHighscoreAsInt(4)) {
             //quitt
             return true;
-        }
+        }*/
         
 
+        foreach(int aa in highscoreAsInt) {
+            UnityEngine.Debug.Log("vorher: " + aa);
+        }
 
+        //bubblesort: sort the actual score into the highscorelist
+        for (byte sortCycle = 0; sortCycle <= 4; sortCycle++)
+            {
+                for (int index = 0; index <= 4; index++)
+                {
+                    if (getHighscoreAsInt(index) < getHighscoreAsInt(index + 1))
+                    {
+                        tempMemory = getHighscoreAsInt(index + 1);
+                        setHighscoreAsInt(false, index + 1, getHighscoreAsInt(index));
+                        setHighscoreAsInt(false, index, tempMemory);
+                    }
+                } 
+                if (sortCycle == 4) {
+                    copyHighscoreToPlayerPrefs(true, 0);
+                    copyPlayerprefsToTextfields(true, 0);
+                    
+                    foreach(int bb in highscoreAsInt) {
+                        UnityEngine.Debug.Log("nachher: " + bb);
+                    }
 
-        //geht nicht 
-        /*for (byte index = 1; index < 6; index++) {
-            if (actualScore >= getPlayerscoreAsInt(index)) {
-                //sort scores if necessary
-                PlayaerPrefs.SetString("playername" + index, snakePlayerName);    //name wahrscheinlich nochmal anpassen, wenn in snake vorhanden
-                PlayerPrefs.SetString("playerscore" + index, getScorefield());
-                copyPlayerprefsToHighscore(false, index);
+                    return true;
+                }
+            }
 
-                log("highscore refresh done", Int32.Parse(getScorefield()), getPlayerscoreAsInt(index));
-                return true;
-            } 
-        }*/
         return false;
     }
 
@@ -221,7 +242,25 @@ public class scoreController : MonoBehaviour
     //main debug
     private void debugArea() {
         log("DEBUG-MODE ACTIVE!!!", 0, 0);
-        setPlayerscoreAsInt(false, 1, 1);
+        
+        //write highscores in int array
+        setHighscoreAsInt(false, 0, 100);
+        setHighscoreAsInt(false, 1, 300);
+        setHighscoreAsInt(false, 2, 500);
+        setHighscoreAsInt(false, 3, 200);
+        setHighscoreAsInt(false, 4, 400);
+        setHighscoreAsInt(false, 5, 800); //act score
+
+        foreach(int aa in highscoreAsInt) {
+            UnityEngine.Debug.Log("vorher: " + aa);
+        }
+
+        bool temp = refreshHighscoreList();
+
+        foreach(int bb in highscoreAsInt) {
+            UnityEngine.Debug.Log("nachher: " + bb);
+        }
+
     }
     //write Playerprefs for debug
     private void debugWritePlayerpref(String keyname, String value) {
@@ -239,11 +278,11 @@ public class scoreController : MonoBehaviour
         //calculate and update scorefield
         setScorefield(calculate(snake.getLenght(), 1, 1, 1).ToString());
 
-
-        setScorefield(testScore); //TEST
         //gamover = refresh highscorelist
         if (gameover) {
+            setScorefield(testScore);
             bool done = refreshHighscoreList();
+
             if (done) {
                 gameover = false;
             }
