@@ -3,7 +3,6 @@ Name:           LevelGrid
 Description:   
                
 Author(s):      Adel Kharbout
-                Markus Haubold (function and dependencies: spawnFood())
 Date:          
 Version:       V1.0 
 TODO:          - implement postionController(): check every frame: collision snake<->snake && snake<-->wall
@@ -17,8 +16,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using CodeMonkey;
 
-public class LevelGrid
-{
+public class LevelGrid {
     private Vector2Int foodGridPosition;
     private GameObject foodGameObject;
     private Vector2 foodScale = new Vector2(30.0f, 30.0f);  //scale-factor food size
@@ -30,47 +28,44 @@ public class LevelGrid
     public LevelGrid(int width, int height) {
         this.width = width;
         this.height = height;
-
-        spawnFood();    //spawn the very first food
-        //FunctionPeriodic.Create(SpawnFood, 0.001f); OLD but do not delete!
+        Debug.Log("width: " + this.width);
+        Debug.Log("height: " + this.height);
     }
 
-    public void Setup(Snake snake)
-    {
+    public void Setup(Snake snake) {
         this.snake = snake;
+        spawnFood();
     }
 
     
     private void spawnFood() {
-        //generate random position 
-        foodGridPosition = new Vector2Int(Random.Range(borderFoodSpawn, width), 
-        Random.Range(borderFoodSpawn, height));
+        // avoiding food resapawn on the snake (head + body parts) 
+        //generate random position for respawn
+        do {
+            foodGridPosition = new Vector2Int(Random.Range(borderFoodSpawn, width), 
+            Random.Range(borderFoodSpawn, height));
+        } while (snake.GetFullSnakeGridPositionList().IndexOf(foodGridPosition) != -1);
+        
         //foodGameObject settings
         foodGameObject = new GameObject("Food", typeof(SpriteRenderer));
         foodGameObject.GetComponent<Renderer>().sortingOrder = 4;                               //set food at layer 4 (green background = layer 1 to 3)
         foodGameObject.GetComponent<Renderer>().transform.localScale = foodScale;               //scale food
         foodGameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.i.foodSprite;
+        //set respawn postion
         foodGameObject.transform.position = new Vector2(foodGridPosition.x, foodGridPosition.y);
 
 
-    // avoiding food respawn on the snake    
-        /*OLD
-        do
-        {
-            foodGridPosition = new Vector2Int(Random.Range(0, width), Random.Range(0, height));
-        } while (snake.GetGridPosition() == foodGridPosition);
-
-        foodGameObject = new GameObject("Food", typeof(SpriteRenderer));
-        foodGameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.i.foodSprite;
-        foodGameObject.transform.position = new Vector3(foodGridPosition.x, foodGridPosition.y);
-    */
+    
     }
 
-    public void SnakeMoved(Vector2Int snakeGridPosition) {
+    // snake eats
+    public bool TrySnakeEatFood(Vector2Int snakeGridPosition) {
         if (snakeGridPosition == foodGridPosition) {
-            Debug.Log("snake auf food!!!!!");
             Object.Destroy(foodGameObject);
-            spawnFood();    //Markus: spawn new food if the old one was eaten
+            spawnFood();
+            return true;
+        } else {
+            return false;
         }
     }
 }
