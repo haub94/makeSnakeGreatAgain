@@ -20,8 +20,7 @@ public class PauseMenu : MonoBehaviour /////////////////////////////////////////
     public bool gameStarted;
     public bool gamePaused;
 
-    void Start()
-    {
+    void Start() {
         gamePaused = true;
         gameStarted = false;
         // Daniel - 24.05.2022 - 08.06.2022 geupdatet - ClickEvent fuer IngameButtons. Diese starten folgende Funktionen
@@ -31,37 +30,30 @@ public class PauseMenu : MonoBehaviour /////////////////////////////////////////
         startMultiplayerButton.onClick.AddListener(StartGame);
     }
 
-    void Update()
-    {
-        if (gameStarted && Input.GetKeyDown(KeyCode.Escape))
-        {
+    void Update() {
+        if (gameStarted && Input.GetKeyDown(KeyCode.Escape)) {
             PauseOrResume();
         }
     }
 
     // Daniel - 24.05.2022 - pausiere das Spiel bzw. setze das Spiel fort
-    public void PauseOrResume()
-    {
-        if (gamePaused)
-        {
+    public void PauseOrResume() {
+        if (gamePaused) {
             Resume();
         }
-        else
-        {
+        else {
             Pause();
         }
     }
-    
+
     // Daniel - 08.06.2022 - schaltet Variable fuer den Spielstart auf true und schlieﬂt Menue
-    public void StartGame()
-    {
+    public void StartGame() {
         gameStarted = true;
         Resume();
     }
 
     // Daniel - 24.05.2022 - 05.06.2022 geupdatet - Spiel anhalten und Menue anzeigen
-    public void Pause()
-    {
+    public void Pause() {
         Time.timeScale = 0f;
         gamePaused = true;
         buttonPauseMenu.SetActive(false);
@@ -74,8 +66,7 @@ public class PauseMenu : MonoBehaviour /////////////////////////////////////////
     }
 
     // Daniel - 24.05.2022 - 05.06.2022 geupdatet - Spiel fortsetzen und Menue ausblenden
-    public void Resume()
-    {
+    public void Resume() {
         gamePaused = false;
         buttonPauseMenu.SetActive(true);
         buttonAudioOnOff.SetActive(true);
