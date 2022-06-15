@@ -46,8 +46,6 @@ public class scoreController : MonoBehaviour
     [SerializeField] string debugSetActualScore;
     [SerializeField] bool deleteAllHighscoreData;
 
-    public bool test;
-
     // Start is called before the first frame update
     void Start() {
         //reference to snake object
@@ -264,8 +262,11 @@ public class scoreController : MonoBehaviour
         int actualScore;
         int tempMemoryScore;
         string tempMemoryName;
+        //set actual score to int array and name to playerpref 6
         int.TryParse(getScorefield(), out actualScore);
         setHighscoreAsInt(false, 5, actualScore);
+        PlayerPrefs.SetString("highscoreName5", snakePlayerName);
+        
 
         //do nothing with the score if it is lower than the one from the 5th place 
         /*if (actualScore < getHighscoreAsInt(4)) {
@@ -273,13 +274,6 @@ public class scoreController : MonoBehaviour
             return true;
         }*/
     
-       UnityEngine.Debug.Log("index0: " + getHighscoreAsInt(0));
-       UnityEngine.Debug.Log("index1: " + getHighscoreAsInt(1));
-       UnityEngine.Debug.Log("index2: " + getHighscoreAsInt(2));
-       UnityEngine.Debug.Log("index3: " + getHighscoreAsInt(3));
-       UnityEngine.Debug.Log("index4: " + getHighscoreAsInt(4));
-       UnityEngine.Debug.Log("index5: " + getHighscoreAsInt(5));
-
         //bubblesort: sort the actual score into the highscorelist
         for (byte sortCycle = 0; sortCycle <= 4; sortCycle++)
             {
@@ -288,8 +282,13 @@ public class scoreController : MonoBehaviour
                     if (getHighscoreAsInt(index) < getHighscoreAsInt(index + 1))
                     {
                         tempMemoryScore = getHighscoreAsInt(index + 1);
+                        tempMemoryName = PlayerPrefs.GetString("highscoreName" + (index + 1));
                         setHighscoreAsInt(false, index + 1, getHighscoreAsInt(index));
                         setHighscoreAsInt(false, index, tempMemoryScore);
+
+                        PlayerPrefs.SetString("highscoreName" + (index + 1), 
+                            PlayerPrefs.GetString("highscoreName" + index));
+                        PlayerPrefs.SetString("highscoreName" + index, tempMemoryName);
                     }
                 } 
                 if (sortCycle == 4) {
