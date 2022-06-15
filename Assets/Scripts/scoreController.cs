@@ -43,7 +43,10 @@ public class scoreController : MonoBehaviour
     public string snakePlayerName = "horstiHorst94"; //Platzhalter
     public bool gameover;   //PLatzhalter
 
-    public string testScore;
+    [SerializeField] string debugSetActualScore;
+    [SerializeField] bool deleteAllHighscoreData;
+
+    public bool test;
 
     // Start is called before the first frame update
     void Start() {
@@ -52,20 +55,10 @@ public class scoreController : MonoBehaviour
         scorefield = GetComponent<TextMeshProUGUI>();
         setScorefield("0");
 
-        //initialize highscorelist
-        //the very first run of the game => set keynames for Playerprefs
-        //check only the 1st place because if there was a first game, the score will be the 1st place
-        if (PlayerPrefs.GetString("highscoreName1") == "") {
-            for (byte index = 1; index < 6; index++) {
-                PlayerPrefs.SetString("highscoreName" + index , "Wer wird Platz " + index + " belegen?!");
-                PlayerPrefs.SetString("highscoreValue" + index , "123");
-            }
-        }
-        //values from playerprefs --> playername/score.text --> playername/scoreAsInt
-        copyPlayerprefsToTextfields(true, 0);
-        setHighscoreAsInt(true, 0, 0);
-
-        //initilize array from setPlayerscoreAsInt
+        //set keyNames with startvalues if the are not exists
+        bool initDataDone = initializePlayerprefKeys();
+        //copy playerprefs to the textfields
+        bool copyDone = copyPlayerprefsToTextfields(true, 0);
         
     }
 
@@ -79,6 +72,7 @@ public class scoreController : MonoBehaviour
     public void setScorefield(string value) {
         scorefield.text = value;
     }
+    
     //playerscoreAsInt
     public int getHighscoreAsInt(int index) {
         int returnValue = 0;
@@ -89,7 +83,9 @@ public class scoreController : MonoBehaviour
 
         return  returnValue;
     }
-    public void setHighscoreAsInt(bool all, int index, int value) {
+    public bool setHighscoreAsInt(bool all, int index, int value) {
+        //convert the textfield string to integer and save it in an array
+
         //int returnValue = 0;
         if (all) {   //initialize array
             highscoreAsInt[0] = Int32.Parse(highscoreValue0.text);
@@ -98,16 +94,21 @@ public class scoreController : MonoBehaviour
             highscoreAsInt[3] = Int32.Parse(highscoreValue3.text);
             highscoreAsInt[4] = Int32.Parse(highscoreValue4.text);
             highscoreAsInt[5] = 0; //needed for bubblesort
+            return true;
         }
         //write single index only if the index is within the range of the array (0-5)
-        if (!all && inRangeOfInt(index, 0, 5)) {
+        if (!all && inRangeOfInt(index, 0, 4)) {
             highscoreAsInt[index] = value;
-            log("setHighscore: ", index, value);
+            return true;
         }
+
+        return false;
     }
     
-    
-    private void copyPlayerprefsToTextfields(bool all, byte index) {
+
+
+    //copy the playerprefs to the textfields
+    private bool copyPlayerprefsToTextfields(bool all, byte index) {
         if (all) {
             highscoreName0.text = PlayerPrefs.GetString("highscoreName0");
             highscoreValue0.text = PlayerPrefs.GetString("highscoreValue0");
@@ -119,32 +120,39 @@ public class scoreController : MonoBehaviour
             highscoreValue3.text = PlayerPrefs.GetString("highscoreValue3");
             highscoreName4.text = PlayerPrefs.GetString("highscoreName4");
             highscoreValue4.text = PlayerPrefs.GetString("highscoreValue4");
+            log("All playerprefs are copied to the textfields!", 0, 0);
+            return true;
         } else {
             switch (index) {
-                case 1:
+                case 0:
                     highscoreName0.text = PlayerPrefs.GetString("highscoreName0");
                     highscoreValue0.text = PlayerPrefs.GetString("highscoreValue0");
                     break;
-                case 2:
+                case 1:
                     highscoreName1.text = PlayerPrefs.GetString("highscoreName0");
                     highscoreValue1.text = PlayerPrefs.GetString("highscoreValue0");
                     break;
-                case 3:
+                case 2:
                     highscoreName2.text = PlayerPrefs.GetString("highscoreName0");
                     highscoreValue3.text = PlayerPrefs.GetString("highscoreValue0");
                     break;
-                case 4:
+                case 3:
                     highscoreName3.text = PlayerPrefs.GetString("highscoreName0");
                     highscoreValue3.text = PlayerPrefs.GetString("highscoreValue0");
                     break;
-                case 5:
+                case 4:
                     highscoreName4.text = PlayerPrefs.GetString("highscoreName0");
                     highscoreValue4.text = PlayerPrefs.GetString("highscoreValue0");
                     break;
             }
+            log("Playerpref with the index " + index + " was copied to the textfield!", 0, 0);
+            return true;
         }
-    }
 
+        return false;
+    }
+    
+    //convert the highscoreAsInt to string and copy to the playerprefs 
     private void copyHighscoreToPlayerPrefs(bool all, int index) {
         int actualScore;
         string keyname;
@@ -153,20 +161,78 @@ public class scoreController : MonoBehaviour
                 actualScore = getHighscoreAsInt(internalIndex);
                 keyname = "highscoreValue" + internalIndex;
                 PlayerPrefs.SetString(keyname, actualScore.ToString());
+                log("All highscores are copied to the playerprefs!", 0, 0);
             }
         }
         if (!all && inRangeOfInt(index, 0, 4)) {
             actualScore = getHighscoreAsInt(index);
             keyname = "highscoreValue" + index;
             PlayerPrefs.SetString(keyname, actualScore.ToString());
+            log("The highscore with the index " + index + " was copied to the playerpref!", 0, 0);
         }
         PlayerPrefs.Save();
     }
 
-    //check if the given value is within a range 
+    //check if the given value (integer) is within a range 
     private bool inRangeOfInt(int value, int lowBound, int highBound) {
         if ((value >= lowBound) && (value <= highBound)) {
             return true;
+        }
+
+        return false;
+    }
+
+    //initialize highscoredata (set default values)
+    private bool initializePlayerprefKeys() {
+        //initialize highscorelist
+        //set keynames for Playerprefs
+        //check only the 1st place because if there was a first game, the score will be the 1st place
+        if (PlayerPrefs.GetString("highscoreName0") == "") {
+            for (byte index = 0; index < 5; index++) {
+                PlayerPrefs.SetString("highscoreName" + index , "Wer wird Platz " + (index + 1) + " belegen?!");
+                PlayerPrefs.SetString("highscoreValue" + index , "000");
+                if (index == 4) {
+                    log("All playerpref-keys are initialized!", 0, 0);
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+    }
+
+    //delete playerprefs highscore and name (from PlayerPrefs-file AND the highscoreAsInt!)
+    private bool deleteHighscoreData(bool all, int index) {
+        bool done = false;
+        bool setHighscoreDone = false;
+        //delete all
+        if (all) {
+            for (int internalIndex = 0; internalIndex < 5; internalIndex++) {
+                PlayerPrefs.DeleteKey("highscoreName" + internalIndex);
+                PlayerPrefs.DeleteKey("highscoreValue" + internalIndex);
+                setHighscoreDone = setHighscoreAsInt(false, internalIndex, 0);
+                if ((internalIndex == 4) && setHighscoreDone) {
+                    done = true;
+                    log("All data are deleted!!", 0, 0);
+                }
+            }
+        }
+       
+       //delte the name and score additional to the given index
+        if (!all && inRangeOfInt(index, 0, 4)) {
+            PlayerPrefs.DeleteKey("highscoreName" + index);
+            PlayerPrefs.DeleteKey("highscoreValue" + index);
+            done = true;
+            log("Data with the index " + index + " was deleted!", 0, 0);
+        }
+       
+        //refresh (copy) textfields in the highscore window
+        if (done) {
+            PlayerPrefs.Save();
+            initializePlayerprefKeys();
+            copyPlayerprefsToTextfields(true, 0);
+            return true;
+
         }
 
         return false;
@@ -196,7 +262,8 @@ public class scoreController : MonoBehaviour
     //refresh / upddate highscore window
     public bool refreshHighscoreList() {
         int actualScore;
-        int tempMemory;
+        int tempMemoryScore;
+        string tempMemoryName;
         int.TryParse(getScorefield(), out actualScore);
         setHighscoreAsInt(false, 5, actualScore);
 
@@ -218,9 +285,9 @@ public class scoreController : MonoBehaviour
                 {
                     if (getHighscoreAsInt(index) < getHighscoreAsInt(index + 1))
                     {
-                        tempMemory = getHighscoreAsInt(index + 1);
+                        tempMemoryScore = getHighscoreAsInt(index + 1);
                         setHighscoreAsInt(false, index + 1, getHighscoreAsInt(index));
-                        setHighscoreAsInt(false, index, tempMemory);
+                        setHighscoreAsInt(false, index, tempMemoryScore);
                     }
                 } 
                 if (sortCycle == 4) {
@@ -263,11 +330,11 @@ public class scoreController : MonoBehaviour
 
     }
     //write Playerprefs for debug
-    private void debugWritePlayerpref(String keyname, String value) {
+    private void debugWritePlayerpref(string keyname, string value) {
         PlayerPrefs.SetString(keyname , value);
     }
     //log shorthand
-    private void log(String message, int intValue1, int intValue2) {
+    private void log(string message, int intValue1, int intValue2) {
         UnityEngine.Debug.Log(message + " " + intValue1.ToString() + " " + intValue2.ToString());
     }
 
@@ -280,7 +347,7 @@ public class scoreController : MonoBehaviour
 
         //gamover = refresh highscorelist
         if (gameover) {
-            setScorefield(testScore);
+            setScorefield(debugSetActualScore);
             bool done = refreshHighscoreList();
 
             if (done) {
@@ -288,11 +355,20 @@ public class scoreController : MonoBehaviour
             }
         }
 
+        //call: delte all highscore data
+        if (deleteAllHighscoreData) {
+            if (deleteHighscoreData(true, 0)) {
+                deleteAllHighscoreData = false;
+            }
+        }
 
+        if (test) {
+            initializePlayerprefKeys();
+        }
 
+        //call: debugArea
         if (debugModeOn) {
             debugArea();
        }   
-
     }
 }
