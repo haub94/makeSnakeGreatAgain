@@ -388,7 +388,7 @@ public class scoreController : MonoBehaviour
     void Update()
     {
         //calculate and update scorefield
-        setScorefield(calculate(snake.getLenght(), 1, 1, 1).ToString());
+        setScorefield(calculate(snake.getLength(), 1, 1, 1).ToString());
 
         //gamover = refresh highscorelist
         if (gameover) {
