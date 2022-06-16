@@ -690,6 +690,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InputField (TMP)
       objectReference: {fileID: 0}
+    - target: {fileID: 7818629924343428843, guid: 2ff533b5ff54f0a4e96e7dc457f1fd62, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8925135378941158384, guid: 2ff533b5ff54f0a4e96e7dc457f1fd62, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
