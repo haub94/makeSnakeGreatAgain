@@ -14,6 +14,7 @@ TODO:          - scorefield genauso wie playername (public)
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using TMPro;
 
@@ -119,6 +120,7 @@ public class scoreController : MonoBehaviour
             highscoreName4.text = PlayerPrefs.GetString("highscoreName4");
             highscoreValue4.text = PlayerPrefs.GetString("highscoreValue4");
             log("All playerprefs are copied to the textfields!");
+
             return true;
         } else {
             switch (index) {
@@ -127,23 +129,24 @@ public class scoreController : MonoBehaviour
                     highscoreValue0.text = PlayerPrefs.GetString("highscoreValue0");
                     break;
                 case 1:
-                    highscoreName1.text = PlayerPrefs.GetString("highscoreName0");
-                    highscoreValue1.text = PlayerPrefs.GetString("highscoreValue0");
+                    highscoreName1.text = PlayerPrefs.GetString("highscoreName1");
+                    highscoreValue1.text = PlayerPrefs.GetString("highscoreValue1");
                     break;
                 case 2:
-                    highscoreName2.text = PlayerPrefs.GetString("highscoreName0");
-                    highscoreValue3.text = PlayerPrefs.GetString("highscoreValue0");
+                    highscoreName2.text = PlayerPrefs.GetString("highscoreName2");
+                    highscoreValue3.text = PlayerPrefs.GetString("highscoreValue2");
                     break;
                 case 3:
-                    highscoreName3.text = PlayerPrefs.GetString("highscoreName0");
-                    highscoreValue3.text = PlayerPrefs.GetString("highscoreValue0");
+                    highscoreName3.text = PlayerPrefs.GetString("highscoreName3");
+                    highscoreValue3.text = PlayerPrefs.GetString("highscoreValue3");
                     break;
                 case 4:
-                    highscoreName4.text = PlayerPrefs.GetString("highscoreName0");
-                    highscoreValue4.text = PlayerPrefs.GetString("highscoreValue0");
+                    highscoreName4.text = PlayerPrefs.GetString("highscoreName4");
+                    highscoreValue4.text = PlayerPrefs.GetString("highscoreValue4");
                     break;
             }
             log("Playerpref with the index " + index + " was copied to the textfield!");
+
             return true;
         }
 
@@ -261,6 +264,8 @@ public class scoreController : MonoBehaviour
     public bool refreshHighscoreList() {
         int actualScore;
         int tempMemoryScore;
+        bool goToLastPart = false;
+        int factor;
         string tempMemoryName;
         //set actual score to int array and name to playerpref 6
         int.TryParse(getScorefield(), out actualScore);
@@ -292,12 +297,51 @@ public class scoreController : MonoBehaviour
                     }
                 } 
                 if (sortCycle == 4) {
+                    //overwrite the placenumber from the initial-startvalue
+                    //"Wer wird PLatz >x< belegen?!"
+                    int position = 0;
+                    //find the first initial-startvalue (exit when it not exist)
+                    for (int index = 0; index <  5; index++) {
+                        if (PlayerPrefs.GetString("highscoreName" + index).Contains('1')) {
+                            position = index;
+                            log("position: " + position);
+                            break;
+                        }
+                        goToLastPart = ((position == 0) && index == 5);
+                        log("lastPart: " + goToLastPart);
+                    }
+                    if (!goToLastPart) {
+                        /*switch (position) {
+                            case 1: //2nd place
+                                factor = 1;
+                                break;
+                            case 2: //3rd place
+                                factor = 2;
+                                break;
+                            case 3: //4th place
+                                factor = 3;
+                                break;
+                            case 4: //5th place
+                                factor = 4;
+                                break;
+                        }  */ 
+                        int zahl = 0;
+                        for (int index = position; index <= (5 - position); index++) {
+                            int targetInt = zahl + index;
+                            char targetChar = Convert.ToChar(targetInt);
+                            log("target: " + targetChar);
+                            int changeInt = index + 1;
+                            char changeChar = Convert.ToChar(changeInt);
+                            log("change: " + changeChar);
+
+                            PlayerPrefs.GetString("highscoreName" + index).Replace( targetChar, changeChar);
+                        }
+                    }
+                    
+                    
+                    
                     copyHighscoreToPlayerPrefs(true, 0);
                     copyPlayerprefsToTextfields(true, 0);
-                    
-                    foreach(int bb in highscoreAsInt) {
-                        UnityEngine.Debug.Log("nachher: " + bb);
-                    }
 
                     return true;
                 }
