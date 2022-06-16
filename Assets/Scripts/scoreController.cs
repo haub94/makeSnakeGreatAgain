@@ -58,6 +58,8 @@ public class scoreController : MonoBehaviour
         bool initDataDone = initializePlayerprefKeys();
         //copy playerprefs to the textfields
         bool copyDone = copyPlayerprefsToTextfields(true, 0);
+        //copy score from textfield to integer array
+        bool integerDone = setHighscoreAsInt(true, 0, 0);
         
     }
 
@@ -264,8 +266,6 @@ public class scoreController : MonoBehaviour
     public bool refreshHighscoreList() {
         int actualScore;
         int tempMemoryScore;
-        bool goToLastPart = false;
-        int factor;
         string tempMemoryName;
         //set actual score to int array and name to playerpref 6
         int.TryParse(getScorefield(), out actualScore);
@@ -311,7 +311,6 @@ public class scoreController : MonoBehaviour
                             }
                         }
                     }
-
                     //copy data to playerprefs and playerprefs to the textfields
                     copyHighscoreToPlayerPrefs(true, 0);
                     copyPlayerprefsToTextfields(true, 0);
