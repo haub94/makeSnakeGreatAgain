@@ -1,14 +1,15 @@
 /**********************************************************************************************************************
 Name:          scoreCalculator
 Description:   The script calculates the highscore depending on the lenght of
-               the snake and playtime.
-               read data: PlayerPrefs <-- Textfield <-- playerScoreAsInt
+               the snake.
+               read data: PlayerPrefs <-- Textfield <-- highscoreAsInt
 Author(s):     Markus Haubold
 Date:          2022-05-31
 Version:       V1.0 
 TODO:          - scorefield genauso wie playername (public)
                - private array, in welches die public textdaten eingepflegt werden
                - spielername aus Snake.cs ankoppeln 
+               - run setScorefield() only if the snake.getLenght() has changed!
 **********************************************************************************************************************/
 
 using System;
@@ -359,6 +360,7 @@ public class scoreController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //TODO: run setScorefield() only if the snake.getLenght() has changed!
         //calculate and update scorefield
         setScorefield(calculate(snake.getLenght(), 1, 1, 1).ToString());
 
