@@ -296,50 +296,23 @@ public class scoreController : MonoBehaviour
                         PlayerPrefs.SetString("highscoreName" + index, tempMemoryName);
                     }
                 } 
+                //cleanup and copy values
                 if (sortCycle == 4) {
-                    //overwrite the placenumber from the initial-startvalue
-                    //"Wer wird PLatz >x< belegen?!"
-                    int position = 0;
-                    //find the first initial-startvalue (exit when it not exist)
-                    for (int index = 0; index <  5; index++) {
-                        if (PlayerPrefs.GetString("highscoreName" + index).Contains('1')) {
-                            position = index;
-                            log("position: " + position);
-                            break;
+                    //overwrite startvalues becaus their values are not ok after bubblesort 
+                    //check every place
+                    for (int place = 0; place <=4; place++) {
+                        string startvalue = PlayerPrefs.GetString("highscoreName" + place);
+                        //check every possible number in the startvalue
+                        for (int number = 1; number < 5; number++) {
+                            if (startvalue.Contains("Wer wird Platz " + number + " belegen?!")) {
+                                PlayerPrefs.SetString("highscoreName" + place, 
+                                    "Wer wird Platz " + (place + 1) + " belegen?!");
+                                break;
+                            }
                         }
-                        goToLastPart = ((position == 0) && index == 5);
-                        log("lastPart: " + goToLastPart);
                     }
-                    if (!goToLastPart) {
-                        /*switch (position) {
-                            case 1: //2nd place
-                                factor = 1;
-                                break;
-                            case 2: //3rd place
-                                factor = 2;
-                                break;
-                            case 3: //4th place
-                                factor = 3;
-                                break;
-                            case 4: //5th place
-                                factor = 4;
-                                break;
-                        }  */ 
-                        int zahl = 0;
-                        for (int index = position; index <= (5 - position); index++) {
-                            int targetInt = zahl + index;
-                            char targetChar = Convert.ToChar(targetInt);
-                            log("target: " + targetChar);
-                            int changeInt = index + 1;
-                            char changeChar = Convert.ToChar(changeInt);
-                            log("change: " + changeChar);
 
-                            PlayerPrefs.GetString("highscoreName" + index).Replace( targetChar, changeChar);
-                        }
-                    }
-                    
-                    
-                    
+                    //copy data to playerprefs and playerprefs to the textfields
                     copyHighscoreToPlayerPrefs(true, 0);
                     copyPlayerprefsToTextfields(true, 0);
 
@@ -388,7 +361,7 @@ public class scoreController : MonoBehaviour
     void Update()
     {
         //calculate and update scorefield
-        setScorefield(calculate(snake.getLength(), 1, 1, 1).ToString());
+        setScorefield(calculate(snake.getLenght(), 1, 1, 1).ToString());
 
         //gamover = refresh highscorelist
         if (gameover) {
