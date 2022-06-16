@@ -27,7 +27,7 @@ public class Snake : MonoBehaviour {
     private List<Vector2Int> snakeMovePositionList;
     private List<snakeBodyPart> snakeBodyPartList;
     PauseMenu myPauseMenu;
-
+    private int  length;
     public void Start()
     {
         myPauseMenu = GameObject.Find("Pause - Menu - Manager").GetComponent<PauseMenu>(); // Daniel - 06.06.2022 - Zugriff auf Variable aus PauseMenu Script
@@ -35,16 +35,16 @@ public class Snake : MonoBehaviour {
 
     //getter and setter
     //lenght
-    public void setLenght(int value)
+    public void setLength(int value)
     {  //funktioniert noch nicht 
-        lenght = value;
+        length = value;
 
     }
-    public int getLenght()
+    public int getLength()
     {
-        int returnLenght = lenght;
+        int returnLength = length;
 
-        return returnLenght;
+        return returnLength;
     }
 
     public void Setup(LevelGrid levelGrid)

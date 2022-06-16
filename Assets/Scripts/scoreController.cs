@@ -93,7 +93,7 @@ public class scoreController : MonoBehaviour
     void Update()
     {
         //calculate and update score
-        setScorefield(calculate(snake.getLenght(), 1, 1, 1).ToString());
+        setScorefield(calculate(snake.getLength(), 1, 1, 1).ToString());
         playername1.text = "hans";
         playerscore1.text = "1000";
     }
