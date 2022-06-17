@@ -10,6 +10,7 @@ TODO:          - scorefield genauso wie playername (public)
                - private array, in welches die public textdaten eingepflegt werden
                - spielername aus Snake.cs ankoppeln 
                - run setScorefield() only if the snake.getLenght() has changed!
+               - add error function (message + gamecontrol)
 **********************************************************************************************************************/
 
 using System;
@@ -21,6 +22,7 @@ using TMPro;
 
 public class scoreController : MonoBehaviour
 {
+    //create object from class snake
     Snake snake;
 
     //Highscore list output 
@@ -50,7 +52,7 @@ public class scoreController : MonoBehaviour
 
     // Start is called before the first frame update
     void Start() {
-        //reference to snake object
+        //reference to snake object (to get the length from it)
         snake = GameObject.Find("Snake").GetComponent<Snake>();
         scorefield = GetComponent<TextMeshProUGUI>();
         setScorefield("0");
@@ -125,7 +127,8 @@ public class scoreController : MonoBehaviour
             log("All playerprefs are copied to the textfields!");
 
             return true;
-        } else {
+        } 
+        if (!all && inRangeOfInt(index, 0, 4)) {
             switch (index) {
                 case 0:
                     highscoreName0.text = PlayerPrefs.GetString("highscoreName0");
