@@ -1,22 +1,22 @@
-/******************************************************************************
-Name:          LevelGrid
+/**********************************************************************************************************************
+Name:           LevelGrid
 Description:   
                
-Author(s):     
+Author(s):      Adel Kharbout
 Date:          
 Version:       V1.0 
 TODO:          - implement postionController(): check every frame: collision snake<->snake && snake<-->wall
                - destroy food after eat it
-               - camelCase-notation!!!
-******************************************************************************/
+               - camelCase-notation
+               - getter and setter
+**********************************************************************************************************************/
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using CodeMonkey;
 
-public class LevelGrid
-{
+public class LevelGrid {
     private Vector2Int foodGridPosition;
     private GameObject foodGameObject;
     private Vector2 foodScale = new Vector2(30.0f, 30.0f);  //scale-factor food size
@@ -25,62 +25,47 @@ public class LevelGrid
     private int width;
     private int height;
 
-    private bool testModeSpawnOn = true;  //true = spawn apple in rectangle 200x200
-
-    public LevelGrid(int width, int height)
-    {
+    public LevelGrid(int width, int height) {
         this.width = width;
         this.height = height;
-
-        spawnFood();    //spawn first and after eating
-        //FunctionPeriodic.Create(SpawnFood, 0.001f); OLD but do not delete!
+        Debug.Log("width: " + this.width);
+        Debug.Log("height: " + this.height);
     }
 
-    public void Setup(Snake snake)
-    {
+    public void Setup(Snake snake) {
         this.snake = snake;
+        spawnFood();
     }
 
-    private void spawnFood()
-    {
-        if (testModeSpawnOn == true) {
-            foodGridPosition = new Vector2Int(Random.Range(borderFoodSpawn, 500), 
-            Random.Range(borderFoodSpawn, 500));
-        } else {
+    
+    private void spawnFood() {
+        // avoiding food resapawn on the snake (head + body parts) 
+        //generate random position for respawn
+        do {
             foodGridPosition = new Vector2Int(Random.Range(borderFoodSpawn, width), 
             Random.Range(borderFoodSpawn, height));
-        }
+        } while (snake.GetFullSnakeGridPositionList().IndexOf(foodGridPosition) != -1);
         
+        //foodGameObject settings
         foodGameObject = new GameObject("Food", typeof(SpriteRenderer));
         foodGameObject.GetComponent<Renderer>().sortingOrder = 4;                               //set food at layer 4 (green background = layer 1 to 3)
         foodGameObject.GetComponent<Renderer>().transform.localScale = foodScale;               //scale food
         foodGameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.i.foodSprite;
+        //set respawn postion
         foodGameObject.transform.position = new Vector2(foodGridPosition.x, foodGridPosition.y);
 
 
-    // avoiding food respawn on the snake    
-        /*OLD
-        do
-        {
-            foodGridPosition = new Vector2Int(Random.Range(0, width), Random.Range(0, height));
-        } while (snake.GetGridPosition() == foodGridPosition);
-
-        foodGameObject = new GameObject("Food", typeof(SpriteRenderer));
-        foodGameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.i.foodSprite;
-        foodGameObject.transform.position = new Vector3(foodGridPosition.x, foodGridPosition.y);
-    */
+    
     }
 
-    public void SnakeMoved(Vector2Int snakeGridPosition)
-    {
-        Debug.Log("snakeMoved executed!!!!!");
-        if ((snakeGridPosition.x == foodGridPosition.x) && (snakeGridPosition.y == foodGridPosition.y)) //not tested!
-        {
-            Debug.Log("snake auf food!!!!!");
+    // snake eats
+    public bool TrySnakeEatFood(Vector2Int snakeGridPosition) {
+        if (snakeGridPosition == foodGridPosition) {
             Object.Destroy(foodGameObject);
             spawnFood();
+            return true;
+        } else {
+            return false;
         }
-
-
     }
 }

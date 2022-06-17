@@ -4,16 +4,20 @@ OOP-project to make prof. hara happy
 #### codeStyle
 - blockcode (dont use spaghetticode)
 - camelCase-Notation (myFirstFuction(); variableOne; dogCatMouseWhatEver ) 
-- 80 characters per line
+- 120 characters per line
+- language = english!!!
 
-Functions:
-/*
-Name:         myFuction(int var1, float var2)
-Description:  Description of the function.
-Author:       Markus Haubold
-Date:         19.05.2022
-Version:      1.0
-*/
+Functionheader (last * and / == character nr 120):
+/**************************************************************************************************
+Name:          scriptXyz.cs
+Description:   Descripe your function!
+Author(s):     - Dev1
+               - Dev2 (functionAbc)
+Date:          jjjj-mm-dd
+Version:       Vx.y 
+TODO:          - do great stuff
+               - do greater stuff
+**************************************************************************************************/
 
 myFunction(int var1, float var2) {
   //body

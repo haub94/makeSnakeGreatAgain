@@ -411,5 +411,4 @@ public class scoreController : MonoBehaviour
         if (debugModeOn) {
             debugArea();
        }   
-    }
 }
