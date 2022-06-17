@@ -9,7 +9,7 @@ Version:       V1.0
 TODO:          - scorefield genauso wie playername (public)
                - private array, in welches die public textdaten eingepflegt werden
                - spielername aus Snake.cs ankoppeln 
-               - run setScorefield() only if the snake.getLenght() has changed!
+               - run setScorefield() only if the snake.getLength() has changed!
                - add error function (message + gamecontrol)
 **********************************************************************************************************************/
 
@@ -380,7 +380,7 @@ public class scoreController : MonoBehaviour
     void Update() {
         //TODO: run setScorefield() only if the snake.getLenght() has changed!
         //calculate and update scorefield
-        setScorefield(calculate(snake.getLenght(), 1, 1, 1).ToString());
+        setScorefield(calculate(snake.getLength(), 1, 1, 1).ToString());
 
         //gamover = refresh highscorelist
         if (gameover) {
