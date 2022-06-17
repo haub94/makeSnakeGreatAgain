@@ -44,27 +44,12 @@ public class scoreController : MonoBehaviour
     private int[] highscoreAsInt = new int[6]; //value max highscores in list +1 for actual score (see bubblesort)
     //switch on for debug stuff
     private const bool debugModeOn = false;
-    public string snakePlayerName = "horstiHorst94"; //Platzhalter
+    public string snakePlayerName = "spielerName"; //Platzhalter
     public bool gameover;   //PLatzhalter
+    public bool test1;
 
     [SerializeField] string debugSetActualScore;
     [SerializeField] bool deleteAllHighscoreData;
-
-    // Start is called before the first frame update
-    void Start() {
-        //reference to snake object (to get the length from it)
-        snake = GameObject.Find("Snake").GetComponent<Snake>();
-        scorefield = GetComponent<TextMeshProUGUI>();
-        setScorefield("0");
-
-        //set keyNames with startvalues if the are not exists
-        bool initDataDone = initializePlayerprefKeys();
-        //copy playerprefs to the textfields
-        bool copyDone = copyPlayerprefsToTextfields(true, 0);
-        //copy score from textfield to integer array
-        bool integerDone = setHighscoreAsInt(true, 0, 0);
-        
-    }
 
     //getter and setter
     //scorefield
@@ -108,8 +93,39 @@ public class scoreController : MonoBehaviour
 
         return false;
     }
-    
 
+    //deleteAllHighscoreData
+    public bool setDeleteAllHighscoreData(bool value) {
+        //if there will be a popup in the future with the final question for the delet -> implement 
+        //the logic here!
+        deleteAllHighscoreData = value;
+
+        return true;
+    }    
+    public bool getDeleteAllHighscoreData() {
+        
+        return deleteAllHighscoreData;
+    }
+
+
+
+
+
+    // Start is called before the first frame update
+    void Start() {
+        //reference to snake object (to get the length from it)
+        snake = GameObject.Find("Snake").GetComponent<Snake>();
+        scorefield = GetComponent<TextMeshProUGUI>();
+        setScorefield("0");
+
+        //set keyNames with startvalues if the are not exists
+        bool initDataDone = initializePlayerprefKeys();
+        //copy playerprefs to the textfields
+        bool copyDone = copyPlayerprefsToTextfields(true, 0);
+        //copy score from textfield to integer array
+        bool integerDone = setHighscoreAsInt(true, 0, 0);
+        
+    }
 
     //copy the playerprefs to the textfields
     private bool copyPlayerprefsToTextfields(bool all, byte index) {
@@ -361,15 +377,16 @@ public class scoreController : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         //TODO: run setScorefield() only if the snake.getLenght() has changed!
         //calculate and update scorefield
         setScorefield(calculate(snake.getLenght(), 1, 1, 1).ToString());
 
         //gamover = refresh highscorelist
         if (gameover) {
-            setScorefield(debugSetActualScore);
+            if (debugModeOn) {
+                setScorefield(debugSetActualScore);
+            }
             bool done = refreshHighscoreList();
 
             if (done) {
@@ -377,10 +394,16 @@ public class scoreController : MonoBehaviour
             }
         }
 
+        //if the button exists in the UI
+        /*if (PLACEHOLDER_BUTTON) {
+            setDeleteAllHighscoreData(true);
+            PLACEHOLDER_BUTTON = false;
+        }*/
+
         //call: delte all highscore data
-        if (deleteAllHighscoreData) {
+        if (getDeleteAllHighscoreData()) {
             if (deleteHighscoreData(true, 0)) {
-                deleteAllHighscoreData = false;
+                setDeleteAllHighscoreData(false);
             }
         }
 
