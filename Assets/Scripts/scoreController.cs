@@ -6,9 +6,7 @@ Description:   The script calculates the highscore depending on the lenght of
 Author(s):     Markus Haubold
 Date:          2022-05-31
 Version:       V1.0 
-TODO:          - scorefield genauso wie playername (public)
-               - private array, in welches die public textdaten eingepflegt werden
-               - spielername aus Snake.cs ankoppeln 
+TODO:          - spielername aus Snake.cs ankoppeln 
                - run setScorefield() only if the snake.getLength() has changed!
                - add error function (message + gamecontrol)
 **********************************************************************************************************************/
@@ -22,69 +20,27 @@ using TMPro;
 
 public class scoreController : MonoBehaviour
 {
-    //create object from class snake
-    Snake snake;
+    Snake snake;    //create object from class snake
+    [SerializeField] List<TextMeshProUGUI> highscoreName = 
+        new List<TextMeshProUGUI>();    //list of textfield for the names in the highscore window                                    
+    [SerializeField] List<TextMeshProUGUI> highscoreValue = 
+        new List<TextMeshProUGUI>();    //list of textfield for the scores in the highscore window
+    private TextMeshProUGUI scorefield; //scorefield in the corner from the playfield (shows actual highscore) 
+    private const bool debugModeOn = true;  //switch on for debug stuff
+    public string snakePlayerName = "spielerName"; //name of the actual player
+    [SerializeField] bool gameover;   //trigger: true if the game is over (set from a button in the gameover popup)
+    [SerializeField] string debugSetActualScore;    //set an score for debugging
+    [SerializeField] bool deleteAllHighscoreData;   //trigger: delete all data from the highscorelist (for ever)
 
-    //Highscore list output 
-    //names
-    [SerializeField] List<TextMeshProUGUI> highscoreName = new List<TextMeshProUGUI>();
-    //scores
-    [SerializeField] List<TextMeshProUGUI> highscoreValue = new List<TextMeshProUGUI>();
-    
-    //scorefield gamefield
-    private TextMeshProUGUI scorefield;
-    private int[] highscoreAsInt = new int[6]; //value max highscores in list +1 for actual score (see bubblesort)
-    //switch on for debug stuff
-    private const bool debugModeOn = true;
-    public string snakePlayerName = "spielerName"; //Platzhalter
-    public bool gameover;   //PLatzhalter
-    public bool test1;
-
-    [SerializeField] string debugSetActualScore;
-    [SerializeField] bool deleteAllHighscoreData;
-
-    //getter and setter
+    //setter and getter
     //scorefield
-    public string getScorefield() {
-        string text = scorefield.text;
-
-        return text;
-    }
     public void setScorefield(string value) {
         scorefield.text = value;
     }
-    
-    //playerscoreAsInt
-    public int getHighscoreAsInt(int index) {
-        int returnValue = 0;
-        //read playerscore only if the index is within the range of the array (0-4 highscores 5 actualScore)
-        if (inRangeOfInt(index, 0, 5)) {
-            returnValue = highscoreAsInt[index];
-        }
+    public string getScorefield() {
+        string returnValue = scorefield.text;
 
-        return  returnValue;
-    }
-    public bool setHighscoreAsInt(bool all, int index, int value) {
-        /*
-        //convert the textfield string to integer and save it in an array
-
-        //int returnValue = 0;
-        if (all) {   //initialize array
-            highscoreAsInt[0] = Int32.Parse(highscoreValue0.text);
-            highscoreAsInt[1] = Int32.Parse(highscoreValue1.text);
-            highscoreAsInt[2] = Int32.Parse(highscoreValue2.text);
-            highscoreAsInt[3] = Int32.Parse(highscoreValue3.text);
-            highscoreAsInt[4] = Int32.Parse(highscoreValue4.text);
-            highscoreAsInt[5] = 0; //needed for bubblesort
-            return true;
-        }
-        //write single index only if the index is within the range of the array (0-5)
-        if (!all && inRangeOfInt(index, 0, 5)) {
-            highscoreAsInt[index] = value;
-            return true;
-        }
-*/
-        return false;
+        return returnValue;
     }
 
     //deleteAllHighscoreData
@@ -96,8 +52,10 @@ public class scoreController : MonoBehaviour
         return true;
     }    
     public bool getDeleteAllHighscoreData() {
-        
-        return deleteAllHighscoreData;
+        bool returnValue;
+        returnValue = deleteAllHighscoreData;
+
+        return returnValue;
     }
 
     //textfield highscoreName
@@ -105,6 +63,7 @@ public class scoreController : MonoBehaviour
         highscoreName[index].text = value;    
     }
     public string getHighscoreName(int index) {
+        
         return highscoreName[index].text;
     }
     
@@ -116,7 +75,18 @@ public class scoreController : MonoBehaviour
         return highscoreValue[index].text;
     }
 
-    
+    //trigger gameover
+    public void setGameOver(bool state) {
+        gameover = state;
+    }
+    public bool getGameOver() {
+        bool returnValue;
+        returnValue = gameover;
+
+        return returnValue;
+    }
+
+
 
     // Start is called before the first frame update
     void Start() {
@@ -129,14 +99,9 @@ public class scoreController : MonoBehaviour
         bool initDataDone = initializePlayerprefKeys();
         //copy playerprefs to the textfields
         bool copyDone = copyPlayerprefsToTextfields();
-        //copy score from textfield to integer array
-        bool integerDone = setHighscoreAsInt(true, 0, 0);
-        
     }
 
-
-
-    //shorthand Playerprefs highscoreValue
+    //shorthands Playerprefs highscoreValue
     private void setPpValue(int index, string value) {
         if (inRangeOfInt(index, 0, 5)) {
             PlayerPrefs.SetString("highscoreValue" + index, value);
@@ -154,8 +119,9 @@ public class scoreController : MonoBehaviour
     
         return returnValue;
     }
-    //shorthand Playerprefs highscoreName
-     private void setPpName(int index, string value) {
+    
+    //shorthands Playerprefs highscoreName
+    private void setPpName(int index, string value) {
         if (inRangeOfInt(index, 0, 5)) {
             PlayerPrefs.SetString("highscoreName" + index, value);
         } else {
@@ -173,8 +139,7 @@ public class scoreController : MonoBehaviour
         return returnName;
     }
 
-    
-     //initialize highscoredata (set default values)
+     //initialize playerpref-keys with the default values
     private bool initializePlayerprefKeys() {
         //initialize highscorelist
         //set keynames for Playerprefs
@@ -298,6 +263,21 @@ public class scoreController : MonoBehaviour
         return false;
     }
 
+    //convert a string to an integer
+    private int stringToInt(string value) {
+        int returnValue;
+
+        try {
+            returnValue = int.Parse(value);
+        } catch (FormatException e) {
+            log("Error in function stringToInt: " + e.Message);
+            returnValue = -99; //workaround till the error-handle-function is implemented
+        }
+        //ToDo: if the error-handle-function is implemented, call it! 
+
+        return returnValue;
+    }
+
     //calculate the actual score (depends on snakelenght)
     private double calculate(int lenght, float playtime, int bonusFactor1, int bonusFactor2) {
         //function parameters
@@ -321,17 +301,18 @@ public class scoreController : MonoBehaviour
 
     //refresh / upddate highscore window
     public bool refreshHighscoreList() {
-        //fill PlayerPref5 with the actual data (needed for bubblesort)
-        setPpName(5, snakePlayerName);
-        setPpValue(5, getScorefield());
+        const int memoryIndexPp = 5;
         
+        //write the actual player-data in the PlayPrefs because they will needed for bubblesort
+        setPpName(memoryIndexPp, snakePlayerName);
+        setPpValue(memoryIndexPp, getScorefield());
+        
+        //do nothing with the score if it is lower than another one ore equal
+        if (stringToInt(getPpValue(memoryIndexPp)) <= stringToInt(getPpValue(4))) {
+            debugLog("Score " + getPpValue(memoryIndexPp) + " to low for highscorelist");
 
-        //do nothing with the score if it is lower than the one from the 5th place 
-        /*if (actualScore < getHighscoreAsInt(4)) {
-            //quitt
             return true;
-        }*/
-
+        } 
         //bubblesort: sort the actual score into the highscorelist
         for (byte sortCycle = 0; sortCycle <= 4; sortCycle++)
             {
@@ -344,13 +325,18 @@ public class scoreController : MonoBehaviour
                     string tempMemoryScore;
                     string tempMemoryName;
 
-                    //convert string to int the compare the values
-                    int actualPpValueAsInt = 0;
-                    int nextPpValueAsInt = 0;
-                    int.TryParse(actualPpValue, out actualPpValueAsInt);
-                    int.TryParse(nextPpValue, out nextPpValueAsInt);
+                    //convert string to integer to compare the values
+                    int actualPpValueAsInt = stringToInt(actualPpValue);    //return -99 if the parse failed
+                    int nextPpValueAsInt = stringToInt(nextPpValue);        //-||-
                     
+                    if ((actualPpValueAsInt == -99) || (nextPpValueAsInt == -99)) {
+                        log("Error in function refreshHighscoreList: converting string to integer not successful!");
+                        //TODO: if the error-handling-function is implemented, call it and informate the player that
+                        //the score will not be saved
 
+                        return true;
+                    }
+                    //sort the actual and the next value
                     if (actualPpValueAsInt < nextPpValueAsInt) {
                         tempMemoryScore = nextPpValue;
                         tempMemoryName = nextPpName;
@@ -376,7 +362,6 @@ public class scoreController : MonoBehaviour
                             }
                         }
                     }
-
                     //print the sorted data in a log for debugging
                     if (debugModeOn) {
                         log("Function refreshHighscoreList says:");
@@ -384,9 +369,7 @@ public class scoreController : MonoBehaviour
                             log("Playerpref" + index + ": " + getPpName(index) + " with value: " + getPpValue(index));
                         }
                     }
-
-                    //copy data to playerprefs and playerprefs to the textfields
-                    //copyHighscoreToPlayerPrefs(true, 0);
+                    //copy playerprefs to the textfields
                     copyPlayerprefsToTextfields();
 
                     return true;
@@ -400,7 +383,7 @@ public class scoreController : MonoBehaviour
     //main debug
     private void debugArea() {
         log("DEBUG-MODE ACTIVE!!!");
-
+        
 
     }
     //write Playerprefs for debug
