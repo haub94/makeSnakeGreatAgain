@@ -21,6 +21,7 @@ using TMPro;
 public class scoreController : MonoBehaviour
 {
     Snake snake;    //create object from class snake
+
     [SerializeField] List<TextMeshProUGUI> highscoreName = 
         new List<TextMeshProUGUI>();    //list of textfield for the names in the highscore window                                    
     [SerializeField] List<TextMeshProUGUI> highscoreValue = 
@@ -129,7 +130,7 @@ public class scoreController : MonoBehaviour
         bool copyDone = copyPlayerprefsToTextfields();
         
         
-        setMessages();
+        setMessage();
     }
 
     //shorthands Playerprefs highscoreValue
@@ -341,7 +342,7 @@ public class scoreController : MonoBehaviour
         //do nothing with the score if it is lower than another one ore equal
         if (stringToInt(getPpValue(memoryIndexPp)) <= stringToInt(getPpValue(4))) {
             debugLog("Score " + getPpValue(memoryIndexPp) + " to low for highscorelist");
-            userInformation(getMessages(4));
+            userInformation(getMessage(4));
 
             return true;
         } 
@@ -445,6 +446,7 @@ public class scoreController : MonoBehaviour
     void Update() {
         //TODO: run setScorefield() only if the snake.getLenght() has changed!
         //calculate and update scorefield
+        
         setScorefield(calculate(snake.getLength(), 1, 1, 1).ToString());
 
         //gamover = refresh highscorelist
