@@ -213,11 +213,23 @@ MonoBehaviour:
   namePlayerOne: 
   inputFieldWindow: {fileID: 666426906}
   inputFieldText: {fileID: 2099406232}
+  nameInputFieldTMP: {fileID: 666426907}
 --- !u!1 &666426906 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7839785513617287203, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
   m_PrefabInstance: {fileID: 7678340755776271978}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &666426907 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6104988639314039614, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+  m_PrefabInstance: {fileID: 7678340755776271978}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666426906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &854262997 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7678340756082893235, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
