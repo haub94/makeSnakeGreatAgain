@@ -28,10 +28,11 @@ public class scoreController : MonoBehaviour
     private TextMeshProUGUI scorefield; //scorefield in the corner from the playfield (shows actual highscore) 
     private const bool debugModeOn = true;  //switch on for debug stuff
     public string snakePlayerName = "spielerName"; //name of the actual player
-    [SerializeField] bool gameover;   //trigger: true if the game is over (set from a button in the gameover popup)
+    [SerializeField] bool runRefreshHighscoreList;   //trigger: true if the game is over (set from a button in the gameover popup)
     [SerializeField] string debugSetActualScore;    //set an score for debugging
     [SerializeField] bool deleteAllHighscoreData;   //trigger: delete all data from the highscorelist (for ever)
-
+    [SerializeField] bool secondCheckDeleteData = false;
+    private List<string> messages = new List<string>();
     //setter and getter
     //scorefield
     public void setScorefield(string value) {
@@ -75,17 +76,44 @@ public class scoreController : MonoBehaviour
         return highscoreValue[index].text;
     }
 
-    //trigger gameover
-    public void setGameOver(bool state) {
-        gameover = state;
+    //second check delete all data
+    public void setSecondCheckDeleData(bool value) {
+        secondCheckDeleteData = value;
     }
-    public bool getGameOver() {
+    public bool getSecondCheckDeleteData() {
         bool returnValue;
-        returnValue = gameover;
+        returnValue = secondCheckDeleteData;
 
         return returnValue;
     }
 
+    //start the alogrithm to sort the actual score into the highscorelist
+    public void setRunRefreshHighscoreList(bool value) {
+        runRefreshHighscoreList = value;
+    }
+    public bool getRunRefreshHighscoreList() {
+        bool returnValue;
+        returnValue = runRefreshHighscoreList;
+
+        return returnValue;
+    }
+
+    public void setMessage() {
+       //maybe later it will be possible to change the language -> implement logic here!
+       
+        messages[0] = "Bist du sicher, dass alle Highscoredaten gelöscht werden sollen?";
+        messages[1] = ""; //maybe second line
+        messages[2] = "Sorry...leider konnte dein Highscore nicht gespeichert werden!"; 
+        messages[3] = ""; //maybe second line
+        messages[4] = "Du hast es leider nicht unter die Top5 geschafft!"; 
+
+    }
+    public string getMessage(int index) {
+        string returnValue;
+        returnValue = messages[index];
+
+        return returnValue;
+    }
 
 
     // Start is called before the first frame update
@@ -99,6 +127,9 @@ public class scoreController : MonoBehaviour
         bool initDataDone = initializePlayerprefKeys();
         //copy playerprefs to the textfields
         bool copyDone = copyPlayerprefsToTextfields();
+        
+        
+        setMessages();
     }
 
     //shorthands Playerprefs highscoreValue
@@ -310,6 +341,7 @@ public class scoreController : MonoBehaviour
         //do nothing with the score if it is lower than another one ore equal
         if (stringToInt(getPpValue(memoryIndexPp)) <= stringToInt(getPpValue(4))) {
             debugLog("Score " + getPpValue(memoryIndexPp) + " to low for highscorelist");
+            userInformation(getMessages(4));
 
             return true;
         } 
@@ -331,7 +363,7 @@ public class scoreController : MonoBehaviour
                     
                     if ((actualPpValueAsInt == -99) || (nextPpValueAsInt == -99)) {
                         log("Error in function refreshHighscoreList: converting string to integer not successful!");
-                        //TODO: if the error-handling-function is implemented, call it and informate the player that
+                        userInformation(getMessage(2));
                         //the score will not be saved
 
                         return true;
@@ -379,6 +411,12 @@ public class scoreController : MonoBehaviour
         return false;
     }
 
+    //PREPARTION FOR A COMMUNICATION WITH THE USER (UI NEEDS THEREFOR A SCRIPTLINKED TEXTFELD!)
+    private void userInformation(string message) {
+        //TODO: generate an textfield at the UI and link it!
+        debugLog(message);
+    }
+
     //debug stuff
     //main debug
     private void debugArea() {
@@ -410,27 +448,33 @@ public class scoreController : MonoBehaviour
         setScorefield(calculate(snake.getLength(), 1, 1, 1).ToString());
 
         //gamover = refresh highscorelist
-        if (gameover) {
+        if (getRunRefreshHighscoreList()) {
             if (debugModeOn) {
                 setScorefield(debugSetActualScore);
             }
-            bool done = refreshHighscoreList();
-
-            if (done) {
-                gameover = false;
+            //wait for finish
+            if (refreshHighscoreList()) {
+                setRunRefreshHighscoreList(false);
             }
         }
 
-        //if the button exists in the UI
-        /*if (PLACEHOLDER_BUTTON) {
-            setDeleteAllHighscoreData(true);
-            PLACEHOLDER_BUTTON = false;
-        }*/
-
-        //call: delte all highscore data
+        /* PREPARATION FOR A ACTION TO DELETE ALL THE HIGHSCORE-DATA
+            needs a doublecheck mechanism at the UI 
+            set with a first button the setDeleteAllHighscoreData(true) and
+            confirm it with a second one via setSecondCheckDeletData(true)*/
+        //delete all highscore data
         if (getDeleteAllHighscoreData()) {
-            if (deleteHighscoreData(true, 0)) {
+            //preparation for a second check if the user really want to delete the data
+            //but acually it is not planned -> user should know what he do
+            if (!getSecondCheckDeleteData()) {
+                userInformation(getMessage(0));
+            } else {
+                //delete all data
+                deleteHighscoreData(true, 0);
+                log("All highscore data are deleted!");
+                //reset variables
                 setDeleteAllHighscoreData(false);
+                setSecondCheckDeleData(false);
             }
         }
 
