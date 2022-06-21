@@ -33,7 +33,7 @@ public class scoreController : MonoBehaviour
     [SerializeField] string debugSetActualScore;    //set an score for debugging
     [SerializeField] bool deleteAllHighscoreData;   //trigger: delete all data from the highscorelist (for ever)
     [SerializeField] bool secondCheckDeleteData = false;
-    private List<string> messages = new List<string>();
+    private List<String> messages = new List<String>();
     //setter and getter
     //scorefield
     public void setScorefield(string value) {
@@ -334,23 +334,26 @@ public class scoreController : MonoBehaviour
     //refresh / upddate highscore window
     public bool refreshHighscoreList() {
         const int memoryIndexPp = 5;
-        
-        //write the actual player-data in the PlayPrefs because they will needed for bubblesort
-        setPpName(memoryIndexPp, snakePlayerName);
-        setPpValue(memoryIndexPp, getScorefield());
-        
+         
         //do nothing with the score if it is lower than another one ore equal
-        if (stringToInt(getPpValue(memoryIndexPp)) <= stringToInt(getPpValue(4))) {
+        if (stringToInt(getScorefield()) <= stringToInt(getPpValue(4))) {
             debugLog("Score " + getPpValue(memoryIndexPp) + " to low for highscorelist");
             userInformation(getMessage(4));
 
             return true;
+        } else {
+             //write the actual player-data in the PlayPrefs because they will needed for bubblesort
+            setPpName(memoryIndexPp, snakePlayerName);
+            setPpValue(memoryIndexPp, getScorefield());
         } 
+
+
         //bubblesort: sort the actual score into the highscorelist
         for (byte sortCycle = 0; sortCycle <= 4; sortCycle++)
             {
                 for (int index = 0; index <= 4; index++)
                 {
+                    //write data from playerprefs with the actual index to variables
                     string actualPpValue = getPpValue(index);
                     string actualPpName = getPpName(index);
                     string nextPpValue = getPpValue(index + 1);
@@ -394,12 +397,12 @@ public class scoreController : MonoBehaviour
                                 break;
                             }
                         }
-                    }
+                    } 
                     //print the sorted data in a log for debugging
                     if (debugModeOn) {
-                        log("Function refreshHighscoreList says:");
+                        debugLog("Function refreshHighscoreList says:");
                         for (int index = 0; index <= 5; index++) {
-                            log("Playerpref" + index + ": " + getPpName(index) + " with value: " + getPpValue(index));
+                            debugLog("Playerpref" + index + ": " + getPpName(index) + " with value: " + getPpValue(index));
                         }
                     }
                     //copy playerprefs to the textfields
