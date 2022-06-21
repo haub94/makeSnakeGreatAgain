@@ -1,3 +1,13 @@
+/******************************************************************************
+Name:           SoundManager
+Description:    The script manages to play backgroundmusic and the option to
+                pause it by clicking the speaker buttons. The players choice 
+                if the music is on or off will be saved for the next gamestart.
+Author(s):      Daniel Rittrich
+Date:           2022-05-24
+Version:        V1.0
+TODO:           - 
+******************************************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

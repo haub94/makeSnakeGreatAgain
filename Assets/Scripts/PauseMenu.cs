@@ -1,3 +1,13 @@
+/******************************************************************************
+Name:           PauseMenu
+Description:    The script manages the menue-window and all menue-sub-windows.
+                Also it manages the option to start the game and pause the 
+                game.
+Author(s):      Daniel Rittrich
+Date:           2022-05-24
+Version:        V1.2
+TODO:           - 
+******************************************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

@@ -1,3 +1,12 @@
+/******************************************************************************
+Name:           NameInputPlayerOne
+Description:    The script manages the name-input-window at the start of the 
+                application.
+Author(s):      Daniel Rittrich
+Date:           2022-06-20
+Version:        V1.1 
+TODO:           - 
+******************************************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
