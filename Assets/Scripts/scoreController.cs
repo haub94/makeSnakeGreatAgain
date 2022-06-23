@@ -33,7 +33,7 @@ public class scoreController : MonoBehaviour
     [SerializeField] string debugSetActualScore;    //set an score for debugging
     [SerializeField] bool deleteAllHighscoreData;   //trigger: delete all data from the highscorelist (for ever)
     [SerializeField] bool secondCheckDeleteData = false;
-    private List<String> messages = new List<String>();
+    private List<string> messages = new List<string>();
     //setter and getter
     //scorefield
     public void setScorefield(string value) {
@@ -102,12 +102,10 @@ public class scoreController : MonoBehaviour
     public void setMessage() {
        //maybe later it will be possible to change the language -> implement logic here!
        
-        messages[0] = "Bist du sicher, dass alle Highscoredaten gelöscht werden sollen?";
-        messages[1] = ""; //maybe second line
-        messages[2] = "Sorry...leider konnte dein Highscore nicht gespeichert werden!"; 
-        messages[3] = ""; //maybe second line
-        messages[4] = "Du hast es leider nicht unter die Top5 geschafft!"; 
-
+        messages.Add("Bist du sicher, dass alle Highscoredaten gelöscht werden sollen?");
+        messages.Add("Sorry...leider konnte dein Highscore nicht gespeichert werden!"); 
+        messages.Add("Du hast es leider nicht unter die Top5 geschafft!"); 
+        
     }
     public string getMessage(int index) {
         string returnValue;
