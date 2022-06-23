@@ -1,3 +1,6 @@
+using System;
+using Random=UnityEngine.Random;
+using Object = UnityEngine.Object;
 /**********************************************************************************************************************
 Name:           LevelGrid
 Description:   
@@ -24,24 +27,24 @@ public class LevelGrid {
     private Snake snake;
     private int width;
     private int height;
+    private const int foodRadiusToEat = 10;
 
     public LevelGrid(int width, int height) {
         this.width = width;
         this.height = height;
-        Debug.Log("width: " + this.width);
-        Debug.Log("height: " + this.height);
-        spawnFood();
     }
 
     public void Setup(Snake snake) {
         this.snake = snake;
+        spawnFood();
     }
-
     
-    private void spawnFood() {
+    
+    public void spawnFood() {
         // avoiding food resapawn on the snake (head + body parts) 
         //generate random position for respawn
       //  do {
+            
             foodGridPosition = new Vector2Int(Random.Range(borderFoodSpawn, width), 
             Random.Range(borderFoodSpawn, height));
 //        } while (snake.GetFullSnakeGridPositionList().IndexOf(foodGridPosition) != -1);
@@ -53,14 +56,17 @@ public class LevelGrid {
         foodGameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.i.foodSprite;
         //set respawn postion
         foodGameObject.transform.position = new Vector2(foodGridPosition.x, foodGridPosition.y);
-
+        UnityEngine.Debug.Log("Food gespawnt an PosX: " + foodGridPosition.x + " und PosY: " + foodGridPosition.y);
 
     
     }
 
     // snake eats
     public bool TrySnakeEatFood(Vector2Int snakeGridPosition) {
-        if (snakeGridPosition == foodGridPosition) {
+        if ((Math.Abs(snakeGridPosition.x - foodGridPosition.x) < foodRadiusToEat) && 
+            (Math.Abs(snakeGridPosition.y - foodGridPosition.y) < foodRadiusToEat))  {
+        //if (snakeGridPosition == foodGridPosition) {
+            UnityEngine.Debug.Log("Schlange hat gefressen!!!!!!!");
             Object.Destroy(foodGameObject);
             spawnFood();
             return true;

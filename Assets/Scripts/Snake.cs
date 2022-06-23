@@ -58,7 +58,7 @@ public class Snake : MonoBehaviour {
 
     private void Awake() {
         gridPosition = new Vector2Int(100, 100);
-        gridMoveTimerMax = .1f; // Faktor fuer Aktualisierung der Schrittfrequenz ( 1f = 1sec )
+        gridMoveTimerMax = .5f; // Faktor fuer Aktualisierung der Schrittfrequenz ( 1f = 1sec )
         gridMoveTimer = gridMoveTimerMax;
         gridMoveDirection = new Vector2Int(0, stepDistancePositive); // Daniel - 05.06.2022 - Werte geaendert f�r Movement in groesseren Schritten zu Beginn (0, 1) -> (0, 50)
         snakeMovePositionList = new List<Vector2Int>();
@@ -69,6 +69,7 @@ public class Snake : MonoBehaviour {
     private void Update() {
         HandleInput();
         HandleGridMovement();
+        UnityEngine.Debug.Log("Schlange an PosX: " + gridPosition.x + " und PosY: " + gridPosition.y);
     }
 
     // Daniel - 05.06.2022 - Werte geaendert fuer Movement in groesseren Schritten ( 1 -> 50 )           !!!!!! Werte muessen aber noch an das Grid angepasst werden
