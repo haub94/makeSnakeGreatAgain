@@ -126,8 +126,8 @@ public class Snake : MonoBehaviour {
                 bool snakeAteFood = levelGrid.TrySnakeEatFood(gridPosition);
                 if (snakeAteFood) {
                     snakeBodySize++;
-                    UnityEngine.Debug.Log("Call Körper anhängen");
                     CreateSnakeBody();
+                    setLength(snakeBodySize);
                 }
 
                 if (snakeMovePositionList.Count >= snakeBodySize +1) {
@@ -157,7 +157,6 @@ public class Snake : MonoBehaviour {
         snakeBodyGameObject.GetComponent<SpriteRenderer>().sortingOrder = -snakeBodyTransformList.Count;
     }*/
     private void CreateSnakeBody() {
-        UnityEngine.Debug.Log("Körper anhängen");
         snakeBodyPartList.Add(new snakeBodyPart(snakeBodyPartList.Count));
     }
     private void UpdateSnakeBodyParts() {
@@ -183,16 +182,17 @@ public class Snake : MonoBehaviour {
     }
     private class snakeBodyPart{
         private Vector2Int gridPosition;
-        private Transform transform;
-        private Vector2 bodyPartScale = new Vector2(35.0f, 35.0f);
+        private Transform transform;        
         public snakeBodyPart(int bodyIndex) {
+            Vector2 bodyPartScale = new Vector2(35.0f, 35.0f); //Haubold: scalefactor for bodyparts-sprite
+            
             GameObject snakeBodyGameObject = new GameObject("SnakeBody", typeof(SpriteRenderer));
             snakeBodyGameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.i.snakeBodySprite;
             snakeBodyGameObject.GetComponent<SpriteRenderer>().sortingOrder = -bodyIndex;
-            //Haubold: set sprite to layer 4 and scale it up
+            //Haubold: set sprite to layer 4
             snakeBodyGameObject.GetComponent<Renderer>().sortingOrder = 4;    
+            //Haubold: scale sprite of the bodyparts
             snakeBodyGameObject.GetComponent<Renderer>().transform.localScale = bodyPartScale; 
-
 
             transform = snakeBodyGameObject.transform;
 
