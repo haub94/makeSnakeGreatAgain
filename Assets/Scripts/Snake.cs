@@ -28,6 +28,10 @@ public class Snake : MonoBehaviour {
     private List<snakeBodyPart> snakeBodyPartList;
     PauseMenu myPauseMenu;
     private int  length;
+    private const int stepDistancePositive = 12;
+    private const int stepDistanceNegative = -12;
+
+
     public void Start()
     {
         myPauseMenu = GameObject.Find("Pause - Menu - Manager").GetComponent<PauseMenu>(); // Daniel - 06.06.2022 - Zugriff auf Variable aus PauseMenu Script
@@ -54,9 +58,9 @@ public class Snake : MonoBehaviour {
 
     private void Awake() {
         gridPosition = new Vector2Int(100, 100);
-        gridMoveTimerMax = .5f; // Faktor fuer Aktualisierung der Schrittfrequenz ( 1f = 1sec )
+        gridMoveTimerMax = .1f; // Faktor fuer Aktualisierung der Schrittfrequenz ( 1f = 1sec )
         gridMoveTimer = gridMoveTimerMax;
-        gridMoveDirection = new Vector2Int(0, 50); // Daniel - 05.06.2022 - Werte geaendert f�r Movement in groesseren Schritten zu Beginn (0, 1) -> (0, 50)
+        gridMoveDirection = new Vector2Int(0, stepDistancePositive); // Daniel - 05.06.2022 - Werte geaendert f�r Movement in groesseren Schritten zu Beginn (0, 1) -> (0, 50)
         snakeMovePositionList = new List<Vector2Int>();
         snakeBodySize = 0;
         snakeBodyPartList = new List<snakeBodyPart>();
@@ -72,33 +76,33 @@ public class Snake : MonoBehaviour {
         if (!myPauseMenu.gamePaused) { // <- if-Befehl sperrt Bewegung wenn im Pausemenu - Daniel - 06.06.2022
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                if (gridMoveDirection.y != -50)
+                if (gridMoveDirection.y != stepDistanceNegative)
                 {
                     gridMoveDirection.x = 0;
-                    gridMoveDirection.y = 50;
+                    gridMoveDirection.y = stepDistancePositive;
                 }
             }
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                if (gridMoveDirection.y != 50)
+                if (gridMoveDirection.y != stepDistancePositive)
                 {
                     gridMoveDirection.x = 0;
-                    gridMoveDirection.y = -50;
+                    gridMoveDirection.y = stepDistanceNegative;
                 }
             }
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                if (gridMoveDirection.x != 50)
+                if (gridMoveDirection.x != stepDistancePositive)
                 {
-                    gridMoveDirection.x = -50;
+                    gridMoveDirection.x = stepDistanceNegative;
                     gridMoveDirection.y = 0;
                 }
             }
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                if (gridMoveDirection.x != -50)
+                if (gridMoveDirection.x != stepDistanceNegative)
                 {
-                    gridMoveDirection.x = 50;
+                    gridMoveDirection.x = stepDistancePositive;
                     gridMoveDirection.y = 0;
                 }
             }

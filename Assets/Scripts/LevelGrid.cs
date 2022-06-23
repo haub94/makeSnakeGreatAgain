@@ -19,7 +19,7 @@ using CodeMonkey;
 public class LevelGrid {
     private Vector2Int foodGridPosition;
     private GameObject foodGameObject;
-    private Vector2 foodScale = new Vector2(30.0f, 30.0f);  //scale-factor food size
+    private Vector2 foodScale = new Vector2(35.0f, 35.0f);  //scale-factor food size
     private const int borderFoodSpawn = 20;
     private Snake snake;
     private int width;
@@ -30,21 +30,21 @@ public class LevelGrid {
         this.height = height;
         Debug.Log("width: " + this.width);
         Debug.Log("height: " + this.height);
+        spawnFood();
     }
 
     public void Setup(Snake snake) {
         this.snake = snake;
-        spawnFood();
     }
 
     
     private void spawnFood() {
         // avoiding food resapawn on the snake (head + body parts) 
         //generate random position for respawn
-        do {
+      //  do {
             foodGridPosition = new Vector2Int(Random.Range(borderFoodSpawn, width), 
             Random.Range(borderFoodSpawn, height));
-        } while (snake.GetFullSnakeGridPositionList().IndexOf(foodGridPosition) != -1);
+//        } while (snake.GetFullSnakeGridPositionList().IndexOf(foodGridPosition) != -1);
         
         //foodGameObject settings
         foodGameObject = new GameObject("Food", typeof(SpriteRenderer));

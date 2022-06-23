@@ -15,7 +15,7 @@ using CodeMonkey;
 using CodeMonkey.Utils;
 
 public class GameHandler : MonoBehaviour {
-    private Snake snake;
+    [SerializeField] Snake snake;
     private LevelGrid levelGrid;
 
     //gamfield width and height with a small border (20) to the canvas-border
