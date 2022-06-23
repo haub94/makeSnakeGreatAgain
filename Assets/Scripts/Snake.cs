@@ -28,6 +28,12 @@ public class Snake : MonoBehaviour {
     private List<snakeBodyPart> snakeBodyPartList;
     PauseMenu myPauseMenu;
     private int  length;
+    private int stepDistancePositive = 12;
+    private int stepDistanceNegative = -12;
+    private float timeToStep = .1f;
+    
+
+
     public void Start()
     {
         myPauseMenu = GameObject.Find("Pause - Menu - Manager").GetComponent<PauseMenu>(); // Daniel - 06.06.2022 - Zugriff auf Variable aus PauseMenu Script
@@ -54,9 +60,9 @@ public class Snake : MonoBehaviour {
 
     private void Awake() {
         gridPosition = new Vector2Int(100, 100);
-        gridMoveTimerMax = .5f; // Faktor fuer Aktualisierung der Schrittfrequenz ( 1f = 1sec )
+        gridMoveTimerMax = timeToStep; // Faktor fuer Aktualisierung der Schrittfrequenz ( 1f = 1sec )
         gridMoveTimer = gridMoveTimerMax;
-        gridMoveDirection = new Vector2Int(0, 50); // Daniel - 05.06.2022 - Werte geaendert f�r Movement in groesseren Schritten zu Beginn (0, 1) -> (0, 50)
+        gridMoveDirection = new Vector2Int(0, stepDistancePositive); // Daniel - 05.06.2022 - Werte geaendert f�r Movement in groesseren Schritten zu Beginn (0, 1) -> (0, 50)
         snakeMovePositionList = new List<Vector2Int>();
         snakeBodySize = 0;
         snakeBodyPartList = new List<snakeBodyPart>();
@@ -65,6 +71,7 @@ public class Snake : MonoBehaviour {
     private void Update() {
         HandleInput();
         HandleGridMovement();
+        UnityEngine.Debug.Log("Snake at PosX: " + gridPosition.x + " and PosY: " + gridPosition.y);
     }
 
     // Daniel - 05.06.2022 - Werte geaendert fuer Movement in groesseren Schritten ( 1 -> 50 )           !!!!!! Werte muessen aber noch an das Grid angepasst werden
@@ -72,33 +79,33 @@ public class Snake : MonoBehaviour {
         if (!myPauseMenu.gamePaused) { // <- if-Befehl sperrt Bewegung wenn im Pausemenu - Daniel - 06.06.2022
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                if (gridMoveDirection.y != -50)
+                if (gridMoveDirection.y != stepDistanceNegative)
                 {
                     gridMoveDirection.x = 0;
-                    gridMoveDirection.y = 50;
+                    gridMoveDirection.y = stepDistancePositive;
                 }
             }
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                if (gridMoveDirection.y != 50)
+                if (gridMoveDirection.y != stepDistancePositive)
                 {
                     gridMoveDirection.x = 0;
-                    gridMoveDirection.y = -50;
+                    gridMoveDirection.y = stepDistanceNegative;
                 }
             }
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                if (gridMoveDirection.x != 50)
+                if (gridMoveDirection.x != stepDistancePositive)
                 {
-                    gridMoveDirection.x = -50;
+                    gridMoveDirection.x = stepDistanceNegative;
                     gridMoveDirection.y = 0;
                 }
             }
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                if (gridMoveDirection.x != -50)
+                if (gridMoveDirection.x != stepDistanceNegative)
                 {
-                    gridMoveDirection.x = 50;
+                    gridMoveDirection.x = stepDistancePositive;
                     gridMoveDirection.y = 0;
                 }
             }
@@ -120,6 +127,7 @@ public class Snake : MonoBehaviour {
                 if (snakeAteFood) {
                     snakeBodySize++;
                     CreateSnakeBody();
+                    setLength(snakeBodySize);
                 }
 
                 if (snakeMovePositionList.Count >= snakeBodySize +1) {
@@ -174,12 +182,21 @@ public class Snake : MonoBehaviour {
     }
     private class snakeBodyPart{
         private Vector2Int gridPosition;
-        private Transform transform;
+        private Transform transform;        
         public snakeBodyPart(int bodyIndex) {
+            Vector2 bodyPartScale = new Vector2(35.0f, 35.0f); //Haubold: scalefactor for bodyparts-sprite
+            
             GameObject snakeBodyGameObject = new GameObject("SnakeBody", typeof(SpriteRenderer));
             snakeBodyGameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.i.snakeBodySprite;
             snakeBodyGameObject.GetComponent<SpriteRenderer>().sortingOrder = -bodyIndex;
+            //Haubold: set sprite to layer 4
+            snakeBodyGameObject.GetComponent<Renderer>().sortingOrder = 4;    
+            //Haubold: scale sprite of the bodyparts
+            snakeBodyGameObject.GetComponent<Renderer>().transform.localScale = bodyPartScale; 
+
             transform = snakeBodyGameObject.transform;
+
+
         }
         public void SetGridPosition(Vector2Int gridPosition) {
             this.gridPosition = gridPosition;

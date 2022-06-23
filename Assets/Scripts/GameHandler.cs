@@ -15,12 +15,12 @@ using CodeMonkey;
 using CodeMonkey.Utils;
 
 public class GameHandler : MonoBehaviour {
-    private Snake snake;
+    [SerializeField] Snake snake;
     private LevelGrid levelGrid;
 
     //gamfield width and height with a small border (20) to the canvas-border
-    private const int gamefieldWidth = 1080;
-    private const int gamefieldHeight = 550;
+    private const int gamefieldWidth = 350;
+    private const int gamefieldHeight = 175;
 
      void Start() {
        Debug.Log("GameHandler.Start");
