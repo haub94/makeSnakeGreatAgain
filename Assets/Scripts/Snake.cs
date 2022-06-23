@@ -28,8 +28,10 @@ public class Snake : MonoBehaviour {
     private List<snakeBodyPart> snakeBodyPartList;
     PauseMenu myPauseMenu;
     private int  length;
-    private const int stepDistancePositive = 12;
-    private const int stepDistanceNegative = -12;
+    private int stepDistancePositive = 12;
+    private int stepDistanceNegative = -12;
+    private float timeToStep = .1f;
+    
 
 
     public void Start()
@@ -58,7 +60,7 @@ public class Snake : MonoBehaviour {
 
     private void Awake() {
         gridPosition = new Vector2Int(100, 100);
-        gridMoveTimerMax = .5f; // Faktor fuer Aktualisierung der Schrittfrequenz ( 1f = 1sec )
+        gridMoveTimerMax = timeToStep; // Faktor fuer Aktualisierung der Schrittfrequenz ( 1f = 1sec )
         gridMoveTimer = gridMoveTimerMax;
         gridMoveDirection = new Vector2Int(0, stepDistancePositive); // Daniel - 05.06.2022 - Werte geaendert f�r Movement in groesseren Schritten zu Beginn (0, 1) -> (0, 50)
         snakeMovePositionList = new List<Vector2Int>();
@@ -124,6 +126,7 @@ public class Snake : MonoBehaviour {
                 bool snakeAteFood = levelGrid.TrySnakeEatFood(gridPosition);
                 if (snakeAteFood) {
                     snakeBodySize++;
+                    UnityEngine.Debug.Log("Call Körper anhängen");
                     CreateSnakeBody();
                 }
 
@@ -154,6 +157,7 @@ public class Snake : MonoBehaviour {
         snakeBodyGameObject.GetComponent<SpriteRenderer>().sortingOrder = -snakeBodyTransformList.Count;
     }*/
     private void CreateSnakeBody() {
+        UnityEngine.Debug.Log("Körper anhängen");
         snakeBodyPartList.Add(new snakeBodyPart(snakeBodyPartList.Count));
     }
     private void UpdateSnakeBodyParts() {
@@ -180,11 +184,19 @@ public class Snake : MonoBehaviour {
     private class snakeBodyPart{
         private Vector2Int gridPosition;
         private Transform transform;
+        private Vector2 bodyPartScale = new Vector2(35.0f, 35.0f);
         public snakeBodyPart(int bodyIndex) {
             GameObject snakeBodyGameObject = new GameObject("SnakeBody", typeof(SpriteRenderer));
             snakeBodyGameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.i.snakeBodySprite;
             snakeBodyGameObject.GetComponent<SpriteRenderer>().sortingOrder = -bodyIndex;
+            //Haubold: set sprite to layer 4 and scale it up
+            snakeBodyGameObject.GetComponent<Renderer>().sortingOrder = 4;    
+            snakeBodyGameObject.GetComponent<Renderer>().transform.localScale = bodyPartScale; 
+
+
             transform = snakeBodyGameObject.transform;
+
+
         }
         public void SetGridPosition(Vector2Int gridPosition) {
             this.gridPosition = gridPosition;

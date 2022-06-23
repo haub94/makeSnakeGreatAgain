@@ -27,7 +27,7 @@ public class LevelGrid {
     private Snake snake;
     private int width;
     private int height;
-    private const int foodRadiusToEat = 10;
+    private const int foodRadiusToEat = 15;
 
     public LevelGrid(int width, int height) {
         this.width = width;
@@ -43,11 +43,11 @@ public class LevelGrid {
     public void spawnFood() {
         // avoiding food resapawn on the snake (head + body parts) 
         //generate random position for respawn
-      //  do {
+        do {
             
             foodGridPosition = new Vector2Int(Random.Range(borderFoodSpawn, width), 
             Random.Range(borderFoodSpawn, height));
-//        } while (snake.GetFullSnakeGridPositionList().IndexOf(foodGridPosition) != -1);
+        } while (snake.GetFullSnakeGridPositionList().IndexOf(foodGridPosition) != -1);
         
         //foodGameObject settings
         foodGameObject = new GameObject("Food", typeof(SpriteRenderer));
@@ -56,16 +56,17 @@ public class LevelGrid {
         foodGameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.i.foodSprite;
         //set respawn postion
         foodGameObject.transform.position = new Vector2(foodGridPosition.x, foodGridPosition.y);
-        UnityEngine.Debug.Log("Food gespawnt an PosX: " + foodGridPosition.x + " und PosY: " + foodGridPosition.y);
+        //Haubold: add log to see where the apple is
+        UnityEngine.Debug.Log("Food spawn at PosX: " + foodGridPosition.x + " and PosY: " + foodGridPosition.y);
 
     
     }
 
     // snake eats
     public bool TrySnakeEatFood(Vector2Int snakeGridPosition) {
+        //Haubold: Edited if-sequenz: give an eat-range, otherwise it will be unpossiblr to hit exactly apple
         if ((Math.Abs(snakeGridPosition.x - foodGridPosition.x) < foodRadiusToEat) && 
             (Math.Abs(snakeGridPosition.y - foodGridPosition.y) < foodRadiusToEat))  {
-        //if (snakeGridPosition == foodGridPosition) {
             UnityEngine.Debug.Log("Schlange hat gefressen!!!!!!!");
             Object.Destroy(foodGameObject);
             spawnFood();
