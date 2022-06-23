@@ -71,7 +71,7 @@ public class Snake : MonoBehaviour {
     private void Update() {
         HandleInput();
         HandleGridMovement();
-        UnityEngine.Debug.Log("Schlange an PosX: " + gridPosition.x + " und PosY: " + gridPosition.y);
+        UnityEngine.Debug.Log("Snake at PosX: " + gridPosition.x + " and PosY: " + gridPosition.y);
     }
 
     // Daniel - 05.06.2022 - Werte geaendert fuer Movement in groesseren Schritten ( 1 -> 50 )           !!!!!! Werte muessen aber noch an das Grid angepasst werden

@@ -27,7 +27,7 @@ public class scoreController : MonoBehaviour
     [SerializeField] List<TextMeshProUGUI> highscoreValue = 
         new List<TextMeshProUGUI>();    //list of textfield for the scores in the highscore window
     private TextMeshProUGUI scorefield; //scorefield in the corner from the playfield (shows actual highscore) 
-    private const bool debugModeOn = true;  //switch on for debug stuff
+    private const bool debugModeOn = false;  //switch on for debug stuff
     public string snakePlayerName = "spielerName"; //name of the actual player
     [SerializeField] bool runRefreshHighscoreList;   //trigger: true if the game is over (set from a button in the gameover popup)
     [SerializeField] string debugSetActualScore;    //set an score for debugging
