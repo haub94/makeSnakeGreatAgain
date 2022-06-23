@@ -4,7 +4,7 @@ Description:   The script calculates the highscore depending on the lenght of
                the snake.
                read data: PlayerPrefs <-- Textfield <-- highscoreAsInt
 Author(s):     Markus Haubold
-Date:          2022-05-31
+Date:          2022-06-20
 Version:       V1.0 
 TODO:          - spielername aus Snake.cs ankoppeln 
                - run setScorefield() only if the snake.getLength() has changed!
@@ -311,21 +311,19 @@ public class scoreController : MonoBehaviour
     }
 
     //calculate the actual score (depends on snakelenght)
-    private double calculate(int lenght, float playtime, int bonusFactor1, int bonusFactor2) {
+    private double calculate(int lenght) {
         //function parameters
         double score = 0;
         const double a = 3.0;
         const double k = 0.2;
         const double c = -4;
-        const double d = 0;
         int x = lenght;
 
         if (x == 0) {
             score = 0;
         } else {
             //function= (a*e^k*(x-(c)))+d with x=snakelenght
-            score = Math.Round(((a * Math.Exp(k*(x - (c)))) + d) * 100); 
-            // + (funktion playtime) + (function bF1) + (function bF2)    
+            score = Math.Round(((a * Math.Exp(k*(x - (c)))) + d) * 100);     
         }
         
         return score;
@@ -450,7 +448,7 @@ public class scoreController : MonoBehaviour
         //TODO: run setScorefield() only if the snake.getLenght() has changed!
         //calculate and update scorefield
         
-        setScorefield(calculate(snake.getLength(), 1, 1, 1).ToString());
+        setScorefield(calculate(snake.getLength()).ToString());
 
         //gamover = refresh highscorelist
         if (getRunRefreshHighscoreList()) {
