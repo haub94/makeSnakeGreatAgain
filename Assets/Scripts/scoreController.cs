@@ -323,7 +323,7 @@ public class scoreController : MonoBehaviour
             score = 0;
         } else {
             //function= (a*e^k*(x-(c)))+d with x=snakelenght
-            score = Math.Round(((a * Math.Exp(k*(x - (c)))) + d) * 100);     
+            score = Math.Round(((a * Math.Exp(k*(x - (c))))) * 100);     
         }
         
         return score;
