@@ -4,7 +4,7 @@ Description:   The script calculates the highscore depending on the lenght of
                the snake.
                read data: PlayerPrefs <-- Textfield <-- highscoreAsInt
 Author(s):     Markus Haubold
-Date:          2022-05-31
+Date:          2022-06-20
 Version:       V1.0 
 TODO:          - spielername aus Snake.cs ankoppeln 
                - run setScorefield() only if the snake.getLength() has changed!
@@ -27,13 +27,13 @@ public class scoreController : MonoBehaviour
     [SerializeField] List<TextMeshProUGUI> highscoreValue = 
         new List<TextMeshProUGUI>();    //list of textfield for the scores in the highscore window
     private TextMeshProUGUI scorefield; //scorefield in the corner from the playfield (shows actual highscore) 
-    private const bool debugModeOn = true;  //switch on for debug stuff
+    private const bool debugModeOn = false;  //switch on for debug stuff
     public string snakePlayerName = "spielerName"; //name of the actual player
     [SerializeField] bool runRefreshHighscoreList;   //trigger: true if the game is over (set from a button in the gameover popup)
     [SerializeField] string debugSetActualScore;    //set an score for debugging
     [SerializeField] bool deleteAllHighscoreData;   //trigger: delete all data from the highscorelist (for ever)
     [SerializeField] bool secondCheckDeleteData = false;
-    private List<String> messages = new List<String>();
+    private List<string> messages = new List<string>();
     //setter and getter
     //scorefield
     public void setScorefield(string value) {
@@ -102,12 +102,10 @@ public class scoreController : MonoBehaviour
     public void setMessage() {
        //maybe later it will be possible to change the language -> implement logic here!
        
-        messages[0] = "Bist du sicher, dass alle Highscoredaten gelöscht werden sollen?";
-        messages[1] = ""; //maybe second line
-        messages[2] = "Sorry...leider konnte dein Highscore nicht gespeichert werden!"; 
-        messages[3] = ""; //maybe second line
-        messages[4] = "Du hast es leider nicht unter die Top5 geschafft!"; 
-
+        messages.Add("Bist du sicher, dass alle Highscoredaten gelöscht werden sollen?");
+        messages.Add("Sorry...leider konnte dein Highscore nicht gespeichert werden!"); 
+        messages.Add("Du hast es leider nicht unter die Top5 geschafft!"); 
+        
     }
     public string getMessage(int index) {
         string returnValue;
@@ -210,35 +208,6 @@ public class scoreController : MonoBehaviour
             }
         } 
        
-       /*
-        if (!all && inRangeOfInt(index, 0, 4)) {
-            switch (index) {
-                case 0:
-                    highscoreName0.text = PlayerPrefs.GetString("highscoreName0");
-                    highscoreValue0.text = PlayerPrefs.GetString("highscoreValue0");
-                    break;
-                case 1:
-                    highscoreName1.text = PlayerPrefs.GetString("highscoreName1");
-                    highscoreValue1.text = PlayerPrefs.GetString("highscoreValue1");
-                    break;
-                case 2:
-                    highscoreName2.text = PlayerPrefs.GetString("highscoreName2");
-                    highscoreValue3.text = PlayerPrefs.GetString("highscoreValue2");
-                    break;
-                case 3:
-                    highscoreName3.text = PlayerPrefs.GetString("highscoreName3");
-                    highscoreValue3.text = PlayerPrefs.GetString("highscoreValue3");
-                    break;
-                case 4:
-                    highscoreName4.text = PlayerPrefs.GetString("highscoreName4");
-                    highscoreValue4.text = PlayerPrefs.GetString("highscoreValue4");
-                    break;
-            }
-            log("Playerpref with the index " + index + " was copied to the textfield!");
-
-            return true;
-        }
-        */
         return false;
     }
 
@@ -311,21 +280,19 @@ public class scoreController : MonoBehaviour
     }
 
     //calculate the actual score (depends on snakelenght)
-    private double calculate(int lenght, float playtime, int bonusFactor1, int bonusFactor2) {
+    private double calculate(int lenght) {
         //function parameters
         double score = 0;
         const double a = 3.0;
         const double k = 0.2;
         const double c = -4;
-        const double d = 0;
         int x = lenght;
 
         if (x == 0) {
             score = 0;
         } else {
             //function= (a*e^k*(x-(c)))+d with x=snakelenght
-            score = Math.Round(((a * Math.Exp(k*(x - (c)))) + d) * 100); 
-            // + (funktion playtime) + (function bF1) + (function bF2)    
+            score = Math.Round(((a * Math.Exp(k*(x - (c))))) * 100);     
         }
         
         return score;
@@ -450,7 +417,7 @@ public class scoreController : MonoBehaviour
         //TODO: run setScorefield() only if the snake.getLenght() has changed!
         //calculate and update scorefield
         
-        setScorefield(calculate(snake.getLength(), 1, 1, 1).ToString());
+        setScorefield(calculate(snake.getLength()).ToString());
 
         //gamover = refresh highscorelist
         if (getRunRefreshHighscoreList()) {
@@ -489,3 +456,6 @@ public class scoreController : MonoBehaviour
        } 
     }
 }
+
+
+

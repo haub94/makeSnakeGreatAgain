@@ -28,13 +28,21 @@ public class Snake : MonoBehaviour {
     private List<Vector2Int> snakeMovePositionList;
     private List<snakeBodyPart> snakeBodyPartList;
     PauseMenu myPauseMenu;
-    private int length;
+
     private bool canDoAction; // Booltrigger for stoping Input - Emily
    /* public int mygamefieldWidth;
     public int mygamefieldHeight;
     GameHandler gamehandler;  // my try to get the const value from gamehandler - Emily*/
 
     public PauseMenu MyPauseMenu { get => myPauseMenu; set => myPauseMenu = value; }
+
+    private int  length;
+    private int stepDistancePositive = 12;
+    private int stepDistanceNegative = -12;
+    private float timeToStep = .1f;
+    
+
+
 
     public void Start()
     {
@@ -71,9 +79,9 @@ public class Snake : MonoBehaviour {
     private void Awake() {
         canDoAction = true;     //Booltrigger for Input set true - Emily
         gridPosition = new Vector2Int(100, 100);
-        gridMoveTimerMax = .5f; // Faktor fuer Aktualisierung der Schrittfrequenz ( 1f = 1sec )
+        gridMoveTimerMax = timeToStep; // Faktor fuer Aktualisierung der Schrittfrequenz ( 1f = 1sec )
         gridMoveTimer = gridMoveTimerMax;
-        gridMoveDirection = new Vector2Int(0, 50); // Daniel - 05.06.2022 - Werte geaendert f�r Movement in groesseren Schritten zu Beginn (0, 1) -> (0, 50)
+        gridMoveDirection = new Vector2Int(0, stepDistancePositive); // Daniel - 05.06.2022 - Werte geaendert f�r Movement in groesseren Schritten zu Beginn (0, 1) -> (0, 50)
         snakeMovePositionList = new List<Vector2Int>();
         snakeBodySize = 0;
         snakeBodyPartList = new List<snakeBodyPart>();
@@ -82,9 +90,11 @@ public class Snake : MonoBehaviour {
     private void Update() {
         HandleInput();
         HandleGridMovement();
-        CollisionCheckBoarder();
-        UnityEngine.Debug.Log("GridPosition:X=" + gridPosition.x);
-        UnityEngine.Debug.Log("GridPosition:Y=" + gridPosition.y);
+        CollisionCheckBoarder();                                    // Collision with boarder functioin by Emily
+        UnityEngine.Debug.Log("GridPosition:X=" + gridPosition.x); // x value snake position - Emily
+        UnityEngine.Debug.Log("GridPosition:Y=" + gridPosition.y); // y value snake position - Emily
+
+        UnityEngine.Debug.Log("Snake at PosX: " + gridPosition.x + " and PosY: " + gridPosition.y);
 
     }
 
@@ -94,33 +104,33 @@ public class Snake : MonoBehaviour {
                                                             // canDoAction for allowing Input - Emily - 22.06.2022
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                if (gridMoveDirection.y != -50)
+                if (gridMoveDirection.y != stepDistanceNegative)
                 {
                     gridMoveDirection.x = 0;
-                    gridMoveDirection.y = 50;
+                    gridMoveDirection.y = stepDistancePositive;
                 }
             }
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                if (gridMoveDirection.y != 50)
+                if (gridMoveDirection.y != stepDistancePositive)
                 {
                     gridMoveDirection.x = 0;
-                    gridMoveDirection.y = -50;
+                    gridMoveDirection.y = stepDistanceNegative;
                 }
             }
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                if (gridMoveDirection.x != 50)
+                if (gridMoveDirection.x != stepDistancePositive)
                 {
-                    gridMoveDirection.x = -50;
+                    gridMoveDirection.x = stepDistanceNegative;
                     gridMoveDirection.y = 0;
                 }
             }
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                if (gridMoveDirection.x != -50)
+                if (gridMoveDirection.x != stepDistanceNegative)
                 {
-                    gridMoveDirection.x = 50;
+                    gridMoveDirection.x = stepDistancePositive;
                     gridMoveDirection.y = 0;
                 }
             }
@@ -142,6 +152,7 @@ public class Snake : MonoBehaviour {
                 if (snakeAteFood) {
                     snakeBodySize++;
                     CreateSnakeBody();
+                    setLength(snakeBodySize);
                 }
 
                 if (snakeMovePositionList.Count >= snakeBodySize +1) {
@@ -196,12 +207,21 @@ public class Snake : MonoBehaviour {
     }
     private class snakeBodyPart{
         private Vector2Int gridPosition;
-        private Transform transform;
+        private Transform transform;        
         public snakeBodyPart(int bodyIndex) {
+            Vector2 bodyPartScale = new Vector2(35.0f, 35.0f); //Haubold: scalefactor for bodyparts-sprite
+            
             GameObject snakeBodyGameObject = new GameObject("SnakeBody", typeof(SpriteRenderer));
             snakeBodyGameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.i.snakeBodySprite;
             snakeBodyGameObject.GetComponent<SpriteRenderer>().sortingOrder = -bodyIndex;
+            //Haubold: set sprite to layer 4
+            snakeBodyGameObject.GetComponent<Renderer>().sortingOrder = 4;    
+            //Haubold: scale sprite of the bodyparts
+            snakeBodyGameObject.GetComponent<Renderer>().transform.localScale = bodyPartScale; 
+
             transform = snakeBodyGameObject.transform;
+
+
         }
         public void SetGridPosition(Vector2Int gridPosition) {
             this.gridPosition = gridPosition;
