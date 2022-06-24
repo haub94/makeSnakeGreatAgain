@@ -130,7 +130,13 @@ public class Snake : MonoBehaviour {
                     World_Sprite worldSprite = World_Sprite.Create(new Vector3(snakeMovePosition.x, snakeMovePosition.y), Vector3.one * .5f, Color.white);
                     FunctionTimer.Create(worldSprite.DestroySelf, gridMoveTimerMax);
                 }*/
-            
+                for (int i = 0; i < snakeMovePositionList.Count; i+=1) {
+                    Vector2Int snakeBodyPartGridPosition = snakeBodyPart.GetGridPosition();
+                    if (snakeBodyPartGridPosition == gridPosition) {
+                        Gameover ();
+                    }
+
+                }
             // snake position on Start
             transform.position = new Vector3(gridPosition.x, gridPosition.y);
             // snake head optimization 
@@ -185,6 +191,15 @@ public class Snake : MonoBehaviour {
             this.gridPosition = gridPosition;
             transform.position = new Vector3(gridPosition.x, gridPosition.y);
         }
+        public VectorInt GetGridPosition () {
+            return snakeMovePosition.GetGridPosition ();
+        }
+
+        
+    }
+    private void Gameover()
+    {
+        gameTimer.Stop();
     }
 }
 
