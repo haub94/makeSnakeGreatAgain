@@ -208,35 +208,6 @@ public class scoreController : MonoBehaviour
             }
         } 
        
-       /*
-        if (!all && inRangeOfInt(index, 0, 4)) {
-            switch (index) {
-                case 0:
-                    highscoreName0.text = PlayerPrefs.GetString("highscoreName0");
-                    highscoreValue0.text = PlayerPrefs.GetString("highscoreValue0");
-                    break;
-                case 1:
-                    highscoreName1.text = PlayerPrefs.GetString("highscoreName1");
-                    highscoreValue1.text = PlayerPrefs.GetString("highscoreValue1");
-                    break;
-                case 2:
-                    highscoreName2.text = PlayerPrefs.GetString("highscoreName2");
-                    highscoreValue3.text = PlayerPrefs.GetString("highscoreValue2");
-                    break;
-                case 3:
-                    highscoreName3.text = PlayerPrefs.GetString("highscoreName3");
-                    highscoreValue3.text = PlayerPrefs.GetString("highscoreValue3");
-                    break;
-                case 4:
-                    highscoreName4.text = PlayerPrefs.GetString("highscoreName4");
-                    highscoreValue4.text = PlayerPrefs.GetString("highscoreValue4");
-                    break;
-            }
-            log("Playerpref with the index " + index + " was copied to the textfield!");
-
-            return true;
-        }
-        */
         return false;
     }
 
@@ -485,3 +456,6 @@ public class scoreController : MonoBehaviour
        } 
     }
 }
+
+
+
