@@ -3,16 +3,16 @@ OOP-project to make prof. hara happy
 
 #### codeStyle
 - blockcode (dont use spaghetticode)
-- camelCase-Notation (myFirstFuction(); variableOne; dogCatMouseWhatEver ) 
+- camelCase-Notation (myFirstFuction(); variableOne; dogCatMouseWhatEver) 
 - 120 characters per line
 - language = english!!!
 
-Functionheader (last * and / == character nr 120):
+Scriptheader (last * and / == character nr 120):
 /**************************************************************************************************
 Name:          scriptXyz.cs
 Description:   Descripe your function!
 Author(s):     - Dev1
-               - Dev2 (functionAbc)
+               - Dev2 (exampleFunction() )
 Date:          jjjj-mm-dd
 Version:       Vx.y 
 TODO:          - do great stuff
@@ -27,4 +27,3 @@ Brackets and spacing:
 if ((var1 * var2) == 1) {
   var1 = ((var2 / 10) * 5);
 }
-
