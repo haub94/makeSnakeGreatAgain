@@ -18,6 +18,7 @@ using CodeMonkey;
 using CodeMonkey.Utils;
 
 public class Snake : MonoBehaviour {
+    
     private Vector2Int gridMoveDirection;
     private Vector2Int gridPosition;
     private LevelGrid levelGrid;
@@ -27,6 +28,14 @@ public class Snake : MonoBehaviour {
     private List<Vector2Int> snakeMovePositionList;
     private List<snakeBodyPart> snakeBodyPartList;
     PauseMenu myPauseMenu;
+
+    private bool canDoAction; // Booltrigger for stoping Input - Emily
+   /* public int mygamefieldWidth;
+    public int mygamefieldHeight;
+    GameHandler gamehandler;  // my try to get the const value from gamehandler - Emily*/
+
+    public PauseMenu MyPauseMenu { get => myPauseMenu; set => myPauseMenu = value; }
+
     private int  length;
     private int stepDistancePositive = 12;
     private int stepDistanceNegative = -12;
@@ -34,9 +43,18 @@ public class Snake : MonoBehaviour {
     
 
 
+
     public void Start()
     {
-        myPauseMenu = GameObject.Find("Pause - Menu - Manager").GetComponent<PauseMenu>(); // Daniel - 06.06.2022 - Zugriff auf Variable aus PauseMenu Script
+        MyPauseMenu = GameObject.Find("Pause - Menu - Manager").GetComponent<PauseMenu>(); // Daniel - 06.06.2022 - Zugriff auf Variable aus PauseMenu Script
+       /* gamehandler = GameObject.Find("GameHandler").GetComponent<GameHandler>();
+
+        GameObject GameHandler = GameObject.Find("GameHandler");
+        GameHandler gamehandler = GameHandler.GetComponent<GameHandler>(); 
+        mygamefieldWidth = gamehandler.gamefieldWidth;
+        mygamefieldHeight = gamehandler.gamefieldHeight;
+        UnityEngine.Debug.Log("mygamefieldwith " + mygamefieldWidth);
+        UnityEngine.Debug.Log("mygamefieldheight " + mygamefieldHeight); */
     }
 
     //getter and setter
@@ -59,6 +77,7 @@ public class Snake : MonoBehaviour {
     }
 
     private void Awake() {
+        canDoAction = true;     //Booltrigger for Input set true - Emily
         gridPosition = new Vector2Int(100, 100);
         gridMoveTimerMax = timeToStep; // Faktor fuer Aktualisierung der Schrittfrequenz ( 1f = 1sec )
         gridMoveTimer = gridMoveTimerMax;
@@ -71,12 +90,18 @@ public class Snake : MonoBehaviour {
     private void Update() {
         HandleInput();
         HandleGridMovement();
+        CollisionCheckBoarder();                                    // Collision with boarder functioin by Emily
+        UnityEngine.Debug.Log("GridPosition:X=" + gridPosition.x); // x value snake position - Emily
+        UnityEngine.Debug.Log("GridPosition:Y=" + gridPosition.y); // y value snake position - Emily
+
         UnityEngine.Debug.Log("Snake at PosX: " + gridPosition.x + " and PosY: " + gridPosition.y);
+
     }
 
     // Daniel - 05.06.2022 - Werte geaendert fuer Movement in groesseren Schritten ( 1 -> 50 )           !!!!!! Werte muessen aber noch an das Grid angepasst werden
     private void HandleInput() {
-        if (!myPauseMenu.gamePaused) { // <- if-Befehl sperrt Bewegung wenn im Pausemenu - Daniel - 06.06.2022
+        if (!MyPauseMenu.gamePaused && canDoAction) { // <- if-Befehl sperrt Bewegung wenn im Pausemenu - Daniel - 06.06.2022
+                                                            // canDoAction for allowing Input - Emily - 22.06.2022
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 if (gridMoveDirection.y != stepDistanceNegative)
@@ -113,7 +138,7 @@ public class Snake : MonoBehaviour {
     }
 
     private void HandleGridMovement() {
-        if (!myPauseMenu.gamePaused) { // <- if-Befehl sperrt Bewegung wenn im Pausemenu - Daniel - 06.06.2022
+        if (!MyPauseMenu.gamePaused) { // <- if-Befehl sperrt Bewegung wenn im Pausemenu - Daniel - 06.06.2022
         
             gridMoveTimer += Time.deltaTime;
             if (gridMoveTimer >= gridMoveTimerMax)
@@ -218,6 +243,47 @@ public class Snake : MonoBehaviour {
     {
         gameTimer.Stop();
     }
+
+
+   
+    // Snake collision check with boarder  - Emily
+    //doesn't work: (0 < gridPosition.x < 1080) && (0 < gridPosition.y < 550)
+    public bool CollisionCheckBoarder()
+    {
+        GetGridPosition();
+        if ((gridPosition.x > 0) && (gridPosition.x < 1080) && (gridPosition.y > 0) && (gridPosition.y < 550)) //works
+        {
+            canDoAction = true; //Trigger for getting KeyDown values - on
+            return true;
+        }
+        else
+        {
+            Gameover();
+            UnityEngine.Debug.Log("gameover");
+            return false;
+        }
+
+    }
+
+    // let Snake die and game over - Emily
+    public void Gameover() {
+        canDoAction = false;                                        //Trigger for blocking KeyDown values - off
+        GetGridPosition();                                          //do i need it for the Scorecalculating?
+        Vector2Int NullgridMoveDirection = new Vector2Int(0, 0);    //inizialise a Vector with (0,0) for setting gridMoveDirection to (0,0) --> no movement
+        gridMoveDirection = NullgridMoveDirection;                  //gridMoveDirection = (0,0)
+        gridMoveTimer = 0f;                                         //setting speed of steps Null 
+       /* <scoreController>().enable = true; // Run ScoreController Script while enabled - unfinished*/
+
+
+
+       /* if (score > highscore){                                   //compare scores
+            highScore = score;
+        }
+        */
+    
+    }
+
+  
 }
 
 
