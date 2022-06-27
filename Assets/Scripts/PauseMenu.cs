@@ -27,12 +27,32 @@ public class PauseMenu : MonoBehaviour /////////////////////////////////////////
     public GameObject highScoreMenu;
     public GameObject creditsMenu;
     public GameObject startscreenMenu;
+    public GameObject nameInputMenu;
+    public GameObject pauseMenuButtonEinstellungen;
+    public GameObject pauseMenuButtonAnleitung;
+    public GameObject pauseMenuButtonHighScores;
+    public GameObject pauseMenuButtonCredits;
+    public GameObject pauseMenuButtonSpielBeenden;
+    public GameObject pauseMenuButtonSpielFortsetzen;
+    public GameObject pauseMenuBackgroundLayer;
+    public GameObject pauseMenuBanner;
     public bool gameStarted;
     public bool gamePaused;
 
     void Start() {
         gamePaused = true;
         gameStarted = false;
+        pauseMenu.SetActive(true);
+        startscreenMenu.SetActive(true);
+        nameInputMenu.SetActive(true);
+        pauseMenuButtonEinstellungen.SetActive(true);
+        pauseMenuButtonAnleitung.SetActive(true);
+        pauseMenuButtonHighScores.SetActive(true);
+        pauseMenuButtonCredits.SetActive(true);
+        pauseMenuButtonSpielBeenden.SetActive(true);
+        pauseMenuButtonSpielFortsetzen.SetActive(false);
+        pauseMenuBackgroundLayer.SetActive(false);
+        pauseMenuBanner.SetActive(false);
         // Daniel - 24.05.2022 - 08.06.2022 geupdatet - ClickEvent fuer IngameButtons. Diese starten folgende Funktionen
         pauseMenuButton.onClick.AddListener(Pause);
         resumeGameButton.onClick.AddListener(Resume);
@@ -56,7 +76,7 @@ public class PauseMenu : MonoBehaviour /////////////////////////////////////////
         }
     }
 
-    // Daniel - 08.06.2022 - schaltet Variable fuer den Spielstart auf true und schlieﬂt Menue
+    // Daniel - 08.06.2022 - schaltet Variable fuer den Spielstart auf true und schliesst Menue
     public void StartGame() {
         gameStarted = true;
         Resume();
