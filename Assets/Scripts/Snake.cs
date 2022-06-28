@@ -96,14 +96,13 @@ public class Snake : MonoBehaviour {
 
     private void Update() {
         switch (gameStatus) { // Running Update - Le Xuan
-
-        case GameStatus.Continue:
-             HandleInput();
-             HandleGridMovement();
-             CollisionCheckBoarder();  // Collision with boarder functioin by Emily
-             break;
-         case GameStatus.Stop:
-             break;   
+          case GameStatus.Continue:
+               HandleInput();
+               HandleGridMovement();
+               CollisionCheckBoarder();  // Collision with boarder functioin by Emily
+               break;
+           case GameStatus.Stop:
+               break;   
         }                                   
         UnityEngine.Debug.Log("GridPosition:X=" + gridPosition.x); // x value snake position - Emily
         UnityEngine.Debug.Log("GridPosition:Y=" + gridPosition.y); // y value snake position - Emily
