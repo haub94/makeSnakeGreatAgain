@@ -19,6 +19,12 @@ using CodeMonkey.Utils;
 
 public class Snake : MonoBehaviour {
     
+    private enum GameStatus {  // Create GameStatus to run Update() - Le Xuan
+        Continue,
+        Stop
+    }
+
+    private GameStatus gameStatus; // Store private GameStatus - Le Xuan 
     private Vector2Int gridMoveDirection;
     private Vector2Int gridPosition;
     private LevelGrid levelGrid;
@@ -85,12 +91,20 @@ public class Snake : MonoBehaviour {
         snakeMovePositionList = new List<Vector2Int>();
         snakeBodySize = 0;
         snakeBodyPartList = new List<snakeBodyPart>();
+        gameStatus = GameStatus.Continue; // gameStatus equal out continue - Le Xuan
     }
 
     private void Update() {
-        HandleInput();
-        HandleGridMovement();
-        CollisionCheckBoarder();                                    // Collision with boarder functioin by Emily
+        switch (gameStatus) { // Running Update - Le Xuan
+
+        case GameStatus.Continue:
+             HandleInput();
+             HandleGridMovement();
+             CollisionCheckBoarder();  // Collision with boarder functioin by Emily
+             break;
+         case GameStatus.Stop:
+             break;   
+        }                                   
         UnityEngine.Debug.Log("GridPosition:X=" + gridPosition.x); // x value snake position - Emily
         UnityEngine.Debug.Log("GridPosition:Y=" + gridPosition.y); // y value snake position - Emily
 
@@ -163,7 +177,16 @@ public class Snake : MonoBehaviour {
                     World_Sprite worldSprite = World_Sprite.Create(new Vector3(snakeMovePosition.x, snakeMovePosition.y), Vector3.one * .5f, Color.white);
                     FunctionTimer.Create(worldSprite.DestroySelf, gridMoveTimerMax);
                 }*/
-            
+
+                // Snake collides with itself - Le Xuan
+                for (int i = 0; i < snakeMovePositionList.Count; i++) { 
+                    Vector2Int snakeMovePosition = snakeMovePositionList [i];
+                    if (gridPosition == snakeMovePosition)
+                    {
+                        Gameover ();
+                    }
+                }
+
             // snake position on Start
             transform.position = new Vector3(gridPosition.x, gridPosition.y);
             // snake head optimization 
@@ -227,6 +250,8 @@ public class Snake : MonoBehaviour {
             this.gridPosition = gridPosition;
             transform.position = new Vector3(gridPosition.x, gridPosition.y);
         }
+
+        
     }
 
 
@@ -247,7 +272,6 @@ public class Snake : MonoBehaviour {
             UnityEngine.Debug.Log("gameover");
             return false;
         }
-
     }
 
     // let Snake die and game over - Emily
@@ -258,7 +282,7 @@ public class Snake : MonoBehaviour {
         gridMoveDirection = NullgridMoveDirection;                  //gridMoveDirection = (0,0)
         gridMoveTimer = 0f;                                         //setting speed of steps Null 
        /* <scoreController>().enable = true; // Run ScoreController Script while enabled - unfinished*/
-
+        gameStatus = GameStatus.Stop; // Game stops when Snake bites itself. - Le Xuan
 
 
        /* if (score > highscore){                                   //compare scores
