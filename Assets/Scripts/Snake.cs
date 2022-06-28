@@ -19,12 +19,12 @@ using CodeMonkey.Utils;
 
 public class Snake : MonoBehaviour {
     
-    private enum SnakeStatus {  // Create SnakeCollision to run Update() - Le Xuan
+    private enum GameStatus {  // Create GameStatus to run Update() - Le Xuan
         Continue,
         Stop
     }
 
-    private SnakeStatus snakeStatus; // Store private SnakeStatus - Le Xuan 
+    private GameStatus gameStatus; // Store private GameStatus - Le Xuan 
     private Vector2Int gridMoveDirection;
     private Vector2Int gridPosition;
     private LevelGrid levelGrid;
@@ -91,18 +91,18 @@ public class Snake : MonoBehaviour {
         snakeMovePositionList = new List<Vector2Int>();
         snakeBodySize = 0;
         snakeBodyPartList = new List<snakeBodyPart>();
-        snakeStatus = SnakeStatus.Continue; // snakeStatus equal out continue - Le Xuan
+        gameStatus = GameStatus.Continue; // gameStatus equal out continue - Le Xuan
     }
 
     private void Update() {
-        switch (snakeStatus) { // Running Update - Le Xuan
+        switch (gameStatus) { // Running Update - Le Xuan
 
-        case SnakeStatus.Continue:
+        case GameStatus.Continue:
              HandleInput();
              HandleGridMovement();
              CollisionCheckBoarder();  // Collision with boarder functioin by Emily
              break;
-         case SnakeStatus.Stop:
+         case GameStatus.Stop:
              break;   
         }                                   
         UnityEngine.Debug.Log("GridPosition:X=" + gridPosition.x); // x value snake position - Emily
@@ -183,8 +183,6 @@ public class Snake : MonoBehaviour {
                     Vector2Int snakeMovePosition = snakeMovePositionList [i];
                     if (gridPosition == snakeMovePosition)
                     {
-                    
-                        snakeStatus = SnakeStatus.Stop;
                         Gameover ();
                     }
                 }
@@ -284,7 +282,7 @@ public class Snake : MonoBehaviour {
         gridMoveDirection = NullgridMoveDirection;                  //gridMoveDirection = (0,0)
         gridMoveTimer = 0f;                                         //setting speed of steps Null 
        /* <scoreController>().enable = true; // Run ScoreController Script while enabled - unfinished*/
-
+        gameStatus = GameStatus.Stop; // Game stops when Snake bites itself. - Le Xuan
 
 
        /* if (score > highscore){                                   //compare scores
