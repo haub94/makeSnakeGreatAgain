@@ -25,8 +25,8 @@ public class Snake : MonoBehaviour {
     }
 
     private GameStatus gameStatus; // Store private GameStatus - Le Xuan 
-    private Vector2Int gridMoveDirection;
-    private Vector2Int gridPosition;
+    public Vector2Int gridMoveDirection;
+    public Vector2Int gridPosition;
     private LevelGrid levelGrid;
     private float gridMoveTimer;
     private float gridMoveTimerMax;

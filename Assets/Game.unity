@@ -798,6 +798,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 606686492849055921, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1604198142158261516, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3460402486419475447, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5142782721370524163, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: playername1
       value: 
@@ -838,6 +850,10 @@ PrefabInstance:
       propertyPath: playerscore5
       value: 
       objectReference: {fileID: 1163829306}
+    - target: {fileID: 6302967807987672813, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6769827999031962253, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_Name
       value: Menuestructure
@@ -1205,6 +1221,22 @@ PrefabInstance:
     - target: {fileID: 7678340756258893011, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 476
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764059474333647250, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7839785513617287203, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8314600086959002809, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8904085164550585656, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5142782721370524163, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
