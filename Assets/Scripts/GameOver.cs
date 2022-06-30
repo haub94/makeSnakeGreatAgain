@@ -46,7 +46,7 @@ public class GameOver : MonoBehaviour {
         Time.timeScale = 0f;
         MyPauseMenu.gamePaused = true;
         MyPauseMenu.gameStarted = false;
-        gameOverText.text = "Glueckwunsch " + MyPlayerName.namePlayerOne + "\nDu hast " + MyScore.getScorefield() + " Punkte erzielt";
+        gameOverText.text = "Glückwunsch " + MyPlayerName.namePlayerOne + " !!!\nDu hast " + MyScore.getScorefield() + " Punkte erzielt";
         gameOverWindow.SetActive(true);
     }
 
@@ -57,8 +57,8 @@ public class GameOver : MonoBehaviour {
         MySnake.gridPosition = new Vector2Int(100, 100);    //SNAKE POSITION ZURUECK SETZEN ???
         MySnake.gridMoveDirection = new Vector2Int(0, 50);    //SNAKE MOVEDIRECTION ZURUECK SETZEN ???
         MyScore.setScorefield("0");                       //SCORE ZURUECK SETZEN ???
-        //TIMER FUER FUTTER ZURUECK SETZEN ???
-        //FUTTER DAS HERUM LIEGT LOESCHEN ???
+        //TIMER FUER FUTTER ZURUECK SETZEN ??? Oder ist das nicht noetig
+        //FUTTER DAS HERUM LIEGT LOESCHEN ??? Oder ist das nicht noetig
         gameOverWindow.SetActive(false);
         MyPauseMenu.gamePaused = false;
         MyPauseMenu.gameStarted = true;

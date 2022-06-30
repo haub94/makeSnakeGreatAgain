@@ -30,9 +30,10 @@ public class Snake : MonoBehaviour {
     private LevelGrid levelGrid;
     private float gridMoveTimer;
     private float gridMoveTimerMax;
-    private int snakeBodySize;
-    private List<Vector2Int> snakeMovePositionList;
-    private List<snakeBodyPart> snakeBodyPartList;
+    public int snakeBodySize;
+    public List<Vector2Int> snakeMovePositionList;
+    public List<snakeBodyPart> snakeBodyPartList;
+    public bool isGameOver;
     PauseMenu myPauseMenu;
 
     private bool canDoAction; // Booltrigger for stoping Input - Emily
@@ -84,6 +85,7 @@ public class Snake : MonoBehaviour {
 
     private void Awake() {
         canDoAction = true;     //Booltrigger for Input set true - Emily
+        isGameOver = false;
         gridPosition = new Vector2Int(100, 100);
         gridMoveTimerMax = timeToStep; // Faktor fuer Aktualisierung der Schrittfrequenz ( 1f = 1sec )
         gridMoveTimer = gridMoveTimerMax;
@@ -227,7 +229,7 @@ public class Snake : MonoBehaviour {
         gridPositionList.AddRange(snakeMovePositionList);
         return gridPositionList;
     }
-    private class snakeBodyPart{
+    public class snakeBodyPart{
         private Vector2Int gridPosition;
         private Transform transform;        
         public snakeBodyPart(int bodyIndex) {
@@ -262,7 +264,7 @@ public class Snake : MonoBehaviour {
         GetGridPosition();
         if ((gridPosition.x > 0) && (gridPosition.x < 1080) && (gridPosition.y > 0) && (gridPosition.y < 550)) //works
         {
-            canDoAction = true; //Trigger for getting KeyDown values - on
+            //canDoAction = true; //Trigger for getting KeyDown values - on
             return true;
         }
         else
@@ -275,14 +277,17 @@ public class Snake : MonoBehaviour {
 
     // let Snake die and game over - Emily
     public void Gameover() {
-        canDoAction = false;                                        //Trigger for blocking KeyDown values - off
+        isGameOver = true;
+
+        /*canDoAction = false;                                        //Trigger for blocking KeyDown values - off
         GetGridPosition();                                          //do i need it for the Scorecalculating?
         Vector2Int NullgridMoveDirection = new Vector2Int(0, 0);    //inizialise a Vector with (0,0) for setting gridMoveDirection to (0,0) --> no movement
         gridMoveDirection = NullgridMoveDirection;                  //gridMoveDirection = (0,0)
         gridMoveTimer = 0f;                                         //setting speed of steps Null 
-       /* <scoreController>().enable = true; // Run ScoreController Script while enabled - unfinished*/
-        gameStatus = GameStatus.Stop; // Game stops when Snake bites itself. - Le Xuan
+        */
 
+       /* <scoreController>().enable = true; // Run ScoreController Script while enabled - unfinished*/
+        //gameStatus = GameStatus.Stop; // Game stops when Snake bites itself. - Le Xuan
 
        /* if (score > highscore){                                   //compare scores
             highScore = score;
