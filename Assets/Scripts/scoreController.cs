@@ -6,9 +6,10 @@ Description:   The script calculates the highscore depending on the lenght of
 Author(s):     Markus Haubold
 Date:          2022-06-20
 Version:       V1.0 
-TODO:          - spielername aus Snake.cs ankoppeln 
+TODO:          - link playername from UI 
                - run setScorefield() only if the snake.getLength() has changed!
                - add error function (message + gamecontrol)
+               - add config file to switch the debug mode (not in the script)
 **********************************************************************************************************************/
 
 using System;
@@ -27,9 +28,11 @@ public class scoreController : MonoBehaviour
     [SerializeField] List<TextMeshProUGUI> highscoreValue = 
         new List<TextMeshProUGUI>();    //list of textfield for the scores in the highscore window
     private TextMeshProUGUI scorefield; //scorefield in the corner from the playfield (shows actual highscore) 
-    private const bool debugModeOn = false;  //switch on for debug stuff
+    private const bool debugModeOn = false;  //switch on for debug stuff //TODO: it would be better to switch it with an
+                                             //config file but currently there is no time for the implementation)
     public string snakePlayerName = "spielerName"; //name of the actual player
-    [SerializeField] bool runRefreshHighscoreList;   //trigger: true if the game is over (set from a button in the gameover popup)
+    [SerializeField] bool runRefreshHighscoreList;   //trigger: true if the game is over (set from a button in the 
+                                                     //gameover popup)
     [SerializeField] string debugSetActualScore;    //set an score for debugging
     [SerializeField] bool deleteAllHighscoreData;   //trigger: delete all data from the highscorelist (for ever)
     [SerializeField] bool secondCheckDeleteData = false;
@@ -187,7 +190,7 @@ public class scoreController : MonoBehaviour
        
         messages.Add("Bist du sicher, dass alle Highscoredaten gelöscht werden sollen?");
         messages.Add("Sorry...leider konnte dein Highscore nicht gespeichert werden!"); 
-        messages.Add("Du hast es leider nicht unter die Top5 geschafft!"); 
+        messages.Add("Du hast es leider nicht unter die Top 5 geschafft!"); 
         
     }
     
@@ -458,7 +461,8 @@ public class scoreController : MonoBehaviour
         //do nothing with the score if it is lower than another one ore equal
         if (stringToInt(getScorefield()) <= stringToInt(getPpValue(4))) {
             debugLog("Score " + getPpValue(memoryIndexPp) + " to low for highscorelist");
-            userInformation(getMessage(4));
+            userInformation(getMessage(2));
+            
 
             return true;
         } else {
@@ -487,7 +491,7 @@ public class scoreController : MonoBehaviour
                     
                     if ((actualPpValueAsInt == -99) || (nextPpValueAsInt == -99)) {
                         log("Error in function refreshHighscoreList: converting string to integer not successful!");
-                        userInformation(getMessage(2));
+                        userInformation(getMessage(1));
                         //the score will not be saved
 
                         return true;
