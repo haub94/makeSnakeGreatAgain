@@ -348,36 +348,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1167195803 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1137192695028330587, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
-  m_PrefabInstance: {fileID: 7678340755776271978}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1167195805 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7381387398496091686, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
   m_PrefabInstance: {fileID: 7678340755776271978}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1167195803}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2ef91e95e215fa47827aa5fef2ba613, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1167195806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1167195803}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2ef91e95e215fa47827aa5fef2ba613, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameOverWindow: {fileID: 612886891}
-  gameOverText: {fileID: 1525808657}
 --- !u!1 &1177431437 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7987982579972041507, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
@@ -987,9 +968,21 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 1593348840872436631, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -129.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1593348840872436631, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 132.9
+      objectReference: {fileID: 0}
     - target: {fileID: 1604198142158261516, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_RootOrder
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1631836251450926742, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1812084959841732467, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1002,6 +995,14 @@ PrefabInstance:
     - target: {fileID: 2118520826748900057, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_text
       value: '>> Catlover007 <<'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2644307194740500833, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -366.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2644307194740500833, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 132.9
       objectReference: {fileID: 0}
     - target: {fileID: 3367073475002900003, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -1223,6 +1224,14 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 7381387398496091686, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: gameOverText
+      value: 
+      objectReference: {fileID: 1525808657}
+    - target: {fileID: 7381387398496091686, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: gameOverWindow
+      value: 
+      objectReference: {fileID: 612886891}
     - target: {fileID: 7678340754284368914, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_Layer
       value: 5

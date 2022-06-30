@@ -456,6 +456,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Menu GameOver
       objectReference: {fileID: 0}
+    - target: {fileID: 7214900782152924687, guid: 285578ccb98a43948a3590e64151c03d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 285578ccb98a43948a3590e64151c03d, type: 3}
 --- !u!224 &4516661235340375477 stripped
@@ -901,7 +905,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7714910227530681236, guid: df3c4e23c235347bb825b27780201859, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7714910227530681239, guid: df3c4e23c235347bb825b27780201859, type: 3}
       propertyPath: m_Pivot.x

@@ -57,20 +57,39 @@ public class GameOver : MonoBehaviour {
     }
 
     public void StartNewGame() {
-        MySnake.snakeBodySize = 0;                        //SNAKE KOERPER ZURUECK SETZEN
-        MySnake.snakeBodyPartList.Clear();                //SNAKE BODYPARTLIST ZURUECK SETZEN ???
-        MySnake.snakeMovePositionList.Clear();            //SNAKE MOVEPOSITIONLIST ZURUECK SETZEN ???
-        MySnake.gridPosition = new Vector2Int(100, 100);    //SNAKE POSITION ZURUECK SETZEN ???
-        MySnake.gridMoveDirection = new Vector2Int(0, 50);    //SNAKE MOVEDIRECTION ZURUECK SETZEN ???
-        MyScore.setScorefield("0");                       //SCORE ZURUECK SETZEN ???
+        MySnake.isGameOver = false;
+        //MySnake.snakeBodySize = 0;                          //SNAKE KOERPER ZURUECK SETZEN                 >> WORKS
+        //MySnake.snakeBodyPartList.Clear();                  //SNAKE BODYPARTLIST ZURUECK SETZEN         >> WORKS
+        //MySnake.snakeMovePositionList.Clear();              //SNAKE MOVEPOSITIONLIST ZURUECK SETZEN      >> WORKS
+        //MySnake.gridPosition = new Vector2Int(100, 100);    //SNAKE POSITION ZURUECK SETZEN             >> WORKS
+        //MySnake.gridMoveDirection = new Vector2Int(0, 50);  //SNAKE MOVEDIRECTION ZURUECK SETZEN         >> WORKS
+        //MySnake.gameStatus = MySnake.GameStatus.Continue;
+        MyScore.setScorefield("0");                         //SCORE ZURUECK SETZEN                       >> WORKS
+        MyScore.setRunRefreshHighscoreList(true);           //SCORE UPDATEN DER HIGHSCORELISTE
         //TIMER FUER FUTTER ZURUECK SETZEN ??? Oder ist das nicht noetig
         //FUTTER DAS HERUM LIEGT LOESCHEN ??? Oder ist das nicht noetig
         gameOverWindow.SetActive(false);
         MyPauseMenu.buttonPauseMenu.SetActive(true);
         MyPauseMenu.gamePaused = false;
         MyPauseMenu.gameStarted = true;
-        MySnake.isGameOver = false;
+        MySnake.Awake();                                       //SNAKE NEUINITIALISIERUNG
         Time.timeScale = 1f;
+
+
+        // For debugging a list
+        /*
+        string result = "List contents before: ";
+        foreach (var item in MySnake.snakeBodyPartList) {
+            result += item.ToString() + ", ";
+        }
+        Debug.Log(result);
+
+        string result2 = "List contents after: ";
+        foreach (var item in MySnake.snakeBodyPartList) {
+            result2 += item.ToString() + ", ";
+        }
+        Debug.Log(result2);
+        */
     }
 
 }
