@@ -89,6 +89,7 @@ public class PauseMenu : MonoBehaviour /////////////////////////////////////////
         buttonPauseMenu.SetActive(false);
         buttonAudioOnOff.SetActive(false);
         pauseMenu.SetActive(true);
+        pauseMenuButtonSpielFortsetzen.SetActive(true);
         einstellungsMenu.SetActive(false);
         anleitungsMenu.SetActive(false);
         highScoreMenu.SetActive(false);

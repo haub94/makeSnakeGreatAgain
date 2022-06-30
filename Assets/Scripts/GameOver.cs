@@ -46,7 +46,13 @@ public class GameOver : MonoBehaviour {
         Time.timeScale = 0f;
         MyPauseMenu.gamePaused = true;
         MyPauseMenu.gameStarted = false;
-        gameOverText.text = "Glückwunsch " + MyPlayerName.namePlayerOne + " !!!\nDu hast " + MyScore.getScorefield() + " Punkte erzielt";
+        MyPauseMenu.buttonPauseMenu.SetActive(false);
+        if (MyScore.getScorefield() == "0") {
+            gameOverText.text = "Ups! " + MyPlayerName.namePlayerOne + "\nDu hast " + MyScore.getScorefield() + " Punkte erzielt";
+        }
+        else {
+            gameOverText.text = "Glückwunsch " + MyPlayerName.namePlayerOne + " !!!\nDu hast " + MyScore.getScorefield() + " Punkte erzielt";
+        }
         gameOverWindow.SetActive(true);
     }
 
@@ -60,6 +66,7 @@ public class GameOver : MonoBehaviour {
         //TIMER FUER FUTTER ZURUECK SETZEN ??? Oder ist das nicht noetig
         //FUTTER DAS HERUM LIEGT LOESCHEN ??? Oder ist das nicht noetig
         gameOverWindow.SetActive(false);
+        MyPauseMenu.buttonPauseMenu.SetActive(true);
         MyPauseMenu.gamePaused = false;
         MyPauseMenu.gameStarted = true;
         MySnake.isGameOver = false;
