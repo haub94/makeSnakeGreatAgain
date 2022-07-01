@@ -37,19 +37,24 @@ public class scoreController : MonoBehaviour
     [SerializeField] bool deleteAllHighscoreData;   //trigger: delete all data from the highscorelist (for ever)
     [SerializeField] bool secondCheckDeleteData = false;
     private List<string> messages = new List<string>();
-   
-
-
-
+    
     //setter and getter
     /*
      *Author(s): Haubold Markus;
      *Description: Set the actual playerscore as string (it is displayed in the Textfield at the playfield)
-     *Parameter value: The value for the Scorefield as string (its the actual playerscore)
+     *Parameter value: The value for the Scorefield as integer
      *Return: -
     */
-    public void setScorefield(string value) {
-        scorefield.text = value;
+    public void setScorefield(int value) {
+        log("snakelänge: " + value);
+        //set scorefield 0 if the snake has no bodyparts
+        if (value <= 0) {
+            scorefield.text = "0";
+        }
+        //if snake has bodyparts from 1 up to maxLength: calculate the score
+        if (inRangeOfInt(value, 1, snake.getMaxLength())) {
+            scorefield.text = calculate(value).ToString();
+        }
     }
     
     /*
@@ -220,13 +225,13 @@ public class scoreController : MonoBehaviour
         //reference to snake object (to get the length from it)
         snake = GameObject.Find("Snake").GetComponent<Snake>();
         scorefield = GetComponent<TextMeshProUGUI>();
-        setScorefield("0");
 
         //set keyNames with startvalues if the are not exists
         bool initDataDone = initializePlayerprefKeys();
         //copy playerprefs to the textfields
         bool copyDone = copyPlayerprefsToTextfields();
-        
+        //set scorefield to 0 
+        setScorefield(0);
         
         setMessage();
     }
@@ -610,13 +615,10 @@ public class scoreController : MonoBehaviour
         //TODO: run setScorefield() only if the snake.getLenght() has changed!
         //calculate and update scorefield
         
-        setScorefield(calculate(snake.getLength()).ToString());
+        //setScorefield(calculate(snake.getLength()).ToString());
 
         //gamover = refresh highscorelist
         if (getRunRefreshHighscoreList()) {
-            if (debugModeOn) {
-                setScorefield(debugSetActualScore);
-            }
             //wait for finish
             if (refreshHighscoreList()) {
                 setRunRefreshHighscoreList(false);

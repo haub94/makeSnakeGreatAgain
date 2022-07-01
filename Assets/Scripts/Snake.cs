@@ -41,12 +41,11 @@ public class Snake : MonoBehaviour {
     GameHandler gamehandler;  // my try to get the const value from gamehandler - Emily*/
 
     public PauseMenu MyPauseMenu { get => myPauseMenu; set => myPauseMenu = value; }
-
-    private int  length;
     private int stepDistancePositive = 12;
     private int stepDistanceNegative = -12;
     private float timeToStep = .1f;
-    
+    private scoreController scoreControllerScript;
+    private const int maxLength = 30; //Haubold: maximal parts of the Snake
 
 
 
@@ -63,18 +62,17 @@ public class Snake : MonoBehaviour {
         UnityEngine.Debug.Log("mygamefieldheight " + mygamefieldHeight); */
     }
 
-    //getter and setter
-    //lenght
-    public void setLength(int value)
-    {  //funktioniert noch nicht 
-        length = value;
+    /*
+     * Author(s): Haubold Markus
+     * Description: Get the maximal length (bodyparts) of the snake 
+     * Parameter: -
+     * Return: The maximal length of the snake as integer 
+    */
+    public int getMaxLength() {
+        int returnValue;
+        returnValue = maxLength;
 
-    }
-    public int getLength()
-    {
-        int returnLength = length;
-
-        return returnLength;
+        return returnValue;
     }
 
     public void Setup(LevelGrid levelGrid)
@@ -92,6 +90,7 @@ public class Snake : MonoBehaviour {
         snakeBodySize = 0;
         snakeBodyPartList = new List<snakeBodyPart>();
         gameStatus = GameStatus.Continue; // gameStatus equal out continue - Le Xuan
+        scoreControllerScript = GameObject.Find("Scorefield").GetComponent<scoreController>(); //Haubold:link to script
     }
 
     private void Update() {
@@ -104,10 +103,10 @@ public class Snake : MonoBehaviour {
            case GameStatus.Stop:
                break;   
         }                                   
-        UnityEngine.Debug.Log("GridPosition:X=" + gridPosition.x); // x value snake position - Emily
-        UnityEngine.Debug.Log("GridPosition:Y=" + gridPosition.y); // y value snake position - Emily
+        //UnityEngine.Debug.Log("GridPosition:X=" + gridPosition.x); // x value snake position - Emily
+        //UnityEngine.Debug.Log("GridPosition:Y=" + gridPosition.y); // y value snake position - Emily
 
-        UnityEngine.Debug.Log("Snake at PosX: " + gridPosition.x + " and PosY: " + gridPosition.y);
+        //UnityEngine.Debug.Log("Snake at PosX: " + gridPosition.x + " and PosY: " + gridPosition.y);
 
     }
 
@@ -164,8 +163,8 @@ public class Snake : MonoBehaviour {
                 bool snakeAteFood = levelGrid.TrySnakeEatFood(gridPosition);
                 if (snakeAteFood) {
                     snakeBodySize++;
+                    scoreControllerScript.setScorefield(snakeBodySize);
                     CreateSnakeBody();
-                    setLength(snakeBodySize);
                 }
 
                 if (snakeMovePositionList.Count >= snakeBodySize +1) {
