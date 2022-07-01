@@ -45,7 +45,7 @@ public class Snake : MonoBehaviour {
     private int stepDistanceNegative = -12;
     private float timeToStep = .1f;
     private scoreController scoreControllerScript;
-    private const int maxLength = 30; //Haubold: maximal parts of the Snake
+    private const int maxLength = 90; //Haubold: maximal parts of the Snake
 
 
 
@@ -60,19 +60,6 @@ public class Snake : MonoBehaviour {
         mygamefieldHeight = gamehandler.gamefieldHeight;
         UnityEngine.Debug.Log("mygamefieldwith " + mygamefieldWidth);
         UnityEngine.Debug.Log("mygamefieldheight " + mygamefieldHeight); */
-    }
-
-    /*
-     * Author(s): Haubold Markus
-     * Description: Get the maximal length (bodyparts) of the snake 
-     * Parameter: -
-     * Return: The maximal length of the snake as integer 
-    */
-    public int getMaxLength() {
-        int returnValue;
-        returnValue = maxLength;
-
-        return returnValue;
     }
 
     public void Setup(LevelGrid levelGrid)
@@ -163,7 +150,7 @@ public class Snake : MonoBehaviour {
                 bool snakeAteFood = levelGrid.TrySnakeEatFood(gridPosition);
                 if (snakeAteFood) {
                     snakeBodySize++;
-                    scoreControllerScript.setScorefield(snakeBodySize);
+                    scoreControllerScript.setScorefield(snakeBodySize, maxLength);
                     CreateSnakeBody();
                 }
 

@@ -45,14 +45,14 @@ public class scoreController : MonoBehaviour
      *Parameter value: The value for the Scorefield as integer
      *Return: -
     */
-    public void setScorefield(int value) {
+    public void setScorefield(int value, int maxLength) {
         log("snakelänge: " + value);
         //set scorefield 0 if the snake has no bodyparts
         if (value <= 0) {
             scorefield.text = "0";
         }
         //if snake has bodyparts from 1 up to maxLength: calculate the score
-        if (inRangeOfInt(value, 1, snake.getMaxLength())) {
+        if (inRangeOfInt(value, 1, maxLength)) {
             scorefield.text = calculate(value).ToString();
         }
     }
@@ -231,7 +231,7 @@ public class scoreController : MonoBehaviour
         //copy playerprefs to the textfields
         bool copyDone = copyPlayerprefsToTextfields();
         //set scorefield to 0 
-        setScorefield(0);
+        setScorefield(0, 0);
         
         setMessage();
     }
@@ -439,9 +439,9 @@ public class scoreController : MonoBehaviour
     private double calculate(int x) {
         //function parameters
         double score = 0;
-        const double a = 3.0;
+        const double a = 0.1;
         const double k = 0.2;
-        const double c = -4;
+        const double c = - 1;
 
         if (x == 0) {
             score = 0;
