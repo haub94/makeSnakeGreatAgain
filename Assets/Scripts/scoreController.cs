@@ -21,8 +21,6 @@ using TMPro;
 
 public class scoreController : MonoBehaviour
 {
-    Snake snake;    //create object from class snake
-
     [SerializeField] List<TextMeshProUGUI> highscoreName = 
         new List<TextMeshProUGUI>();    //list of textfield for the names in the highscore window                                    
     [SerializeField] List<TextMeshProUGUI> highscoreValue = 
@@ -222,8 +220,7 @@ public class scoreController : MonoBehaviour
      *Return: -
     */
     void Start() {
-        //reference to snake object (to get the length from it)
-        snake = GameObject.Find("Snake").GetComponent<Snake>();
+        //get the gameobject from the textfield
         scorefield = GetComponent<TextMeshProUGUI>();
 
         //set keyNames with startvalues if the are not exists
