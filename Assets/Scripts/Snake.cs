@@ -77,7 +77,7 @@ public class Snake : MonoBehaviour {
         snakeBodySize = 0;
         snakeBodyPartList = new List<snakeBodyPart>();
         gameStatus = GameStatus.Continue; // gameStatus equal out continue - Le Xuan
-        scoreControllerScript = GameObject.Find("Scorefield").GetComponent<scoreController>(); //Haubold:link to script
+        scoreControllerScript = GameObject.Find("Scorefield").GetComponent<scoreController>();
     }
 
     private void Update() {
@@ -150,7 +150,8 @@ public class Snake : MonoBehaviour {
                 bool snakeAteFood = levelGrid.TrySnakeEatFood(gridPosition);
                 if (snakeAteFood) {
                     snakeBodySize++;
-                    scoreControllerScript.setScorefield(snakeBodySize, maxLength);
+                    scoreControllerScript.setScorefield(snakeBodySize, maxLength); //Haubold: write give length to 
+                                                                                   //scoreController (calc act score)
                     CreateSnakeBody();
                 }
 
@@ -266,7 +267,6 @@ public class Snake : MonoBehaviour {
         Vector2Int NullgridMoveDirection = new Vector2Int(0, 0);    //inizialise a Vector with (0,0) for setting gridMoveDirection to (0,0) --> no movement
         gridMoveDirection = NullgridMoveDirection;                  //gridMoveDirection = (0,0)
         gridMoveTimer = 0f;                                         //setting speed of steps Null 
-       /* <scoreController>().enable = true; // Run ScoreController Script while enabled - unfinished*/
         gameStatus = GameStatus.Stop; // Game stops when Snake bites itself. - Le Xuan
 
 

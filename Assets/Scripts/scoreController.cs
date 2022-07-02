@@ -4,12 +4,10 @@ Description:   The script calculates the highscore depending on the lenght of
                the snake.
                read data: PlayerPrefs <-- Textfield <-- highscoreAsInt
 Author(s):     Markus Haubold
-Date:          2022-06-20
+Date:          2022-07-01
 Version:       V1.0 
 TODO:          - link playername from UI 
-               - run setScorefield() only if the snake.getLength() has changed!
-               - add error function (message + gamecontrol)
-               - add config file to switch the debug mode (not in the script)
+               - future: add config file to switch the debug mode (not in the script)
 **********************************************************************************************************************/
 
 using System;
@@ -31,7 +29,6 @@ public class scoreController : MonoBehaviour
     public string snakePlayerName = "spielerName"; //name of the actual player
     [SerializeField] bool runRefreshHighscoreList;   //trigger: true if the game is over (set from a button in the 
                                                      //gameover popup)
-    [SerializeField] string debugSetActualScore;    //set an score for debugging
     [SerializeField] bool deleteAllHighscoreData;   //trigger: delete all data from the highscorelist (for ever)
     [SerializeField] bool secondCheckDeleteData = false;
     private List<string> messages = new List<string>();
@@ -133,6 +130,7 @@ public class scoreController : MonoBehaviour
      *Return: The score from the list-postion as string
     */
     public string getHighscoreValue(int index) {
+       
         return highscoreValue[index].text;
     }
 
@@ -189,12 +187,11 @@ public class scoreController : MonoBehaviour
      *Return: -
     */
     public void setMessage() {
-       //maybe later it will be possible to change the language -> implement logic here!
+       //later it will maybe possible to change the language -> implement logic here!
        
         messages.Add("Bist du sicher, dass alle Highscoredaten gelöscht werden sollen?");
         messages.Add("Sorry...leider konnte dein Highscore nicht gespeichert werden!"); 
-        messages.Add("Du hast es leider nicht unter die Top 5 geschafft!"); 
-        
+        messages.Add("Du hast es leider nicht unter die Top 5 geschafft!");
     }
     
     /*
