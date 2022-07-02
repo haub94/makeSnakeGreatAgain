@@ -4,12 +4,10 @@ Description:   The script calculates the highscore depending on the lenght of
                the snake.
                read data: PlayerPrefs <-- Textfield <-- highscoreAsInt
 Author(s):     Markus Haubold
-Date:          2022-06-20
+Date:          2022-07-01
 Version:       V1.0 
 TODO:          - link playername from UI 
-               - run setScorefield() only if the snake.getLength() has changed!
-               - add error function (message + gamecontrol)
-               - add config file to switch the debug mode (not in the script)
+               - future: add config file to switch the debug mode (not in the script)
 **********************************************************************************************************************/
 
 using System;
@@ -21,8 +19,6 @@ using TMPro;
 
 public class scoreController : MonoBehaviour
 {
-    Snake snake;    //create object from class snake
-
     [SerializeField] List<TextMeshProUGUI> highscoreName = 
         new List<TextMeshProUGUI>();    //list of textfield for the names in the highscore window                                    
     [SerializeField] List<TextMeshProUGUI> highscoreValue = 
@@ -33,23 +29,27 @@ public class scoreController : MonoBehaviour
     public string snakePlayerName = "spielerName"; //name of the actual player
     [SerializeField] bool runRefreshHighscoreList;   //trigger: true if the game is over (set from a button in the 
                                                      //gameover popup)
-    [SerializeField] string debugSetActualScore;    //set an score for debugging
     [SerializeField] bool deleteAllHighscoreData;   //trigger: delete all data from the highscorelist (for ever)
     [SerializeField] bool secondCheckDeleteData = false;
     private List<string> messages = new List<string>();
-   
-
-
-
+    
     //setter and getter
     /*
      *Author(s): Haubold Markus;
      *Description: Set the actual playerscore as string (it is displayed in the Textfield at the playfield)
-     *Parameter value: The value for the Scorefield as string (its the actual playerscore)
+     *Parameter value: The value for the Scorefield as integer
      *Return: -
     */
-    public void setScorefield(string value) {
-        scorefield.text = value;
+    public void setScorefield(int value, int maxLength) {
+        log("snakelänge: " + value);
+        //set scorefield 0 if the snake has no bodyparts
+        if (value <= 0) {
+            scorefield.text = "0";
+        }
+        //if snake has bodyparts from 1 up to maxLength: calculate the score
+        if (inRangeOfInt(value, 1, maxLength)) {
+            scorefield.text = calculate(value).ToString();
+        }
     }
     
     /*
@@ -130,6 +130,7 @@ public class scoreController : MonoBehaviour
      *Return: The score from the list-postion as string
     */
     public string getHighscoreValue(int index) {
+       
         return highscoreValue[index].text;
     }
 
@@ -186,12 +187,11 @@ public class scoreController : MonoBehaviour
      *Return: -
     */
     public void setMessage() {
-       //maybe later it will be possible to change the language -> implement logic here!
+       //later it will maybe possible to change the language -> implement logic here!
        
         messages.Add("Bist du sicher, dass alle Highscoredaten gelöscht werden sollen?");
         messages.Add("Sorry...leider konnte dein Highscore nicht gespeichert werden!"); 
-        messages.Add("Du hast es leider nicht unter die Top 5 geschafft!"); 
-        
+        messages.Add("Du hast es leider nicht unter die Top 5 geschafft!");
     }
     
     /*
@@ -217,16 +217,15 @@ public class scoreController : MonoBehaviour
      *Return: -
     */
     void Start() {
-        //reference to snake object (to get the length from it)
-        snake = GameObject.Find("Snake").GetComponent<Snake>();
+        //get the gameobject from the textfield
         scorefield = GetComponent<TextMeshProUGUI>();
-        setScorefield("0");
 
         //set keyNames with startvalues if the are not exists
         bool initDataDone = initializePlayerprefKeys();
         //copy playerprefs to the textfields
         bool copyDone = copyPlayerprefsToTextfields();
-        
+        //set scorefield to 0 
+        setScorefield(0, 0);
         
         setMessage();
     }
@@ -434,9 +433,9 @@ public class scoreController : MonoBehaviour
     private double calculate(int x) {
         //function parameters
         double score = 0;
-        const double a = 3.0;
+        const double a = 0.1;
         const double k = 0.2;
-        const double c = -4;
+        const double c = - 1;
 
         if (x == 0) {
             score = 0;
@@ -610,13 +609,10 @@ public class scoreController : MonoBehaviour
         //TODO: run setScorefield() only if the snake.getLenght() has changed!
         //calculate and update scorefield
         
-        setScorefield(calculate(snake.getLength()).ToString());
+        //setScorefield(calculate(snake.getLength()).ToString());
 
         //gamover = refresh highscorelist
         if (getRunRefreshHighscoreList()) {
-            if (debugModeOn) {
-                setScorefield(debugSetActualScore);
-            }
             //wait for finish
             if (refreshHighscoreList()) {
                 setRunRefreshHighscoreList(false);
