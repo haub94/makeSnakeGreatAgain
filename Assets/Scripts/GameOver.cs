@@ -56,8 +56,16 @@ public class GameOver : MonoBehaviour {
         gameOverWindow.SetActive(true);
     }
 
+    public void DestroyOldBodyParts() {
+        GameObject[] bodyPartsToDestroy = GameObject.FindGameObjectsWithTag("SnakeBodyPart");
+        for (int i = 0; i < bodyPartsToDestroy.Length; i++) {
+            GameObject.Destroy(bodyPartsToDestroy[i]);
+        }
+    }
+
     public void StartNewGame() {
         MySnake.isGameOver = false;
+        DestroyOldBodyParts();
         //MySnake.snakeBodySize = 0;                          //SNAKE KOERPER ZURUECK SETZEN                 >> WORKS
         //MySnake.snakeBodyPartList.Clear();                  //SNAKE BODYPARTLIST ZURUECK SETZEN         >> WORKS
         //MySnake.snakeMovePositionList.Clear();              //SNAKE MOVEPOSITIONLIST ZURUECK SETZEN      >> WORKS

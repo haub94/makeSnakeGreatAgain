@@ -94,6 +94,8 @@ public class PauseMenu : MonoBehaviour /////////////////////////////////////////
         anleitungsMenu.SetActive(false);
         highScoreMenu.SetActive(false);
         creditsMenu.SetActive(false);
+        pauseMenuBackgroundLayer.SetActive(true);
+        pauseMenuBanner.SetActive(true);
     }
 
     // Daniel - 24.05.2022 - 05.06.2022 geupdatet - Spiel fortsetzen und Menue ausblenden

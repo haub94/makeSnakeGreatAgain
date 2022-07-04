@@ -231,6 +231,8 @@ public class Snake : MonoBehaviour {
             snakeBodyGameObject.GetComponent<Renderer>().sortingOrder = 4;
             //Haubold: scale sprite of the bodyparts
             snakeBodyGameObject.GetComponent<Renderer>().transform.localScale = bodyPartScale;
+            //Daniel - set a tag to every bodypart
+            snakeBodyGameObject.tag = "SnakeBodyPart";
 
             transform = snakeBodyGameObject.transform;
 
