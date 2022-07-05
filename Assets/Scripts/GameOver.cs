@@ -51,7 +51,7 @@ public class GameOver : MonoBehaviour {
             gameOverText.text = "Ups! " + MyPlayerName.namePlayerOne + "\nDu hast " + MyScore.getScorefield() + " Punkte erzielt";
         }
         else {
-            gameOverText.text = "Glückwunsch " + MyPlayerName.namePlayerOne + " !!!\nDu hast " + MyScore.getScorefield() + " Punkte erzielt";
+            gameOverText.text = "Glï¿½ckwunsch " + MyPlayerName.namePlayerOne + " !!!\nDu hast " + MyScore.getScorefield() + " Punkte erzielt";
         }
         gameOverWindow.SetActive(true);
     }
@@ -72,7 +72,7 @@ public class GameOver : MonoBehaviour {
         //MySnake.gridPosition = new Vector2Int(100, 100);    //SNAKE POSITION ZURUECK SETZEN             >> WORKS
         //MySnake.gridMoveDirection = new Vector2Int(0, 50);  //SNAKE MOVEDIRECTION ZURUECK SETZEN         >> WORKS
         //MySnake.gameStatus = MySnake.GameStatus.Continue;
-        MyScore.setScorefield("0");                         //SCORE ZURUECK SETZEN                       >> WORKS
+        MyScore.setScorefield(0, 0);                         //SCORE ZURUECK SETZEN                       >> WORKS
         MyScore.setRunRefreshHighscoreList(true);           //SCORE UPDATEN DER HIGHSCORELISTE
         //TIMER FUER FUTTER ZURUECK SETZEN ??? Oder ist das nicht noetig
         //FUTTER DAS HERUM LIEGT LOESCHEN ??? Oder ist das nicht noetig
