@@ -1,3 +1,12 @@
+/******************************************************************************
+Name:           BackgroundImageScroll
+Description:    The script manages the effect of the scolling backgroundimage
+                on the startscreen.
+Author(s):      Daniel Rittrich
+Date:           2022-06-03
+Version:        V1.0
+TODO:           - 
+******************************************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
