@@ -189,7 +189,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3894168266290529209, guid: 594d187a3f3e04a6d8f69757a8eb6204, type: 3}
       propertyPath: m_Name
-      value: Text (TMP)
+      value: Scorefield
       objectReference: {fileID: 0}
     - target: {fileID: 3894168266290529210, guid: 594d187a3f3e04a6d8f69757a8eb6204, type: 3}
       propertyPath: m_Pivot.x
