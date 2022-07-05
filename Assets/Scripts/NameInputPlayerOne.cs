@@ -19,7 +19,11 @@ public class NameInputPlayerOne : MonoBehaviour {
     public GameObject inputFieldText;
     public TMP_InputField nameInputFieldTMP;
 
-    // Daniel - 20.06.2022 - Buttonclickhandler prueft ob Var fuer Spielernamen leer ist und traegt ggf. neuen Namen ein
+    void Awake() {
+        nameInputFieldTMP.characterLimit = 12; //Daniel - 05.07.22 - set the limit of characters for playernameinput
+    }
+
+    // Daniel - 20.06.2022 - Buttonclickhandler checks if there is a input in playernamefield and set this value as playername
     public void PressEnter() {
         if (nameInputFieldTMP.text == "") {
         }

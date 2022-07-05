@@ -224,7 +224,6 @@ MonoBehaviour:
   - {fileID: 1163829306}
   snakePlayerName: spielerName
   runRefreshHighscoreList: 0
-  debugSetActualScore: 
   deleteAllHighscoreData: 0
   secondCheckDeleteData: 0
 --- !u!1 &403112213 stripped

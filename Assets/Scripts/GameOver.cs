@@ -30,7 +30,7 @@ public class GameOver : MonoBehaviour {
 
     public void Start() {
         // Daniel - 20.06.2022 - Zugriff auf Variablen aus anderem Script
-        MyScore = GameObject.Find("Text (TMP)").GetComponent<scoreController>();
+        MyScore = GameObject.Find("Scorefield").GetComponent<scoreController>();
         MyPauseMenu = GameObject.Find("Pause - Menu - Manager").GetComponent<PauseMenu>();
         MySnake = GameObject.Find("Snake").GetComponent<Snake>();
         MyPlayerName = GameObject.Find("Name Input Manager - Startscreen").GetComponent<NameInputPlayerOne>();
@@ -51,7 +51,7 @@ public class GameOver : MonoBehaviour {
             gameOverText.text = "Ups! " + MyPlayerName.namePlayerOne + "\nDu hast " + MyScore.getScorefield() + " Punkte erzielt";
         }
         else {
-            gameOverText.text = "Gl�ckwunsch " + MyPlayerName.namePlayerOne + " !!!\nDu hast " + MyScore.getScorefield() + " Punkte erzielt";
+            gameOverText.text = "Wow " + MyPlayerName.namePlayerOne + " !!!\nDu hast " + MyScore.getScorefield() + " Punkte erzielt";
         }
         gameOverWindow.SetActive(true);
     }
