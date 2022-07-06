@@ -5,7 +5,6 @@ Date: 13.06.2022 (update getter and setter)
 ###code-style
 - blockcode (dont use spaghetticode)
 - camelCase-Notation (myFirstFuction(); variableOne; dogCatMouseWhatEver) 
-- objectnames start with a capital letter (e.g. snake MySnakeObject)
 - 120 characters per line
 - language = english!!!
 

@@ -6,8 +6,8 @@ Description:   The script calculates the highscore depending on the lenght of
 Author(s):     Markus Haubold
 Date:          2022-07-01
 Version:       V1.0 
-TODO:          - link playername from UI 
-               - future: add config file to switch the debug mode (not in the script)
+TODO:          - future: add config file to switch the debug mode (not in the script)
+               - complete the user interaction
 **********************************************************************************************************************/
 
 using System;
@@ -26,17 +26,64 @@ public class scoreController : MonoBehaviour
     private TextMeshProUGUI scorefield; //scorefield in the corner from the playfield (shows actual highscore) 
     private const bool debugModeOn = false;  //switch on for debug stuff //TODO: it would be better to switch it with an
                                              //config file but currently there is no time for the implementation)
-    public string snakePlayerName = "spielerName"; //name of the actual player
+    [SerializeField] string playerName; //name of the current player
     [SerializeField] bool runRefreshHighscoreList;   //trigger: true if the game is over (set from a button in the 
                                                      //gameover popup)
     [SerializeField] bool deleteAllHighscoreData;   //trigger: delete all data from the highscorelist (for ever)
     [SerializeField] bool secondCheckDeleteData = false;
     private List<string> messages = new List<string>();
+    [SerializeField] bool refreshDone = false;
     
     //setter and getter
     /*
      *Author(s): Haubold Markus;
-     *Description: Set the actual playerscore as string (it is displayed in the Textfield at the playfield)
+     *Description: Set the actual playername
+     *Parameter value: The value for the playername as string
+     *Return: -
+    */
+    public void setPlayerName(string value) {
+        playerName = value;
+    }
+    
+    /*
+     *Author(s): Haubold Markus;
+     *Description: Get the actual playername
+     *Parameter: -
+     *Return: The actual playername as string
+    */
+    public string getPlayerName() {
+        string returnValue;
+        returnValue = playerName;
+
+        return returnValue;
+    }
+
+    /*
+     *Author(s): Haubold Markus;
+     *Description: Set the state of the refreshing
+     *Parameter value: state as bool  (true == done)
+     *Return: -
+    */
+    public void setRefreshDone(bool value) {
+        refreshDone = value;
+    }
+
+    /*
+     *Author(s): Haubold Markus;
+     *Description: Get the current state of the refreshing from the highscorelist
+     *Parameter: -
+     *Return: The current state of the refreshing  as bool (true == done)
+    */
+    public bool getRefreshDone() {
+        bool returnValue;
+        returnValue = refreshDone;
+
+        return returnValue; 
+    }
+    
+    /*
+     *Author(s): Haubold Markus;
+     *Description: Set the current playerscore as string (it is displayed in the Textfield at the playfield)
      *Parameter value: The value for the Scorefield as integer
      *Return: -
     */
@@ -54,7 +101,7 @@ public class scoreController : MonoBehaviour
     
     /*
      *Author(s): Haubold Markus;
-     *Description: Get the actual playerscore as string
+     *Description: Get the current playerscore as string
      *Parameter: -
      *Return: The actual playerscore as string
     */
@@ -182,7 +229,7 @@ public class scoreController : MonoBehaviour
 
     /*
      *Author(s): Haubold Markus;
-     *Description: Add messagetexts to the list messages
+     *Description: Add messagetexts to the list messages // CURRENTLY NOT USED - ITS A PREPERATION FOR THE FUTURE
      *Parameter : -
      *Return: -
     */
@@ -196,7 +243,7 @@ public class scoreController : MonoBehaviour
     
     /*
      *Author(s): Haubold Markus;
-     *Description: Get an messsage from the message-list
+     *Description: Get an messsage from the message-list // CURRENTLY NOT USED - ITS A PREPERATION FOR THE FUTURE
      *Parameter index: Position in the message-list (message selector)
      *Return: The message as string
     */
@@ -454,9 +501,8 @@ public class scoreController : MonoBehaviour
      *Parameter: - 
      *Return: The status true if the refreshing was successful and and false if not as bool
     */
-    public bool refreshHighscoreList() {
+    private bool refreshHighscoreList() {
         const int memoryIndexPp = 5;
-         
         //do nothing with the score if it is lower than another one ore equal
         if (stringToInt(getScorefield()) <= stringToInt(getPpValue(4))) {
             debugLog("Score " + getPpValue(memoryIndexPp) + " to low for highscorelist");
@@ -465,8 +511,8 @@ public class scoreController : MonoBehaviour
 
             return true;
         } else {
-             //write the actual player-data in the PlayPrefs because they will needed for bubblesort
-            setPpName(memoryIndexPp, snakePlayerName);
+             //write the actual playerdata at the PlayPref position 5 because they will needed for bubblesort
+            setPpName(memoryIndexPp, getPlayerName());
             setPpValue(memoryIndexPp, getScorefield());
         } 
 
@@ -606,16 +652,11 @@ public class scoreController : MonoBehaviour
      *Return: -
     */
     void Update() {
-        //TODO: run setScorefield() only if the snake.getLenght() has changed!
-        //calculate and update scorefield
-        
-        //setScorefield(calculate(snake.getLength()).ToString());
-
         //gamover = refresh highscorelist
-        if (getRunRefreshHighscoreList()) {
-            //wait for finish
+        if (getRunRefreshHighscoreList() && !getRefreshDone()) {
+            //wait for done
             if (refreshHighscoreList()) {
-                setRunRefreshHighscoreList(false);
+                setRefreshDone(true);
             }
         }
 
