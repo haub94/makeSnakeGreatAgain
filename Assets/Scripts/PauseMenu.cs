@@ -142,4 +142,56 @@ public class PauseMenu : MonoBehaviour {
         startscreenMenu.SetActive(false);
         Time.timeScale = 1f;
     }
+
+    /*
+     * Author: Daniel Rittrich 
+     * Description: show settings window 
+     * Parameter: -
+     * Return: -
+    */
+    public void PressSettingsButton() {
+        einstellungsMenu.SetActive(true);
+        anleitungsMenu.SetActive(false);
+        highScoreMenu.SetActive(false);
+        creditsMenu.SetActive(false);
+    }
+
+    /*
+     * Author: Daniel Rittrich 
+     * Description: show manual window
+     * Parameter: -
+     * Return: -
+    */
+    public void PressManualButton() {
+        einstellungsMenu.SetActive(false);
+        anleitungsMenu.SetActive(true);
+        highScoreMenu.SetActive(false);
+        creditsMenu.SetActive(false);
+    }
+
+    /*
+     * Author: Daniel Rittrich 
+     * Description: show highscore window
+     * Parameter: -
+     * Return: -
+    */
+    public void PressHighscoreButton() {
+        einstellungsMenu.SetActive(false);
+        anleitungsMenu.SetActive(false);
+        highScoreMenu.SetActive(true);
+        creditsMenu.SetActive(false);
+    }
+
+    /*
+     * Author: Daniel Rittrich 
+     * Description: show credits window
+     * Parameter: -
+     * Return: -
+    */
+    public void PressCreditsButton() {
+        einstellungsMenu.SetActive(false);
+        anleitungsMenu.SetActive(false);
+        highScoreMenu.SetActive(false);
+        creditsMenu.SetActive(true);
+    }
 }
