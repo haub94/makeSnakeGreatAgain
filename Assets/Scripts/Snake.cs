@@ -256,22 +256,14 @@ public class Snake : MonoBehaviour {
         }
     }
 
-    // let Snake die and game over - Emily
+    /*
+     * Author: Daniel Rittrich 
+     * Description: set isGameOver (bool) to true  
+     * Parameter: -
+     * Return: -
+    */
     public void Gameover() {
         isGameOver = true;
-
-        /*canDoAction = false;                                        //Trigger for blocking KeyDown values - off
-        GetGridPosition();                                          //do i need it for the Scorecalculating?
-        Vector2Int NullgridMoveDirection = new Vector2Int(0, 0);    //inizialise a Vector with (0,0) for setting gridMoveDirection to (0,0) --> no movement
-        gridMoveDirection = NullgridMoveDirection;                  //gridMoveDirection = (0,0)
-        gridMoveTimer = 0f;                                         //setting speed of steps Null 
-        gameStatus = GameStatus.Stop; // Game stops when Snake bites itself. - Le Xuan
-
-        /* if (score > highscore){                                   //compare scores
-             highScore = score;
-         }
-         */
-
     }
 
 

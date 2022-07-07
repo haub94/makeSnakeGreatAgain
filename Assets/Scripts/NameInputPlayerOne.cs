@@ -7,6 +7,7 @@ Date:           2022-06-20
 Version:        V1.1 
 TODO:           - 
 ******************************************************************************/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,11 +20,22 @@ public class NameInputPlayerOne : MonoBehaviour {
     public GameObject inputFieldText;
     public TMP_InputField nameInputFieldTMP;
 
+    /*
+     * Author: Daniel Rittrich 
+     * Description: set the limit of characters for playernameinput  
+     * Parameter: -
+     * Return: -
+    */
     void Awake() {
-        nameInputFieldTMP.characterLimit = 12; //Daniel - 05.07.22 - set the limit of characters for playernameinput
+        nameInputFieldTMP.characterLimit = 12;
     }
 
-    // Daniel - 20.06.2022 - Buttonclickhandler checks if there is a input in playernamefield and set this value as playername
+    /*
+     * Author: Daniel Rittrich 
+     * Description: checks if there is a input in playernamefield  
+     * Parameter: text (string) from inputfield
+     * Return: -
+    */
     public void PressEnter() {
         if (nameInputFieldTMP.text == "") {
         }
@@ -33,10 +45,22 @@ public class NameInputPlayerOne : MonoBehaviour {
         }
     }
 
+    /*
+     * Author: Daniel Rittrich 
+     * Description: set value (string) as playername
+     * Parameter: text (string) from inputfield
+     * Return: -
+    */
     public void SetName() {
         namePlayerOne = nameInputFieldTMP.text;
     }
 
+    /*
+     * Author: Daniel Rittrich 
+     * Description: close the inputfield-window
+     * Parameter: -
+     * Return: -
+    */
     public void CloseInputField() {
         inputFieldWindow.SetActive(false);
     }

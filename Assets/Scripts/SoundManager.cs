@@ -8,13 +8,13 @@ Date:           2022-05-24
 Version:        V1.0
 TODO:           - 
 ******************************************************************************/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SoundManager : MonoBehaviour
-{
+public class SoundManager : MonoBehaviour {
 
     [SerializeField] Image soundOnIconGame;
     [SerializeField] Image soundOffIconGame;
@@ -22,58 +22,57 @@ public class SoundManager : MonoBehaviour
     [SerializeField] Image soundOffIconSettings;
     private bool muted = false;
 
-    void Start()
-    {
-        if (!PlayerPrefs.HasKey("muted"))
-        {
+    /*
+     * Author: Daniel Rittrich 
+     * Description: checks for sound settings and initialize settings for gamestart
+     * Parameter: -
+     * Return: -
+    */
+    void Start() {
+        if (!PlayerPrefs.HasKey("muted")) {
             PlayerPrefs.SetInt("muted", 0);
             Load();
         }
-        else
-        {
+        else {
             Load();
         }
-
         UpdateButtonIcon();
         AudioListener.pause = muted;
-
     }
 
-    void Update()
-    {
-
-    }
-
-    // Daniel - 24.05.2022 - Hintergrundmusik An- bzw. Ausschalten
-    public void SoundOnOff()
-    {
-        if (muted == false)
-        {
+    /*
+     * Author: Daniel Rittrich 
+     * Description: handles the changes for sound-settings (sound on/off)
+     * Parameter: -
+     * Return: -
+    */
+    public void SoundOnOff() {
+        if (muted == false) {
             muted = true;
             AudioListener.pause = true;
         }
-        else
-        {
+        else {
             muted = false;
             AudioListener.pause = false;
         }
-
         Save();
         UpdateButtonIcon();
     }
 
-    // Daniel - 24.05.2022 - ButtonIcon aendern An->Aus bzw. Aus->An
-    private void UpdateButtonIcon()
-    {
-        if (muted == false)
-        {
+    /*
+     * Author: Daniel Rittrich 
+     * Description: changes the icons for sound on/off in game and in settings 
+     * Parameter: -
+     * Return: -
+    */
+    private void UpdateButtonIcon() {
+        if (muted == false) {
             soundOnIconGame.enabled = true;
             soundOffIconGame.enabled = false;
             soundOnIconSettings.enabled = true;
             soundOffIconSettings.enabled = false;
         }
-        else
-        {
+        else {
             soundOnIconGame.enabled = false;
             soundOffIconGame.enabled = true;
             soundOnIconSettings.enabled = false;
@@ -81,15 +80,23 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // Daniel - 24.05.2022 - Soundeinstellungen aus den Spielereinstellungen laden
-    private void Load()
-    {
+    /*
+     * Author: Daniel Rittrich 
+     * Description: load the last setting for sound on/off from playerprefs 
+     * Parameter: -
+     * Return: -
+    */
+    private void Load() {
         muted = PlayerPrefs.GetInt("muted") == 1;
     }
 
-    // Daniel - 24.05.2022 - Soundeinstellungen in den Spielereinstellungen speichern
-    private void Save()
-    {
+    /*
+     * Author: Daniel Rittrich 
+     * Description: save the setting for sound on/off in playerprefs
+     * Parameter: -
+     * Return: -
+    */
+    private void Save() {
         PlayerPrefs.SetInt("muted", muted ? 1 : 0);
     }
 }
