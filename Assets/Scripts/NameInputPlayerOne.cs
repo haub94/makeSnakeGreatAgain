@@ -17,7 +17,6 @@ using TMPro;
 public class NameInputPlayerOne : MonoBehaviour {
     public string namePlayerOne = "";
     public GameObject inputFieldWindow;
-    public GameObject inputFieldText;
     public TMP_InputField nameInputFieldTMP;
 
     /*
