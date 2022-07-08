@@ -18,6 +18,22 @@ public class NameInputPlayerOne : MonoBehaviour {
     public string namePlayerOne = "";
     public GameObject inputFieldWindow;
     public TMP_InputField nameInputFieldTMP;
+    public GameObject pauseMenu;
+    public GameObject pauseMenuButtonEinstellungen;
+    public GameObject pauseMenuButtonAnleitung;
+    public GameObject pauseMenuButtonHighScores;
+    public GameObject pauseMenuButtonCredits;
+    public GameObject pauseMenuButtonSpielBeenden;
+    public GameObject pauseMenuButtonSpielFortsetzen;
+    public GameObject pauseMenuBackgroundLayer;
+    public GameObject pauseMenuBanner;
+    public GameObject startscreenMenu;
+    public GameObject startscreenBGImage;
+    public GameObject startscreenTitel;
+    public GameObject startscreenButtonEinzelspieler;
+    public GameObject startscreenButtonMehrspieler;
+
+
 
     /*
      * Author: Daniel Rittrich 
@@ -56,11 +72,25 @@ public class NameInputPlayerOne : MonoBehaviour {
 
     /*
      * Author: Daniel Rittrich 
-     * Description: close the inputfield-window
+     * Description: close the inputfield-window and shows the menu
      * Parameter: -
      * Return: -
     */
     public void CloseInputField() {
         inputFieldWindow.SetActive(false);
+        pauseMenu.SetActive(true);
+        pauseMenuButtonEinstellungen.SetActive(true);
+        pauseMenuButtonAnleitung.SetActive(true);
+        pauseMenuButtonHighScores.SetActive(true);
+        pauseMenuButtonCredits.SetActive(true);
+        pauseMenuButtonSpielBeenden.SetActive(true);
+        pauseMenuButtonSpielFortsetzen.SetActive(false);
+        pauseMenuBackgroundLayer.SetActive(false);
+        pauseMenuBanner.SetActive(false);
+        startscreenMenu.SetActive(true);
+        startscreenBGImage.SetActive(true);
+        startscreenTitel.SetActive(true);
+        startscreenButtonEinzelspieler.SetActive(true);
+        startscreenButtonMehrspieler.SetActive(true);
     }
 }

@@ -166,6 +166,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2818933644295335491, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
   m_PrefabInstance: {fileID: 7678340755776271978}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &370386370 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1035456677584483344, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+  m_PrefabInstance: {fileID: 7678340755776271978}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &387681540 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7678340754748005355, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
@@ -372,6 +377,20 @@ MonoBehaviour:
   namePlayerOne: 
   inputFieldWindow: {fileID: 570066797}
   nameInputFieldTMP: {fileID: 570066798}
+  pauseMenu: {fileID: 257957373}
+  pauseMenuButtonEinstellungen: {fileID: 1789188667}
+  pauseMenuButtonAnleitung: {fileID: 1465311499}
+  pauseMenuButtonHighScores: {fileID: 1038573503}
+  pauseMenuButtonCredits: {fileID: 399866608}
+  pauseMenuButtonSpielBeenden: {fileID: 700552958}
+  pauseMenuButtonSpielFortsetzen: {fileID: 539913031}
+  pauseMenuBackgroundLayer: {fileID: 807123124}
+  pauseMenuBanner: {fileID: 315288456}
+  startscreenMenu: {fileID: 1943808352}
+  startscreenBGImage: {fileID: 1806826219}
+  startscreenTitel: {fileID: 370386370}
+  startscreenButtonEinzelspieler: {fileID: 1685707937}
+  startscreenButtonMehrspieler: {fileID: 2015593575}
 --- !u!114 &1221812096 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7678340754228261467, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
@@ -393,7 +412,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6349423126553058163, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
   m_PrefabInstance: {fileID: 7678340755776271978}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1685707937}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -441,9 +460,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5516932573617758931, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
   m_PrefabInstance: {fileID: 7678340755776271978}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1685707937 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 42016831893035853, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+  m_PrefabInstance: {fileID: 7678340755776271978}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1789188667 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2818933644378323640, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+  m_PrefabInstance: {fileID: 7678340755776271978}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1806826219 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1631836251450926742, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
   m_PrefabInstance: {fileID: 7678340755776271978}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1867668079 stripped
@@ -462,7 +491,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6978179437059833807, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
   m_PrefabInstance: {fileID: 7678340755776271978}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2015593575}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -482,6 +511,11 @@ MonoBehaviour:
 --- !u!1 &1943808352 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3460402486419475447, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+  m_PrefabInstance: {fileID: 7678340755776271978}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2015593575 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6836053496894221945, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
   m_PrefabInstance: {fileID: 7678340755776271978}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2055674252 stripped
@@ -1592,6 +1626,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 539913035}
     - target: {fileID: 7678340754365467546, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: startscreenTitel
+      value: 
+      objectReference: {fileID: 370386370}
+    - target: {fileID: 7678340754365467546, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: startscreenBGImage
+      value: 
+      objectReference: {fileID: 1806826219}
+    - target: {fileID: 7678340754365467546, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: pauseMenuButtonCredits
       value: 
       objectReference: {fileID: 399866608}
@@ -1624,9 +1666,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1789188667}
     - target: {fileID: 7678340754365467546, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: startscreenButtonMehrspieler
+      value: 
+      objectReference: {fileID: 2015593575}
+    - target: {fileID: 7678340754365467546, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: pauseMenuButtonSpielFortsetzen
       value: 
       objectReference: {fileID: 539913031}
+    - target: {fileID: 7678340754365467546, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: startscreenButtonEinzelspieler
+      value: 
+      objectReference: {fileID: 1685707937}
     - target: {fileID: 7678340754389448370, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -882.00006

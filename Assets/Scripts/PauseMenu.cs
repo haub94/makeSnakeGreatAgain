@@ -36,6 +36,10 @@ public class PauseMenu : MonoBehaviour {
     public GameObject pauseMenuButtonSpielFortsetzen;
     public GameObject pauseMenuBackgroundLayer;
     public GameObject pauseMenuBanner;
+    public GameObject startscreenBGImage;
+    public GameObject startscreenTitel;
+    public GameObject startscreenButtonEinzelspieler;
+    public GameObject startscreenButtonMehrspieler;
     public bool gameStarted;
     public bool gamePaused;
 
@@ -48,17 +52,21 @@ public class PauseMenu : MonoBehaviour {
     void Start() {
         gamePaused = true;
         gameStarted = false;
-        pauseMenu.SetActive(true);
+        pauseMenu.SetActive(false);
         startscreenMenu.SetActive(true);
         nameInputMenu.SetActive(true);
-        pauseMenuButtonEinstellungen.SetActive(true);
-        pauseMenuButtonAnleitung.SetActive(true);
-        pauseMenuButtonHighScores.SetActive(true);
-        pauseMenuButtonCredits.SetActive(true);
-        pauseMenuButtonSpielBeenden.SetActive(true);
+        pauseMenuButtonEinstellungen.SetActive(false);
+        pauseMenuButtonAnleitung.SetActive(false);
+        pauseMenuButtonHighScores.SetActive(false);
+        pauseMenuButtonCredits.SetActive(false);
+        pauseMenuButtonSpielBeenden.SetActive(false);
         pauseMenuButtonSpielFortsetzen.SetActive(false);
         pauseMenuBackgroundLayer.SetActive(false);
         pauseMenuBanner.SetActive(false);
+        startscreenBGImage.SetActive(true);
+        startscreenTitel.SetActive(true);
+        startscreenButtonEinzelspieler.SetActive(false);
+        startscreenButtonMehrspieler.SetActive(false);
         pauseMenuButton.onClick.AddListener(Pause);
         resumeGameButton.onClick.AddListener(Resume);
         startSingleplayerButton.onClick.AddListener(StartGame);
