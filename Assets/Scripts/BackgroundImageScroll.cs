@@ -22,6 +22,7 @@ public class BackgroundImageScroll : MonoBehaviour {
      * Description: Moves an image permanently to a new coordinate and creates a fluid movingeffect. 
      * Parameter: X and Y parameter must be set in Unity.
      * Return: -
+     * Code-Quelle: https://www.youtube.com/watch?v=-6H-uYh80vc (zuletzt aufgerufen am 08.07.2022)
     */
     void Update() {
         image.uvRect = new Rect(image.uvRect.position + new Vector2(x, y) * Time.deltaTime, image.uvRect.size);

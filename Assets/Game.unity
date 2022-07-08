@@ -178,13 +178,19 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  snakePlayerName: spielerName
+  playerName: 
   runRefreshHighscoreList: 0
   deleteAllHighscoreData: 0
   secondCheckDeleteData: 0
+  refreshDone: 0
 --- !u!1 &399866608 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4536052483825753695, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+  m_PrefabInstance: {fileID: 7678340755776271978}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &429349232 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6105696990208246851, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
   m_PrefabInstance: {fileID: 7678340755776271978}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &485294660 stripped
@@ -332,6 +338,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 501a9912d40a64446ac25317797fb7b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1294702483 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7854503900006385292, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+  m_PrefabInstance: {fileID: 7678340755776271978}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1388477689 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2084924256204388974, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
@@ -1240,6 +1251,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4570698660249147072, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: x
+      value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 4570698660249147072, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: y
+      value: 0.025
+      objectReference: {fileID: 0}
     - target: {fileID: 4695990447323936725, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_text
       value: 'Mehrspieler
@@ -1543,9 +1562,17 @@ PrefabInstance:
       value: QuitGame
       objectReference: {fileID: 0}
     - target: {fileID: 7381387398496091686, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: titleWin
+      value: 
+      objectReference: {fileID: 429349232}
+    - target: {fileID: 7381387398496091686, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: gameOverText
       value: 
       objectReference: {fileID: 1525808657}
+    - target: {fileID: 7381387398496091686, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: titleGameOver
+      value: 
+      objectReference: {fileID: 1294702483}
     - target: {fileID: 7381387398496091686, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: gameOverWindow
       value: 
@@ -2323,15 +2350,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8515257117862373176, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_Color.b
-      value: 0.5188679
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8515257117862373176, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_Color.g
-      value: 0.5188679
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8515257117862373176, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_Color.r
-      value: 0.5188679
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8515257117862373177, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8515257117862373178, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_AnchoredPosition.x
