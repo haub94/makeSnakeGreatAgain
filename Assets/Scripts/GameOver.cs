@@ -28,6 +28,12 @@ public class GameOver : MonoBehaviour {
     public Snake MySnake { get => mySnake; set => mySnake = value; }
     public NameInputPlayerOne MyPlayerName { get => myPlayerName; set => myPlayerName = value; }
 
+    /*
+     * Author: Daniel Rittrich 
+     * Description: this function is a connection to other scripts 
+     * Parameter: -
+     * Return: -
+    */
     public void Start() {
         // Daniel - 20.06.2022 - Zugriff auf Variablen aus anderem Script
         MyScore = GameObject.Find("Scorefield").GetComponent<scoreController>();
@@ -36,12 +42,24 @@ public class GameOver : MonoBehaviour {
         MyPlayerName = GameObject.Find("Name Input Manager - Startscreen").GetComponent<NameInputPlayerOne>();
     }
 
+    /*
+     * Author: Daniel Rittrich 
+     * Description: checks if gameover-bool where setted to true
+     * Parameter: isGameOver (bool) from Snake.cs
+     * Return: -
+    */
     void Update() {
         if (MySnake.isGameOver) {
             GameOverStopGame();
         }
     }
 
+    /*
+     * Author: Daniel Rittrich 
+     * Description: Stops the game. Read the actual score. Show gameover-window.
+     * Parameter: score (string) from getScorefield() function from scoreController.cs
+     * Return: -
+    */
     public void GameOverStopGame() {
         Time.timeScale = 0f;
         MyPauseMenu.gamePaused = true;
@@ -56,6 +74,12 @@ public class GameOver : MonoBehaviour {
         gameOverWindow.SetActive(true);
     }
 
+    /*
+     * Author: Daniel Rittrich 
+     * Description: deletes old visible snake-bodyparts of dead snake
+     * Parameter: -
+     * Return: -
+    */
     public void DestroyOldBodyParts() {
         GameObject[] bodyPartsToDestroy = GameObject.FindGameObjectsWithTag("SnakeBodyPart");
         for (int i = 0; i < bodyPartsToDestroy.Length; i++) {
@@ -63,24 +87,22 @@ public class GameOver : MonoBehaviour {
         }
     }
 
+    /*
+     * Author: Daniel Rittrich 
+     * Description: Sets all settings to default and starts a new game. 
+     * Parameter: -
+     * Return: -
+    */
     public void StartNewGame() {
         MySnake.isGameOver = false;
         DestroyOldBodyParts();
-        //MySnake.snakeBodySize = 0;                          //SNAKE KOERPER ZURUECK SETZEN                 >> WORKS
-        //MySnake.snakeBodyPartList.Clear();                  //SNAKE BODYPARTLIST ZURUECK SETZEN         >> WORKS
-        //MySnake.snakeMovePositionList.Clear();              //SNAKE MOVEPOSITIONLIST ZURUECK SETZEN      >> WORKS
-        //MySnake.gridPosition = new Vector2Int(100, 100);    //SNAKE POSITION ZURUECK SETZEN             >> WORKS
-        //MySnake.gridMoveDirection = new Vector2Int(0, 50);  //SNAKE MOVEDIRECTION ZURUECK SETZEN         >> WORKS
-        //MySnake.gameStatus = MySnake.GameStatus.Continue;
-        MyScore.setScorefield(0, 0);                         //SCORE ZURUECK SETZEN                       >> WORKS
-        MyScore.setRunRefreshHighscoreList(true);           //SCORE UPDATEN DER HIGHSCORELISTE
-        //TIMER FUER FUTTER ZURUECK SETZEN ??? Oder ist das nicht noetig
-        //FUTTER DAS HERUM LIEGT LOESCHEN ??? Oder ist das nicht noetig
+        MyScore.setScorefield(0, 0);                        
+        MyScore.setRunRefreshHighscoreList(true);          
         gameOverWindow.SetActive(false);
         MyPauseMenu.buttonPauseMenu.SetActive(true);
         MyPauseMenu.gamePaused = false;
         MyPauseMenu.gameStarted = true;
-        MySnake.Awake();                                       //SNAKE NEUINITIALISIERUNG
+        MySnake.Awake(); // set settings to default
         Time.timeScale = 1f;
 
 

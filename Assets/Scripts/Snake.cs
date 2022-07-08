@@ -258,7 +258,12 @@ public class Snake : MonoBehaviour {
         }
     }
 
-    // let Snake die and game over - Emily
+    /*
+     * Author: Daniel Rittrich 
+     * Description: set isGameOver (bool) to true  
+     * Parameter: -
+     * Return: -
+    */
     public void Gameover() {
        isGameOver = true;
 
