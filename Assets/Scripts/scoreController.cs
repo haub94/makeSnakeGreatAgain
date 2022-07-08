@@ -25,14 +25,14 @@ public class scoreController : MonoBehaviour
         new List<TextMeshProUGUI>();    //list of textfield for the scores in the highscore window
     private TextMeshProUGUI scorefield; //scorefield in the corner from the playfield (shows actual highscore) 
     private const bool debugModeOn = false;  //switch on for debug stuff //TODO: it would be better to switch it with an
-                                             //config file but currently there is no time for the implementation)
+                                             //configfile but currently there is no time for the implementation
     [SerializeField] string playerName; //name of the current player
-    [SerializeField] bool runRefreshHighscoreList;   //trigger: true if the game is over (set from a button in the 
+    [SerializeField] bool runRefreshHighscoreList;   //true if the game is over (set from a button in the 
                                                      //gameover popup)
-    [SerializeField] bool deleteAllHighscoreData;   //trigger: delete all data from the highscorelist (for ever)
-    [SerializeField] bool secondCheckDeleteData = false;
-    private List<string> messages = new List<string>();
-    [SerializeField] bool refreshDone = false;
+    [SerializeField] bool deleteAllHighscoreData;   //delete all data from the highscorelist (for ever)
+    [SerializeField] bool secondCheckDeleteData = false;    //last check before the data will be deleted
+    private List<string> messages = new List<string>(); //list of messages for the user (currently preparation)
+    [SerializeField] bool refreshDone = false;  //refreshing of the highscorelist done
     
     //setter and getter
     /*
@@ -346,26 +346,29 @@ public class scoreController : MonoBehaviour
 
     /*
      *Author(s): Haubold Markus;
-     *Description: Initialize the PlayerPrefs: set the keys with the default values
+     *Description: Initialize the PlayerPrefs at the very first run of the application: set the keys 
+     *             with the default values and the identifier to 1
      *Parameter : - 
-     *Return: The state true if the PlayerPrefs where initialized and with false if not as bool
+     *Return: The state true if the PlayerPrefs are initialized and with false if not as bool
     */
     private bool initializePlayerprefKeys() {
         //initialize highscorelist
         //set keynames for Playerprefs
-        //check only the 1st place because if there was a first game, the score will be the 1st place
-        if (getPpName(0) == "") {
+        //check based on the identifier init if it is the very first run of the application
+       if (PlayerPrefs.GetInt("initPlayerPrefsDone", 0) == 0) {    //if no int of this name exists, the default is 0
+            log("ident sagt: " + PlayerPrefs.GetInt("init", 0));
             for (byte index = 0; index <= 5; index++) {
                 setPpName(index, "Wer wird Platz " + (index + 1) + " belegen?!");
                 setPpValue(index, "0");
                 if (index == 4) {
+                    PlayerPrefs.SetInt("initPlayerPrefsDone", 1);  //set identifier init to 1
                     PlayerPrefs.Save();
                     log("All playerpref-keys are initialized!");
                     
                     return true;
                 }
             }
-        }
+       }
         
         return false;
     }
