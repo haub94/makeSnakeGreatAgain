@@ -45,9 +45,9 @@ public class Snake : MonoBehaviour {
 
     private int stepDistancePositive = 12;
     private int stepDistanceNegative = -12;
-    private float timeToStep = .1f;
-    private scoreController scoreControllerScript;
-    private const int maxLength = 90; //Haubold: maximal parts of the Snake
+    private float timePerStep = .1f;
+    private scoreController scoreControllerScript; //Haubold: scoreController object
+    private const int maxLength = 90; //Haubold: max parts of the snake
     private bool checkIfIsFirstStart = true;
 
 
@@ -79,13 +79,16 @@ public class Snake : MonoBehaviour {
         }
         gridMoveDirection = new Vector2Int(0, stepDistancePositive);
         gridPosition = new Vector2Int(100, 100);
-        gridMoveTimerMax = timeToStep; // Faktor fuer Aktualisierung der Schrittfrequenz ( 1f = 1sec )
+        gridMoveTimerMax = timePerStep; // Faktor fuer Aktualisierung der Schrittfrequenz ( 1f = 1sec )
         gridMoveTimer = gridMoveTimerMax;
         snakeBodySize = 0;
         snakeMovePositionList.Clear();
         snakeBodyPartList.Clear();
         gameStatus = GameStatus.Continue; // gameStatus equal out continue - Le Xuan
-        scoreControllerScript = GameObject.Find("Scorefield").GetComponent<scoreController>();
+        scoreControllerScript = 
+            GameObject.Find("Scorefield").GetComponent<scoreController>(); //Haubold: link to scoreController script
+        scoreControllerScript.setRefreshDone(false);    //Haubold: reset the done variable from the refreshing
+        scoreControllerScript.setRunRefreshHighscoreList(false);    //Haubold: reset the run variable from refreshing
     }
 
     private void Update() {
@@ -101,7 +104,6 @@ public class Snake : MonoBehaviour {
         //UnityEngine.Debug.Log("GridPosition:X=" + gridPosition.x); // x value snake position - Emily
         //UnityEngine.Debug.Log("GridPosition:Y=" + gridPosition.y); // y value snake position - Emily
         //UnityEngine.Debug.Log("Snake at PosX: " + gridPosition.x + " and PosY: " + gridPosition.y);
-
     }
 
     // Daniel - 05.06.2022 - Werte geaendert fuer Movement in groesseren Schritten ( 1 -> 50 )           !!!!!! Werte muessen aber noch an das Grid angepasst werden
@@ -148,7 +150,7 @@ public class Snake : MonoBehaviour {
                 bool snakeAteFood = levelGrid.TrySnakeEatFood(gridPosition);
                 if (snakeAteFood) {
                     snakeBodySize++;
-                    scoreControllerScript.setScorefield(snakeBodySize, maxLength); //Haubold: write give length to 
+                    scoreControllerScript.setScorefield(snakeBodySize, maxLength); //Haubold: write length to 
                                                                                    //scoreController (calc act score)
                     CreateSnakeBody();
                 }
@@ -263,7 +265,26 @@ public class Snake : MonoBehaviour {
      * Return: -
     */
     public void Gameover() {
-        isGameOver = true;
+       isGameOver = true;
+
+        //Haubold: call the refresh-function from scoreController
+        if (!scoreControllerScript.getRefreshDone()) {
+            scoreControllerScript.setRunRefreshHighscoreList(true); 
+            UnityEngine.Debug.Log("refresh calles from gameover");
+        } 
+        if (scoreControllerScript.getRefreshDone()) {
+            scoreControllerScript.setRunRefreshHighscoreList(false); 
+        }
+        
+        /*canDoAction = false;                                        //Trigger for blocking KeyDown values - off
+        GetGridPosition();                                          //do i need it for the Scorecalculating?
+        Vector2Int NullgridMoveDirection = new Vector2Int(0, 0);    //inizialise a Vector with (0,0) for setting gridMoveDirection to (0,0) --> no movement
+        gridMoveDirection = NullgridMoveDirection;                  //gridMoveDirection = (0,0)
+        gridMoveTimer = 0f;                                         //setting speed of steps Null 
+        gameStatus = GameStatus.Stop; // Game stops when Snake bites itself. - Le Xuan
+
+        */
+
     }
 
 
