@@ -19,6 +19,7 @@ public class BackgroundMusic : MonoBehaviour {
      * Description: checks if there exists a audio file
      * Parameter: -
      * Return: -
+     * Code-Quelle: https://www.youtube.com/watch?v=AFcHsKd_aMo (zuletzt aufgerufen am 08.07.2022)
     */
     void Awake() {
         if (backgroundMusic == null) {

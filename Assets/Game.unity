@@ -178,13 +178,19 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  snakePlayerName: spielerName
+  playerName: 
   runRefreshHighscoreList: 0
   deleteAllHighscoreData: 0
   secondCheckDeleteData: 0
+  refreshDone: 0
 --- !u!1 &399866608 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4536052483825753695, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+  m_PrefabInstance: {fileID: 7678340755776271978}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &429349232 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6105696990208246851, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
   m_PrefabInstance: {fileID: 7678340755776271978}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &485294660 stripped
@@ -332,6 +338,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 501a9912d40a64446ac25317797fb7b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1294702483 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7854503900006385292, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+  m_PrefabInstance: {fileID: 7678340755776271978}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1388477689 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2084924256204388974, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
@@ -1240,6 +1251,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4570698660249147072, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: x
+      value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 4570698660249147072, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: y
+      value: 0.025
+      objectReference: {fileID: 0}
     - target: {fileID: 4695990447323936725, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_text
       value: 'Mehrspieler
@@ -1543,9 +1562,17 @@ PrefabInstance:
       value: QuitGame
       objectReference: {fileID: 0}
     - target: {fileID: 7381387398496091686, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: titleWin
+      value: 
+      objectReference: {fileID: 429349232}
+    - target: {fileID: 7381387398496091686, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: gameOverText
       value: 
       objectReference: {fileID: 1525808657}
+    - target: {fileID: 7381387398496091686, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: titleGameOver
+      value: 
+      objectReference: {fileID: 1294702483}
     - target: {fileID: 7381387398496091686, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: gameOverWindow
       value: 
@@ -2202,24 +2229,60 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0.000030517578
       objectReference: {fileID: 0}
+    - target: {fileID: 8367571298029115890, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: m_ScrollSensitivity
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 8367571298049513476, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_text
-      value: "\nHallo 1\n\nHallo 2\n\nHallo 3\n\nHallo 4\n\nHallo 5\n\nHallo 6\n\nHallo
-        7\n\nHallo 8\n\nHallo 9\n\nHallo 10\n\nHallo 11\n\nHallo 12\n\nHallo 13\n\nHallo
-        14\n\nHallo 15\n\nHallo 16\n\nHallo 17\n\nHallo \n\nHallo \n\nHallo \n\nHallo
-        \n\nHallo \n\nHallo \n\nHallo \n\nHallo \n\nHallo \n\nHallo \n\nHallo \n\nHallo
-        \n\nHallo \n\nHallo \n\nHallo \n\nHallo \n\nHallo \n\nHallo \n\nHallo \n\nHallo
-        \n\nHallo \n\nHallo \n\nHallo \n\nHallo \n\nHallo \n\nHallo \n\nHallo \n\nHallo
-        \n\nHallo \n\nHallo \n\nHallo \n\nHallo \n\nHallo \n\nHallo \n\nHallo \n\nHallo
-        \n\nHallo \n\nHallo \n\nHallo \n\nHallo \n\nHallo \n\nHallo \n\nHallo xx\n\n"
+      value: "\nSo geht\u2019s:\r\n\r\nDas Ziel des Spiels ist es die Schlange zum
+        Apfel zu steuern. Dabei sollte sie nicht an den Spielfeldrand oder sich selbst
+        ansto\xDFen.\r\n\r\n\n\nSTARTMEN\xDC\r\n\nNachdem das Spiel ge\xF6ffnet wird,
+        erscheint auf der Startseite ein Fenster in dem du deinen Namen eintragen
+        kannst.\n\nNach dem du diesen best\xE4tigt hast erscheint das Startmen\xFC.
+        Hier kannst du zwischen \u201EEinzelspieler\u201D, \u201EEinstellungen\u201D,
+        \u201EAnleitung\u201C, \u201EHighScores\u201C, \u201ECredits\u201D und \u201ESpiel
+        beenden\u201C w\xE4hlen.\r\n\r\n\n\nSPIEL STARTEN\r\n\nW\xE4hle \u201EEinzelspieler\u201C.
+        Das Spielfeld erscheint und die Schlange bewegt sich automatisch ab Ihrer
+        Startposition.\r\n\r\n\n\nSTEUERUNG\r\n\n\xDCber folgende Tasten kannst du
+        die Schlange steuern:\r\n\r\nPfeiltaste oben - Schlange bewegt sich nach
+        oben\r\nPfeiltaste unten - Schlange bewegt sich nach unten\r\nPfeiltaste
+        links - Schlange bewegt sich nach links\r\nPfeiltaste rechts - Schlange bewegt
+        sich nach rechts\r\n\nAchtung! Du kannst nicht in die entgegengesetzte Richtung
+        kriechen.\r\n\r\n\n\nSPIELFELD\r\n\nOben links befindet sich die Schaltfl\xE4che
+        f\xFCr das Men\xFC sowie ein Lautsprecher-Button. \n\nMit einem Klick auf
+        die Schaltfl\xE4che Men\xFC gelangst du ins Pausemen\xFC. Mit einem Klick
+        auf den Lautsprecher-Button hast du die M\xF6glichkeit den Ton an- oder auszuschalten.\r\n\nOben
+        rechts wirst du \xFCber deinen erzielten Score informiert.\r\n\r\n\n\nPAUSEMEN\xDC\r\n\nDu
+        brauchst eine Pause? \nDann dr\xFCcke einfach auf die Esc-Taste oder klicke
+        mit der Maus auf die Schaltfl\xE4che mit dem Men\xFCsymbol. \n\nDas Spiel
+        ist jetzt pausiert und das Men\xFCfenster \xF6ffnet sich. Hier kannst du
+        zwischen \u201EEinstellungen\u201C, \u201EAnleitung\u201C, \u201EHighScores\u201C,
+        \u201ECredits\u201C, \u201ESpiel Fortsetzen\u201C und \u201ESpiel Beenden\u201C
+        w\xE4hlen. \r\n\nDas Pausemen\xFC kannst du \xFCber den Button \u201ESpiel
+        Fortsetzen\u201C oder durch erneutes dr\xFCcken der Esc-Taste verlassen.\r\n\r\n\nEINSTELLUNGEN\r\nHier
+        hast du die M\xF6glichkeit den Ton an- oder auszuschalten.\r\n\r\n\nANLEITUNG\r\nHier
+        kannst du nachlesen wie das Spiel funktioniert.\r\n\r\n\nHIGH SCORES\r\nHier
+        kannst du die deine gr\xF6\xDFten Erfolge nachvollziehen.\r\n\r\n\nCREDITS\r\nHier
+        stehen zus\xE4tzliche Informationen zu diesem Spiel.\r\n\r\n\nSPIEL FORTSETZEN\r\nDas
+        Spiel wird fortgesetzt und du gelangst wieder auf das Spielfeld.\r\n\r\n\nSPIEL
+        BEENDEN\r\nDas Spiel wird geschlossen und du gelangst wieder zur\xFCck auf
+        deinen Desktop.\r\n\r\n\n\nGAME OVER\r\n\nNachdem die Schlange an den Spielfeldrand
+        gesto\xDFen ist oder sich selbst gebissen hat, stirbt sie und das Spiel ist
+        vorbei. \n\nEin Fenster mit deinem aktuellem Score wird angezeigt. Hier hast
+        du auch die M\xF6glichkeit \xFCber die zwei Button ein neues Spiel zu starten
+        oder das Spiel zu schlie\xDFen und auf deinen Desktop zur\xFCck zu kehren.\r\n\r\n\n\nWIE
+        GEWINNT MAN?\r\n\nVersuche mit der Schlange so viele \xC4pfel wie m\xF6glich
+        zu fressen und vielleicht erreichst du ja das Maximum und gewinnst das Spiel.\r\n\n\n\nViel
+        Spa\xDF !\n"
       objectReference: {fileID: 0}
     - target: {fileID: 8367571298049513499, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 696.6245
+      value: 637.8205
       objectReference: {fileID: 0}
     - target: {fileID: 8367571298049513499, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 1114.98
+      value: 4990.293
       objectReference: {fileID: 0}
     - target: {fileID: 8367571298049513499, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -2227,7 +2290,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8367571298049513499, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -557.49084
+      value: -2495.1465
       objectReference: {fileID: 0}
     - target: {fileID: 8367571298277183995, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_SizeDelta.x
@@ -2323,15 +2386,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8515257117862373176, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_Color.b
-      value: 0.5188679
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8515257117862373176, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_Color.g
-      value: 0.5188679
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8515257117862373176, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_Color.r
-      value: 0.5188679
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8515257117862373177, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8515257117862373178, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_AnchoredPosition.x

@@ -45,6 +45,7 @@ public class SoundManager : MonoBehaviour {
      * Description: handles the changes for sound-settings (sound on/off)
      * Parameter: -
      * Return: -
+     * Code-Quelle: https://www.youtube.com/watch?v=AFcHsKd_aMo (zuletzt aufgerufen am 08.07.2022)
     */
     public void SoundOnOff() {
         if (muted == false) {

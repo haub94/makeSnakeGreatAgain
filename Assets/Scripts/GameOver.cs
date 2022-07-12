@@ -6,7 +6,7 @@ Description:    The script manages the gameover-window and the options to close
 Author(s):      Daniel Rittrich
 Date:           2022-06-20
 Version:        V1.0 
-TODO:           - check if functions works well
+TODO:           -
 ******************************************************************************/
 
 using System.Collections;
@@ -18,6 +18,8 @@ public class GameOver : MonoBehaviour {
 
     public GameObject gameOverWindow;
     public TextMeshProUGUI gameOverText;
+    public GameObject titleGameOver;
+    public GameObject titleWin;
     scoreController myScore;
     PauseMenu myPauseMenu;
     Snake mySnake;
@@ -52,6 +54,9 @@ public class GameOver : MonoBehaviour {
         if (MySnake.isGameOver) {
             GameOverStopGame();
         }
+        if (MyScore.getScorefield() == "801972674") {
+            WinStopGame();
+        }
     }
 
     /*
@@ -69,9 +74,28 @@ public class GameOver : MonoBehaviour {
             gameOverText.text = "Ups! " + MyPlayerName.namePlayerOne + "\nDu hast " + MyScore.getScorefield() + " Punkte erzielt";
         }
         else {
-            gameOverText.text = "Wow " + MyPlayerName.namePlayerOne + " !!!\nDu hast " + MyScore.getScorefield() + " Punkte erzielt";
+            gameOverText.text = "Wow " + MyPlayerName.namePlayerOne + " !\nDu hast " + MyScore.getScorefield() + " Punkte erzielt";
         }
         gameOverWindow.SetActive(true);
+        titleGameOver.SetActive(true);
+        titleWin.SetActive(false);
+    }
+
+    /*
+     * Author: Daniel Rittrich 
+     * Description: Stops the game. Show game-win-window.
+     * Parameter: score (string) from getScorefield() function from scoreController.cs
+     * Return: -
+    */
+    public void WinStopGame() {
+        Time.timeScale = 0f;
+        MyPauseMenu.gamePaused = true;
+        MyPauseMenu.gameStarted = false;
+        MyPauseMenu.buttonPauseMenu.SetActive(false);
+        gameOverText.text = "Gratulation " + MyPlayerName.namePlayerOne + " !!!\nDu hast die maximalen " + MyScore.getScorefield() + " Punkte erzielt";
+        gameOverWindow.SetActive(true);
+        titleGameOver.SetActive(false);
+        titleWin.SetActive(true);
     }
 
     /*
@@ -96,8 +120,8 @@ public class GameOver : MonoBehaviour {
     public void StartNewGame() {
         MySnake.isGameOver = false;
         DestroyOldBodyParts();
-        MyScore.setScorefield(0, 0);                        
-        MyScore.setRunRefreshHighscoreList(true);          
+        MyScore.setScorefield(0, 0);
+        MyScore.setRunRefreshHighscoreList(true);
         gameOverWindow.SetActive(false);
         MyPauseMenu.buttonPauseMenu.SetActive(true);
         MyPauseMenu.gamePaused = false;
