@@ -244,6 +244,8 @@ public class Snake : MonoBehaviour {
 
     // Snake collision check with boarder  - Emily
     //doesn't work: (0 < gridPosition.x < 1080) && (0 < gridPosition.y < 550)
+
+// Kommentar test 123
     public bool CollisionCheckBoarder() {
         GetGridPosition();
         if ((gridPosition.x > 0) && (gridPosition.x < 1080) && (gridPosition.y > 0) && (gridPosition.y < 550)) //works
