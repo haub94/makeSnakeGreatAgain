@@ -19,8 +19,8 @@ public class GameHandler : MonoBehaviour {
     private LevelGrid levelGrid;
 
     //gamfield width and height with a small border (20) to the canvas-border
-    private const int gamefieldWidth = 650;
-    private const int gamefieldHeight = 335;
+    private const int gamefieldWidth = 680;
+    private const int gamefieldHeight = 345;
 
      void Start() {
        Debug.Log("GameHandler.Start");

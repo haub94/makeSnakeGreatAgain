@@ -237,7 +237,7 @@ public class Snake : MonoBehaviour {
    */
     public bool CollisionCheckBoarder() {
         GetGridPosition();
-        if ((gridPosition.x > 30) && (gridPosition.x < 670) && (gridPosition.y > 0) && (gridPosition.y < 390)) {
+        if ((gridPosition.x > 0) && (gridPosition.x < 705) && (gridPosition.y > 0) && (gridPosition.y < 400)) {
             return true;
         }
         else {
