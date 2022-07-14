@@ -19,12 +19,8 @@ public class GameHandler : MonoBehaviour {
     private LevelGrid levelGrid;
 
     //gamfield width and height with a small border (20) to the canvas-border
-    private const int gamefieldWidth = 690;
-    private const int gamefieldHeight = 345;
-
-    /*original scale of gamefield - Emily - 22.06.22 
-    public const int gamefieldWidth = 1080; //changed to public for passing to snake.cs - Emily - 23.06.
-    public const int gamefieldHeight = 550; //changed to public for passing to snake.cs - Emily 23.06. */
+    private const int gamefieldWidth = 650;
+    private const int gamefieldHeight = 335;
 
      void Start() {
        Debug.Log("GameHandler.Start");

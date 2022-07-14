@@ -1225,6 +1225,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 93.907
       objectReference: {fileID: 0}
+    - target: {fileID: 2818933643895343420, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1221812096}
+    - target: {fileID: 2818933643895343420, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitGame
+      objectReference: {fileID: 0}
     - target: {fileID: 2818933643895343421, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -590.00006
@@ -1283,7 +1291,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2818933644646578342, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2818933644999795455, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -3028,11 +3036,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9018526145811389027, guid: 474275465469f4299b8ebac623f13ae0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 513
+      value: 511
       objectReference: {fileID: 0}
     - target: {fileID: 9018526145811389027, guid: 474275465469f4299b8ebac623f13ae0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 289
+      value: 288
       objectReference: {fileID: 0}
     - target: {fileID: 9018526145811389027, guid: 474275465469f4299b8ebac623f13ae0, type: 3}
       propertyPath: m_LocalPosition.z
