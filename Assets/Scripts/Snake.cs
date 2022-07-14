@@ -35,14 +35,10 @@ public class Snake : MonoBehaviour {
     public List<snakeBodyPart> snakeBodyPartList;
     public bool isGameOver;
     PauseMenu myPauseMenu;
-
-    private bool canDoAction; // Booltrigger for stoping Input - Emily
-    /* public int mygamefieldWidth;
-     public int mygamefieldHeight;
-     GameHandler gamehandler;  // my try to get the const value from gamehandler - Emily*/
+    /*GameHandler mygamehandler;  //Emily: please refer Improving Note: CollisionCheckBoarder()*/
 
     public PauseMenu MyPauseMenu { get => myPauseMenu; set => myPauseMenu = value; }
-
+    /*public GameHandler MyGameHandler { get => mygamehandler; set => mygamehandler = value; } //Emily - please refer Improving Note: at CollisionCheckBoarder()*/
     private int stepDistancePositive = 12;
     private int stepDistanceNegative = -12;
     private float timePerStep = .1f;
@@ -53,13 +49,8 @@ public class Snake : MonoBehaviour {
 
     public void Start() {
         MyPauseMenu = GameObject.Find("Pause - Menu - Manager").GetComponent<PauseMenu>(); // Daniel - 06.06.2022 - Zugriff auf Variable aus PauseMenu Script
-        /* gamehandler = GameObject.Find("GameHandler").GetComponent<GameHandler>();
-
-         GameObject GameHandler = GameObject.Find("GameHandler");
-         GameHandler gamehandler = GameHandler.GetComponent<GameHandler>(); 
-         mygamefieldWidth = gamehandler.gamefieldWidth;
-         mygamefieldHeight = gamehandler.gamefieldHeight;
-         UnityEngine.Debug.Log("mygamefieldwith " + mygamefieldWidth);
+        /* gamehandler = GameObject.Find("GameHandler").GetComponent<GameHandler>();    //Emily: link GameHandler.cs for passing gamefield-scale
+         UnityEngine.Debug.Log("mygamefieldwith " + mygamefieldWidth);                  //Emily: please refer improving Note: CollisionCheckBoarder()
          UnityEngine.Debug.Log("mygamefieldheight " + mygamefieldHeight); */
     }
 
@@ -70,7 +61,6 @@ public class Snake : MonoBehaviour {
     }
 
     public void Awake() {
-        canDoAction = true;     //Booltrigger for Input set true - Emily
         isGameOver = false;
         if (checkIfIsFirstStart == true) {
             checkIfIsFirstStart = false;
@@ -96,20 +86,17 @@ public class Snake : MonoBehaviour {
             case GameStatus.Continue:
                 HandleInput();
                 HandleGridMovement();
-                CollisionCheckBoarder();  // Collision with boarder functioin by Emily
+                CollisionCheckBoarder();  //Emily: call CollisionCheckBoarder function every frame
                 break;
             case GameStatus.Stop:
                 break;
         }
-        //UnityEngine.Debug.Log("GridPosition:X=" + gridPosition.x); // x value snake position - Emily
-        //UnityEngine.Debug.Log("GridPosition:Y=" + gridPosition.y); // y value snake position - Emily
-        //UnityEngine.Debug.Log("Snake at PosX: " + gridPosition.x + " and PosY: " + gridPosition.y);
     }
 
     // Daniel - 05.06.2022 - Werte geaendert fuer Movement in groesseren Schritten ( 1 -> 50 )           !!!!!! Werte muessen aber noch an das Grid angepasst werden
     private void HandleInput() {
-        if (!MyPauseMenu.gamePaused && canDoAction) { // <- if-Befehl sperrt Bewegung wenn im Pausemenu - Daniel - 06.06.2022
-                                                      // canDoAction for allowing Input - Emily - 22.06.2022
+        if (!MyPauseMenu.gamePaused) { // <- if-Befehl sperrt Bewegung wenn im Pausemenu - Daniel - 06.06.2022
+                                                      
             if (Input.GetKeyDown(KeyCode.UpArrow)) {
                 if (gridMoveDirection.y != stepDistanceNegative) {
                     gridMoveDirection.x = 0;
@@ -242,27 +229,35 @@ public class Snake : MonoBehaviour {
 
 
 
-    // Snake collision check with boarder  - Emily
-    //doesn't work: (0 < gridPosition.x < 1080) && (0 < gridPosition.y < 550)
+   /* Author: Emily Herzner
+    * Description: Check if Sneak-Head collides with boarder, if so calls GameOver()
+    * Parameter <gridPosition.x>: current coordinate x of Snake-Head
+    * Parameter <gridPosition.y>: current coordinate y of Snake-Head 
+    * Return: true (nothing changes) or false (Gameover();)
+   */
     public bool CollisionCheckBoarder() {
         GetGridPosition();
-        if ((gridPosition.x > 0) && (gridPosition.x < 1080) && (gridPosition.y > 0) && (gridPosition.y < 550)) //works
-        {
-            //canDoAction = true; //Trigger for getting KeyDown values - on
+        if ((gridPosition.x > 0) && (gridPosition.x < 1080) && (gridPosition.y > 0) && (gridPosition.y < 550)) {
             return true;
         }
         else {
             Gameover();
-            UnityEngine.Debug.Log("gameover");
             return false;
         }
     }
-
+    /* Note for improving CollisionCheckBoarder(): 
+     * if ((gridPosition.x > 0) && (gridPosition.x < MyGameHandler.gamefieldWidth) && 
+     * gridPosition.y > 0) && (gridPosition.y < MyGameHandler.gamefieldHeight)) {}
+     * --> would be more functional, Problem: getting right value
+     * --> GameHandler.cs was edited, current Values are unuseable for this function
+    */
     /*
-     * Author: Daniel Rittrich 
+     * Author: Daniel Rittrich (Verion 2)
+     *         (Emily: support version 1 revised by Daniel) 
      * Description: set isGameOver (bool) to true  
      * Parameter: -
      * Return: -
+     * Version: 2
     */
     public void Gameover() {
        isGameOver = true;
@@ -275,19 +270,7 @@ public class Snake : MonoBehaviour {
         if (scoreControllerScript.getRefreshDone()) {
             scoreControllerScript.setRunRefreshHighscoreList(false); 
         }
-        
-        /*canDoAction = false;                                        //Trigger for blocking KeyDown values - off
-        GetGridPosition();                                          //do i need it for the Scorecalculating?
-        Vector2Int NullgridMoveDirection = new Vector2Int(0, 0);    //inizialise a Vector with (0,0) for setting gridMoveDirection to (0,0) --> no movement
-        gridMoveDirection = NullgridMoveDirection;                  //gridMoveDirection = (0,0)
-        gridMoveTimer = 0f;                                         //setting speed of steps Null 
-        gameStatus = GameStatus.Stop; // Game stops when Snake bites itself. - Le Xuan
-
-        */
-
     }
-
-
 }
 
 
