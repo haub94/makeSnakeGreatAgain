@@ -40,7 +40,7 @@ public class LevelGrid {
     
     public void spawnFood() {
         Vector2 foodScale = new Vector2(35.0f, 35.0f);  //Haubold: factor to scale the food-sprite up
-        const int borderFoodSpawn = 20; //Haubold: spawndistance to the border (without you will only see a half apple)
+        const int borderFoodSpawn = 50; //Haubold: spawndistance to the border (without you will only see a half apple)
 
         // avoiding food resapawn on the snake (head + body parts) 
         //generate random position for respawn
