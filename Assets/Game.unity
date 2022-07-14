@@ -1042,8 +1042,12 @@ PrefabInstance:
       value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 419578600752846257, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 843.739
+      objectReference: {fileID: 0}
+    - target: {fileID: 419578600752846257, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -398.00006
+      value: -485.75296
       objectReference: {fileID: 0}
     - target: {fileID: 419578600752846257, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1054,8 +1058,12 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 714946886813054292, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 843.739
+      objectReference: {fileID: 0}
+    - target: {fileID: 714946886813054292, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -398
+      value: -485.75296
       objectReference: {fileID: 0}
     - target: {fileID: 714946886813054292, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1074,8 +1082,12 @@ PrefabInstance:
       value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 1068333415437331537, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 843.739
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068333415437331537, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -398.00006
+      value: -485.75296
       objectReference: {fileID: 0}
     - target: {fileID: 1068333415437331537, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1155,7 +1167,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2084924256204388974, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2084924256204388975, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_RootOrder
@@ -1422,8 +1434,12 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4424152289805914441, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 843.739
+      objectReference: {fileID: 0}
+    - target: {fileID: 4424152289805914441, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -398.00006
+      value: -485.75296
       objectReference: {fileID: 0}
     - target: {fileID: 4424152289805914441, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2416,8 +2432,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7894702837332140241, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 843.739
+      objectReference: {fileID: 0}
+    - target: {fileID: 7894702837332140241, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -398.00006
+      value: -485.75296
       objectReference: {fileID: 0}
     - target: {fileID: 7894702837332140241, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2813,6 +2833,10 @@ PrefabInstance:
     - target: {fileID: 8942692715425239365, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 9102979424340184144, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
+      propertyPath: m_text
+      value: Wer wird Platz 1 belegen?!
       objectReference: {fileID: 0}
     - target: {fileID: 9102979424340184144, guid: 4c41c5bc30c94411b9146357ee6d9a72, type: 3}
       propertyPath: m_fontSize

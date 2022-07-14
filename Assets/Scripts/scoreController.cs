@@ -187,7 +187,7 @@ public class scoreController : MonoBehaviour
      *Parameter value: Set/unset variable secondCheckDeleteData as bool
      *Return: -
     */
-    public void setSecondCheckDeleData(bool value) {
+    public void setSecondCheckDeleteData(bool value) {
         secondCheckDeleteData = value;
     }
     
@@ -355,7 +355,9 @@ public class scoreController : MonoBehaviour
         //initialize highscorelist
         //set keynames for Playerprefs
         //check based on the identifier init if it is the very first run of the application
-       if (PlayerPrefs.GetInt("initPlayerPrefsDone", 0) == 0) {    //if no int of this name exists, the default is 0
+        
+        //if no int of this name exists, the default is 0
+        if ((PlayerPrefs.GetInt("initPlayerPrefsDone", 0) == 0) || (getSecondCheckDeleteData() == true)) {
             log("ident sagt: " + PlayerPrefs.GetInt("init", 0));
             for (byte index = 0; index <= 5; index++) {
                 setPpName(index, "Wer wird Platz " + (index + 1) + " belegen?!");
@@ -679,7 +681,7 @@ public class scoreController : MonoBehaviour
                 log("All highscore data are deleted!");
                 //reset variables
                 setDeleteAllHighscoreData(false);
-                setSecondCheckDeleData(false);
+                setSecondCheckDeleteData(false);
             }
         }
 
