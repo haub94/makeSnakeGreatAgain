@@ -33,7 +33,7 @@ public class scoreController : MonoBehaviour
     [SerializeField] bool secondCheckDeleteData = false;    //last check before the data will be deleted
     private List<string> messages = new List<string>(); //list of messages for the user (currently preparation)
     [SerializeField] bool refreshDone = false;  //refreshing of the highscorelist done
-    
+
     //setter and getter
     /*
      *Author(s): Haubold Markus;
@@ -356,7 +356,7 @@ public class scoreController : MonoBehaviour
         //set keynames for Playerprefs
         //check based on the identifier init if it is the very first run of the application
         
-        //if no int of this name exists, the default is 0
+        //initialize only if it is the very first run ore the data are deleted
         if ((PlayerPrefs.GetInt("initPlayerPrefsDone", 0) == 0) || (getSecondCheckDeleteData() == true)) {
             log("ident sagt: " + PlayerPrefs.GetInt("init", 0));
             for (byte index = 0; index <= 5; index++) {
