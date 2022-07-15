@@ -1,11 +1,11 @@
-/******************************************************************************
+/**********************************************************************************************************************
 Name:           SpielBeenden
 Description:    The script closes the application.
 Author(s):      Daniel Rittrich
 Date:           2022-05-24
 Version:        V1.0
 TODO:           - 
-******************************************************************************/
+**********************************************************************************************************************/
 
 using System.Collections;
 using System.Collections.Generic;
@@ -18,6 +18,7 @@ public class SpielBeenden : MonoBehaviour {
      * Description: closes the game 
      * Parameter: -
      * Return: -
+     * Version: 1.0
     */
     public void QuitGame() {
         Application.Quit();

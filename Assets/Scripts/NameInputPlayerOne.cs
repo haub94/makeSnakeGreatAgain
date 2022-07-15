@@ -1,4 +1,4 @@
-/******************************************************************************
+/**********************************************************************************************************************
 Name:           NameInputPlayerOne
 Description:    The script manages the name-input-window at the start of the 
                 application.
@@ -6,7 +6,7 @@ Author(s):      Daniel Rittrich
 Date:           2022-06-20
 Version:        V1.1 
 TODO:           - 
-******************************************************************************/
+**********************************************************************************************************************/
 
 using System.Collections;
 using System.Collections.Generic;
@@ -39,6 +39,7 @@ public class NameInputPlayerOne : MonoBehaviour {
      * Description: set the limit of characters for playernameinput  
      * Parameter: -
      * Return: -
+     * Version: 1.0
     */
     void Awake() {
         nameInputFieldTMP.characterLimit = 12;
@@ -51,6 +52,7 @@ public class NameInputPlayerOne : MonoBehaviour {
      * Description: checks if there is a input in playernamefield  
      * Parameter: text (string) from inputfield
      * Return: -
+     * Version: 1.0
     */
     public void PressEnter() {
         if (nameInputFieldTMP.text == "") {
@@ -66,6 +68,7 @@ public class NameInputPlayerOne : MonoBehaviour {
      * Description: set value (string) as playername
      * Parameter: text (string) from inputfield
      * Return: -
+     * Version: 1.0
     */
     public void SetName() {
         namePlayerOne = nameInputFieldTMP.text;
@@ -77,6 +80,7 @@ public class NameInputPlayerOne : MonoBehaviour {
      * Description: close the inputfield-window and shows the menu
      * Parameter: -
      * Return: -
+     * Version: 1.0
     */
     public void CloseInputField() {
         inputFieldWindow.SetActive(false);

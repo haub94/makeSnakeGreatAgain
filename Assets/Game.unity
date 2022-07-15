@@ -649,6 +649,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1494154767}
     m_Modifications:
+    - target: {fileID: 6540613996081691028, guid: 4f7cabaa286720f42ac0ff13d9c75ce4, type: 3}
+      propertyPath: m_text
+      value: "- Make Snake Great Again -\n\n\nEin Spiel von:\n\nMarkus Haubold\nEmily
+        Zahnert\nLe Xuan Tran\nAdel Kharbout\nDaniel Rittrich\n\n\nQuellen und Erw\xE4hnungen:\n\nHintergrund
+        Musik von\nchosic.com\nhttps://www.chosic.com/download-audio/24995/\r\nBicycle
+        by Komiku\r\n\nHintergrundbild Startbildschirm\nSilhouette der Schlange von\nsilhouettegarden.com\nhttps://silhouettegarden.com/download/serpent-silhouette/#terms\n\nHintergrund
+        des Spielfelds erstellt mit Asset-Package:\nBackyard Top-Down Tileset\nvon:
+        Kittens and Elves at Work\n(http://www.keawstudio.com)"
+      objectReference: {fileID: 0}
     - target: {fileID: 6540613997314939129, guid: 4f7cabaa286720f42ac0ff13d9c75ce4, type: 3}
       propertyPath: m_Name
       value: Menu Credits

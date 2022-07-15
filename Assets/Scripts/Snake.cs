@@ -1,15 +1,14 @@
-/******************************************************************************
+/**********************************************************************************************************************
 Name:           
 Description:    
                
 Author(s):      Adel Kharbout
+                Haubold Markus (only the interaction with the scoreController 
+                object)
 Date:          
 Version:        V1.0 
-TODO:           - english language
-                - camelCase-notation
-                - bracket formation (readme codestyle!)
-
-******************************************************************************/
+TODO:           - 
+**********************************************************************************************************************/
 
 using System.Collections;
 using System.Collections.Generic;
@@ -234,6 +233,7 @@ public class Snake : MonoBehaviour {
     * Parameter <gridPosition.x>: current coordinate x of Snake-Head
     * Parameter <gridPosition.y>: current coordinate y of Snake-Head 
     * Return: true (nothing changes) or false (Gameover();)
+    * Version: 1.0
    */
     public bool CollisionCheckBoarder() {
         GetGridPosition();
@@ -257,7 +257,7 @@ public class Snake : MonoBehaviour {
      * Description: set isGameOver (bool) to true  
      * Parameter: -
      * Return: -
-     * Version: 2
+     * Version: 1.1
     */
     public void Gameover() {
        isGameOver = true;

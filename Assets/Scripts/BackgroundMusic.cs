@@ -1,11 +1,11 @@
-/******************************************************************************
+/**********************************************************************************************************************
 Name:           BackgroundMusic
 Description:    The script checks if a audio file is embedded 
 Author(s):      Daniel Rittrich
 Date:           2022-06-03
 Version:        V1.0
 TODO:           - 
-******************************************************************************/
+**********************************************************************************************************************/
 
 using System.Collections;
 using System.Collections.Generic;
@@ -19,6 +19,7 @@ public class BackgroundMusic : MonoBehaviour {
      * Description: checks if there exists a audio file
      * Parameter: -
      * Return: -
+     * Version: 1.0
      * Code-Quelle: https://www.youtube.com/watch?v=AFcHsKd_aMo (zuletzt aufgerufen am 08.07.2022)
     */
     void Awake() {

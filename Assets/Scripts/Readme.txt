@@ -1,5 +1,4 @@
 makeSnakeGreatAgain
-OOP-project to make prof. hara happy
 Date: 13.06.2022 (update getter and setter)
 
 ###code-style

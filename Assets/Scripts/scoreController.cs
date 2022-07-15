@@ -2,12 +2,11 @@
 Name:          scoreCalculator
 Description:   The script calculates the highscore depending on the lenght of
                the snake.
-               read data: PlayerPrefs <-- Textfield <-- highscoreAsInt
 Author(s):     Markus Haubold
 Date:          2022-07-01
 Version:       V1.0 
-TODO:          - future: add config file to switch the debug mode (not in the script)
-               - complete the user interaction
+TODO:          - future:- add config file to switch the debug mode (not in the script)
+                        - complete the user interaction
 **********************************************************************************************************************/
 
 using System;
@@ -36,20 +35,22 @@ public class scoreController : MonoBehaviour
 
     //setter and getter
     /*
-     *Author(s): Haubold Markus;
-     *Description: Set the actual playername
-     *Parameter value: The value for the playername as string
-     *Return: -
+     * Author(s): Haubold Markus;
+     * Description: Set the actual playername
+     * Parameter value: The value for the playername as string
+     * Return: -
+     * Version: 1.0
     */
     public void setPlayerName(string value) {
         playerName = value;
     }
     
     /*
-     *Author(s): Haubold Markus;
-     *Description: Get the actual playername
-     *Parameter: -
-     *Return: The actual playername as string
+     * Author(s): Haubold Markus;
+     * Description: Get the actual playername
+     * Parameter: -
+     * Return: The actual playername as string
+     * Version: 1.0
     */
     public string getPlayerName() {
         string returnValue;
@@ -59,20 +60,22 @@ public class scoreController : MonoBehaviour
     }
 
     /*
-     *Author(s): Haubold Markus;
-     *Description: Set the state of the refreshing
-     *Parameter value: state as bool  (true == done)
-     *Return: -
+     * Author(s): Haubold Markus;
+     * Description: Set the state of the refreshing
+     * Parameter value: state as bool  (true == done)
+     * Return: -
+     * Version: 1.0
     */
     public void setRefreshDone(bool value) {
         refreshDone = value;
     }
 
     /*
-     *Author(s): Haubold Markus;
-     *Description: Get the current state of the refreshing from the highscorelist
-     *Parameter: -
-     *Return: The current state of the refreshing  as bool (true == done)
+     * Author(s): Haubold Markus;
+     * Description: Get the current state of the refreshing from the highscorelist
+     * Parameter: -
+     * Return: The current state of the refreshing  as bool (true == done)
+     * Version: 1.0
     */
     public bool getRefreshDone() {
         bool returnValue;
@@ -82,10 +85,11 @@ public class scoreController : MonoBehaviour
     }
     
     /*
-     *Author(s): Haubold Markus;
-     *Description: Set the current playerscore as string (it is displayed in the Textfield at the playfield)
-     *Parameter value: The value for the Scorefield as integer
-     *Return: -
+     * Author(s): Haubold Markus;
+     * Description: Set the current playerscore as string (it is displayed in the Textfield at the playfield)
+     * Parameter value: The value for the Scorefield as integer
+     * Return: -
+     * Version: 1.0
     */
     public void setScorefield(int value, int maxLength) {
         log("snakelänge: " + value);
@@ -100,10 +104,11 @@ public class scoreController : MonoBehaviour
     }
     
     /*
-     *Author(s): Haubold Markus;
-     *Description: Get the current playerscore as string
-     *Parameter: -
-     *Return: The actual playerscore as string
+     * Author(s): Haubold Markus;
+     * Description: Get the current playerscore as string
+     * Parameter: -
+     * Return: The actual playerscore as string
+     * Version: 1.0
     */
     public string getScorefield() {
         string returnValue = scorefield.text;
@@ -112,10 +117,11 @@ public class scoreController : MonoBehaviour
     }
 
     /*
-     *Author(s): Haubold Markus;
-     *Description: Set/unset the variable deleteAllHighscoreData to delete all highscore data
-     *Parameter value: The state of the variable deleteAllHighscoreData as bool
-     *Return: -
+     * Author(s): Haubold Markus;
+     * Description: Set/unset the variable deleteAllHighscoreData to delete all highscore data
+     * Parameter value: The state of the variable deleteAllHighscoreData as bool
+     * Return: -
+     * Version: 1.0
     */
     public void setDeleteAllHighscoreData(bool value) {
         //if there will be a popup in the future with the final question for the delet -> implement 
@@ -125,10 +131,11 @@ public class scoreController : MonoBehaviour
     }    
     
     /*
-     *Author(s): Haubold Markus;
-     *Description: Get the status of the variable deleteAllHighscoreData to delete all data 
-     *Parameter : -
-     *Return: The state of the variable deleteAllHighscoreData as bool
+     * Author(s): Haubold Markus;
+     * Description: Get the status of the variable deleteAllHighscoreData to delete all data 
+     * Parameter : -
+     * Return: The state of the variable deleteAllHighscoreData as bool
+     * Version: 1.0
     */
     public bool getDeleteAllHighscoreData() {
         bool returnValue;
@@ -138,21 +145,23 @@ public class scoreController : MonoBehaviour
     }
 
     /*
-     *Author(s): Haubold Markus;
-     *Description: Set a name to an position at the highscoreName-list 
-     *Parameter index: Set the list-position as integer
-     *Parameter value: Set the playername in the list as string
-     *Return: -
+     * Author(s): Haubold Markus;
+     * Description: Set a name to an position at the highscoreName-list 
+     * Parameter index: Set the list-position as integer
+     * Parameter value: Set the playername in the list as string
+     * Return: -
+     * Version: 1.0
     */
     public void setHighscoreName(int index, string value) {
         highscoreName[index].text = value;    
     }
 
     /*
-     *Author(s): Haubold Markus;
-     *Description: Get a name from the highscoreName list
-     *Parameter index: Set the list-position as integer
-     *Return: The name from the list-position as string
+     * Author(s): Haubold Markus;
+     * Description: Get a name from the highscoreName list
+     * Parameter index: Set the list-position as integer
+     * Return: The name from the list-position as string
+     * Version: 1.0
     */
     public string getHighscoreName(int index) {
         
@@ -160,21 +169,23 @@ public class scoreController : MonoBehaviour
     }
     
     /*
-     *Author(s): Haubold Markus;
-     *Description: Set a score to an position at the highscoreValue-list 
-     *Parameter index: Set the list-position as integer
-     *Parameter value: Set the playerscore in the list as string
-     *Return: -
+     * Author(s): Haubold Markus;
+     * Description: Set a score to an position at the highscoreValue-list 
+     * Parameter index: Set the list-position as integer
+     * Parameter value: Set the playerscore in the list as string
+     * Return: -
+     * Version: 1.0
     */
     public void setHighscoreValue(int index, string value) {
         highscoreValue[index].text = value;    
     }
     
     /*
-     *Author(s): Haubold Markus;
-     *Description: Get a score from the highscoreValue list
-     *Parameter index: Set the list-position as integer
-     *Return: The score from the list-postion as string
+     * Author(s): Haubold Markus;
+     * Description: Get a score from the highscoreValue list
+     * Parameter index: Set the list-position as integer
+     * Return: The score from the list-postion as string
+     * Version: 1.0
     */
     public string getHighscoreValue(int index) {
        
@@ -182,20 +193,22 @@ public class scoreController : MonoBehaviour
     }
 
      /*
-     *Author(s): Haubold Markus;
-     *Description: Set/unset the variable secondCheckDeleteData (confirm deletion)
-     *Parameter value: Set/unset variable secondCheckDeleteData as bool
-     *Return: -
+     * Author(s): Haubold Markus;
+     * Description: Set/unset the variable secondCheckDeleteData (confirm deletion)
+     * Parameter value: Set/unset variable secondCheckDeleteData as bool
+     * Return: -
+     * Version: 1.0
     */
     public void setSecondCheckDeleteData(bool value) {
         secondCheckDeleteData = value;
     }
     
     /*
-     *Author(s): Haubold Markus;
-     *Description: Get the state of the variable secondCheckDeleteData 
-     *Parameter : -
-     *Return: The state of the variable secondCheckDeleteData as bool
+     * Author(s): Haubold Markus;
+     * Description: Get the state of the variable secondCheckDeleteData 
+     * Parameter : -
+     * Return: The state of the variable secondCheckDeleteData as bool
+     * Version: 1.0
     */
     public bool getSecondCheckDeleteData() {
         bool returnValue;
@@ -205,20 +218,22 @@ public class scoreController : MonoBehaviour
     }
 
     /*
-     *Author(s): Haubold Markus;
-     *Description: Set/unset the state of the variable runRefreshHighscoreList
-     *Parameter value: Set/unset the state of the variable runRefreshHighscoreList as bool
-     *Return: -
+     * Author(s): Haubold Markus;
+     * Description: Set/unset the state of the variable runRefreshHighscoreList
+     * Parameter value: Set/unset the state of the variable runRefreshHighscoreList as bool
+     * Return: -
+     * Version: 1.0
     */
     public void setRunRefreshHighscoreList(bool value) {
         runRefreshHighscoreList = value;
     }
     
     /*
-     *Author(s): Haubold Markus;
-     *Description: Get the state of the variable runRefreshHighscoreList
-     *Parameter : -
-     *Return: The state of the variable runRefreshHighscoreList as bool
+     * Author(s): Haubold Markus;
+     * Description: Get the state of the variable runRefreshHighscoreList
+     * Parameter : -
+     * Return: The state of the variable runRefreshHighscoreList as bool
+     * Version: 1.0
     */
     public bool getRunRefreshHighscoreList() {
         bool returnValue;
@@ -228,10 +243,11 @@ public class scoreController : MonoBehaviour
     }
 
     /*
-     *Author(s): Haubold Markus;
-     *Description: Add messagetexts to the list messages // CURRENTLY NOT USED - ITS A PREPERATION FOR THE FUTURE
-     *Parameter : -
-     *Return: -
+     * Author(s): Haubold Markus;
+     * Description: Add messagetexts to the list messages // CURRENTLY NOT USED - ITS A PREPERATION FOR THE FUTURE
+     * Parameter : -
+     * Return: -
+     * Version: 1.0
     */
     public void setMessage() {
        //later it will maybe possible to change the language -> implement logic here!
@@ -242,10 +258,11 @@ public class scoreController : MonoBehaviour
     }
     
     /*
-     *Author(s): Haubold Markus;
-     *Description: Get an messsage from the message-list // CURRENTLY NOT USED - ITS A PREPERATION FOR THE FUTURE
-     *Parameter index: Position in the message-list (message selector)
-     *Return: The message as string
+     * Author(s): Haubold Markus;
+     * Description: Get an messsage from the message-list // CURRENTLY NOT USED - ITS A PREPERATION FOR THE FUTURE
+     * Parameter index: Position in the message-list (message selector)
+     * Return: The message as string
+     * Version: 1.0
     */
     public string getMessage(int index) {
         string returnValue;
@@ -258,10 +275,11 @@ public class scoreController : MonoBehaviour
 
     //startup
     /*
-     *Author(s): Haubold Markus;
-     *Description: Is called with the first run of the script and is used to initialize the variables,lists and objects
-     *Parameter : - 
-     *Return: -
+     * Author(s): Haubold Markus;
+     * Description: Is called with the first run of the script and is used to initialize the variables,lists and objects
+     * Parameter : - 
+     * Return: -
+     * Version: 1.1
     */
     void Start() {
         //get the gameobject from the textfield
@@ -281,11 +299,12 @@ public class scoreController : MonoBehaviour
 
     //declaration of the function
     /*
-     *Author(s): Haubold Markus;
-     *Description: Shorthand to set the highscoreValue to the PlayerPrefs
-     *Parameter index: Set the number from the highscoreValue-key as integer (e.g. highscoreValue2)
-     *Parameter value: Set the highscoreValue as string
-     *Return: -
+     * Author(s): Haubold Markus;
+     * Description: Shorthand to set the highscoreValue to the PlayerPrefs
+     * Parameter index: Set the number from the highscoreValue-key as integer (e.g. highscoreValue2)
+     * Parameter value: Set the highscoreValue as string
+     * Return: -
+     * Version: 1.0
     */
     private void setPpValue(int index, string value) {
         if (inRangeOfInt(index, 0, 5)) {
@@ -296,10 +315,11 @@ public class scoreController : MonoBehaviour
     }
 
     /*
-     *Author(s): Haubold Markus;
-     *Description: Shorthand to get the highscoreValue from the PlayerPrefs
-     *Parameter index: Set the number from the highscoreValue-key as integer (e.g. highscoreValue2)
-     *Return: The highscoreValue as string
+     * Author(s): Haubold Markus;
+     * Description: Shorthand to get the highscoreValue from the PlayerPrefs
+     * Parameter index: Set the number from the highscoreValue-key as integer (e.g. highscoreValue2)
+     * Return: The highscoreValue as string
+     * Version: 1.0
     */
     private string getPpValue(int index) {
         string returnValue = "Error in getPpValue: Index " + index + " out of range!";
@@ -313,11 +333,12 @@ public class scoreController : MonoBehaviour
     }
     
     /*
-     *Author(s): Haubold Markus;
-     *Description: Shorthand to set the highscoreName to the PlayerPrefs
-     *Parameter index: Set the number from the highscoreName-key as integer (e.g. highscoreName2)
-     *Parameter value: Set the highscoreName as string
-     *Return: -
+     * Author(s): Haubold Markus;
+     * Description: Shorthand to set the highscoreName to the PlayerPrefs
+     * Parameter index: Set the number from the highscoreName-key as integer (e.g. highscoreName2)
+     * Parameter value: Set the highscoreName as string
+     * Return: -
+     * Version: 1.0
     */
     private void setPpName(int index, string value) {
         if (inRangeOfInt(index, 0, 5)) {
@@ -328,10 +349,11 @@ public class scoreController : MonoBehaviour
     }
    
    /*
-     *Author(s): Haubold Markus;
-     *Description: Shorthand to get the highscoreName from the PlayerPrefs
-     *Parameter index: Set the number from the highscoreName-key as integer (e.g. highscoreValue2)
-     *Return: The highscoreName as string
+     * Author(s): Haubold Markus;
+     * Description: Shorthand to get the highscoreName from the PlayerPrefs
+     * Parameter index: Set the number from the highscoreName-key as integer (e.g. highscoreValue2)
+     * Return: The highscoreName as string
+     * Version: 1.0
     */
     private string getPpName(int index) {
         string returnName = "Error in getPpName: Index " + index + " out of range!";
@@ -345,11 +367,12 @@ public class scoreController : MonoBehaviour
     }
 
     /*
-     *Author(s): Haubold Markus;
-     *Description: Initialize the PlayerPrefs at the very first run of the application: set the keys 
+     * Author(s): Haubold Markus;
+     * Description: Initialize the PlayerPrefs at the very first run of the application: set the keys 
      *             with the default values and the identifier to 1
-     *Parameter : - 
-     *Return: The state true if the PlayerPrefs are initialized and with false if not as bool
+     * Parameter : - 
+     * Return: The state true if the PlayerPrefs are initialized and with false if not as bool
+     * Version: 1.1
     */
     private bool initializePlayerprefKeys() {
         //initialize highscorelist
@@ -376,10 +399,11 @@ public class scoreController : MonoBehaviour
     }
     
     /*
-     *Author(s): Haubold Markus;
-     *Description: Copy the values highscoreName and highscoreValue from the PlayrePrefs to the eponymous lists
-     *Parameter : -  
-     *Return: The state true if the copy was successfull or with false if not as bool
+     * Author(s): Haubold Markus;
+     * Description: Copy the values highscoreName and highscoreValue from the PlayrePrefs to the eponymous lists
+     * Parameter : -  
+     * Return: The state true if the copy was successfull or with false if not as bool
+     * Version: 1.0
     */
     private bool copyPlayerprefsToTextfields() {
         for (int index = 0; index <= 4; index++) {
@@ -402,10 +426,11 @@ public class scoreController : MonoBehaviour
     }
 
     /*
-     *Author(s): Haubold Markus;
-     *Description: Delete all highscoreName and highscoreValue from the PlayerPrefs
-     *Parameter : -
-     *Return: The state true if the deletion was successfull or with false if not as bool
+     * Author(s): Haubold Markus;
+     * Description: Delete all highscoreName and highscoreValue from the PlayerPrefs
+     * Parameter : -
+     * Return: The state true if the deletion was successfull or with false if not as bool
+     * Version: 1.0
     */
     private bool deleteHighscoreData() {
         bool done = false;
@@ -441,12 +466,13 @@ public class scoreController : MonoBehaviour
     }
 
     /*
-     *Author(s): Haubold Markus;
-     *Description: Tests whether a given value is within the given bounds
-     *Parameter value: The value to test for the bounds 
-     *Parameter lowBound: Allowed minimum value for the value
-     *Parameter highBound: Allowed maximum value for the value 
-     *Return: The state true if the value is within the bounds and false if not as bool
+     * Author(s): Haubold Markus;
+     * Description: Tests whether a given value is within the given bounds
+     * Parameter value: The value to test for the bounds 
+     * Parameter lowBound: Allowed minimum value for the value
+     * Parameter highBound: Allowed maximum value for the value 
+     * Return: The state true if the value is within the bounds and false if not as bool
+     * Version: 1.0
     */
     private bool inRangeOfInt(int value, int lowBound, int highBound) {
         if ((value >= lowBound) && (value <= highBound)) {
@@ -457,10 +483,11 @@ public class scoreController : MonoBehaviour
     }
 
     /*
-     *Author(s): Haubold Markus;
-     *Description: Convert a number from the type string to an number from the type integer 
-     *Parameter value: The number from the type string which to convert
-     *Return: The converted number as an integer 
+     * Author(s): Haubold Markus;
+     * Description: Convert a number from the type string to an number from the type integer 
+     * Parameter value: The number from the type string which to convert
+     * Return: The converted number as an integer 
+     * Version: 1.0
     */
     private int stringToInt(string value) {
         int returnValue;
@@ -471,16 +498,16 @@ public class scoreController : MonoBehaviour
             log("Error in function stringToInt: " + e.Message);
             returnValue = -99; //workaround till the error-handle-function is implemented
         }
-        //ToDo: if the error-handle-function is implemented, call it! 
 
         return returnValue;
     }
 
     /*
-     *Author(s): Haubold Markus;
-     *Description: Calculates an rounded an factorized exponential function with the given parameter x
-     *Parameter x: The variable value for the calculation
-     *Return: The result from the calculation as an double 
+     * Author(s): Haubold Markus;
+     * Description: Calculates an rounded an factorized exponential function with the given parameter x
+     * Parameter x: The variable value for the calculation
+     * Return: The result from the calculation as an double
+     * Version: 1.1 
     */
     private double calculate(int x) {
         //function parameters
@@ -500,11 +527,12 @@ public class scoreController : MonoBehaviour
     }
 
     /*
-     *Author(s): Haubold Markus;
-     *Description: Sorts highscoreName and highscoreValue (from PlayerPrefs) in descending order and writes it to the
+     * Author(s): Haubold Markus;
+     * Description: Sorts highscoreName and highscoreValue (from PlayerPrefs) in descending order and writes it to the
      *             eponymous lists (=refreshing the list of highscores at the highscore window)
-     *Parameter: - 
-     *Return: The status true if the refreshing was successful and and false if not as bool
+     * Parameter: - 
+     * Return: The status true if the refreshing was successful and and false if not as bool
+     * Version: 1.3
     */
     private bool refreshHighscoreList() {
         const int memoryIndexPp = 5;
@@ -590,10 +618,11 @@ public class scoreController : MonoBehaviour
     }
 
     /*
-     *Author(s): Haubold Markus;
-     *Description: Currently a preparation for an communication with the user (show messages)
-     *Parameter message: The to shown message as string 
-     *Return: -
+     * Author(s): Haubold Markus;
+     * Description: Currently a preparation for an communication with the user (show messages)
+     * Parameter message: The to shown message as string 
+     * Return: -
+     * Version: 1.0
     */
     private void userInformation(string message) {
         //TODO: generate an textfield at the UI and link it here!
@@ -602,10 +631,11 @@ public class scoreController : MonoBehaviour
 
     //debug stuff
     /*
-     *Author(s): Haubold Markus;
-     *Description: Debug area to test some functions / codelines rapid (only called if debugModeOn true)
-     *Parameter: -
-     *Return: -
+     * Author(s): Haubold Markus;
+     * Description: Debug area to test some functions / codelines rapid (only called if debugModeOn true)
+     * Parameter: -
+     * Return: -
+     * Version: 1.0
     */
     private void debugArea() {
         log("DEBUG-MODE ACTIVE!!!");
@@ -614,31 +644,34 @@ public class scoreController : MonoBehaviour
     }
     
     /*
-     *Author(s): Haubold Markus;
-     *Description: Write a PlayerPref with the given key and value
-     *Parameter keyname: The keyname for the PlayerPref as string
-     *Parameter value: The value for the given keyname as string
-     *Return: -
+     * Author(s): Haubold Markus;
+     * Description: Write a PlayerPref with the given key and value
+     * Parameter keyname: The keyname for the PlayerPref as string
+     * Parameter value: The value for the given keyname as string
+     * Return: -
+     * Version: 1.0
     */
     private void debugWritePlayerpref(string keyname, string value) {
         PlayerPrefs.SetString(keyname , value);
     }
     
     /*
-     *Author(s): Haubold Markus;
-     *Description: Shorthand for the UnityEngine.Debug.Log()
-     *Parameter message: The message to log
-     *Return: -
+     * Author(s): Haubold Markus;
+     * Description: Shorthand for the UnityEngine.Debug.Log()
+     * Parameter message: The message to log
+     * Return: -
+     * Version: 1.0
     */
     private void log(string message) {
         UnityEngine.Debug.Log(message);
     }
 
     /*
-     *Author(s): Haubold Markus;
-     *Description: Logs which only shown when debugModeOn is true
-     *Parameter message: The message to log
-     *Return: -
+     * Author(s): Haubold Markus;
+     * Description: Logs which only shown when debugModeOn is true
+     * Parameter message: The message to log
+     * Return: -
+     * Version: 1.0
     */
     private void debugLog(string message) {
         if (debugModeOn) {
@@ -648,13 +681,14 @@ public class scoreController : MonoBehaviour
 
 
 
-    //main
+
     /*
-     *Author(s): Haubold Markus;
-     *Description: Update is called every frame and handles the call from the functions wich are used to calculate and 
-     *             handle the highscorelist 
-     *Parameter: -
-     *Return: -
+     * Author(s): Haubold Markus;
+     * Description: Update is called every frame and handles the call from the functions wich are used to calculate and 
+     *             handle the highscorelist (its the main function)
+     * Parameter: -
+     * Return: -
+     * Version: 1.0
     */
     void Update() {
         //gamover = refresh highscorelist
@@ -665,7 +699,7 @@ public class scoreController : MonoBehaviour
             }
         }
 
-        /* PREPARATION FOR A ACTION TO DELETE ALL THE HIGHSCORE-DATA
+        /* PREPARATION FOR AN ACTION TO DELETE ALL THE HIGHSCORE-DATA
             needs a doublecheck mechanism at the UI 
             set with a first button the setDeleteAllHighscoreData(true) and
             confirm it with a second one via setSecondCheckDeletData(true)*/

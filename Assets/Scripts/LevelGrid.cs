@@ -3,12 +3,10 @@ Name:           LevelGrid
 Description:   
                
 Author(s):      Adel Kharbout
+                Markus Haubold (only fix visibility bug @spawnFood and add radius to if-sequence @TrySnakeEatFood)
 Date:          
 Version:       V1.0 
-TODO:          - implement postionController(): check every frame: collision snake<->snake && snake<-->wall
-               - destroy food after eat it
-               - camelCase-notation
-               - getter and setter
+TODO:          - 
 **********************************************************************************************************************/
 using System;
 using Random=UnityEngine.Random;
@@ -37,7 +35,7 @@ public class LevelGrid {
         spawnFood();
     }
     
-    
+   
     public void spawnFood() {
         Vector2 foodScale = new Vector2(35.0f, 35.0f);  //Haubold: factor to scale the food-sprite up
         const int borderFoodSpawn = 20; //Haubold: spawndistance to the border (without you will only see a half apple)

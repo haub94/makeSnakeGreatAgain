@@ -1,4 +1,4 @@
-/******************************************************************************
+/**********************************************************************************************************************
 Name:           BackgroundImageScroll
 Description:    The script manages the effect of the scolling backgroundimage
                 on the startscreen.
@@ -6,7 +6,7 @@ Author(s):      Daniel Rittrich
 Date:           2022-06-03
 Version:        V1.0
 TODO:           - 
-******************************************************************************/
+**********************************************************************************************************************/
 
 using System.Collections;
 using System.Collections.Generic;
@@ -22,6 +22,7 @@ public class BackgroundImageScroll : MonoBehaviour {
      * Description: Moves an image permanently to a new coordinate and creates a fluid movingeffect. 
      * Parameter: X and Y parameter must be set in Unity.
      * Return: -
+     * Version: 1.0
      * Code-Quelle: https://www.youtube.com/watch?v=-6H-uYh80vc (zuletzt aufgerufen am 08.07.2022)
     */
     void Update() {

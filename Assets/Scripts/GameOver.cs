@@ -1,4 +1,4 @@
-/******************************************************************************
+/**********************************************************************************************************************
 Name:           GameOver
 Description:    The script manages the gameover-window and the options to close
                 the game or start e new game. Also it resets the all stats that
@@ -7,7 +7,7 @@ Author(s):      Daniel Rittrich
 Date:           2022-06-20
 Version:        V1.0 
 TODO:           -
-******************************************************************************/
+**********************************************************************************************************************/
 
 using System.Collections;
 using System.Collections.Generic;
@@ -35,6 +35,7 @@ public class GameOver : MonoBehaviour {
      * Description: this function is a connection to other scripts 
      * Parameter: -
      * Return: -
+     * Version: 1.0
     */
     public void Start() {
         // Daniel - 20.06.2022 - Zugriff auf Variablen aus anderem Script
@@ -49,6 +50,7 @@ public class GameOver : MonoBehaviour {
      * Description: checks if gameover-bool where setted to true
      * Parameter: isGameOver (bool) from Snake.cs
      * Return: -
+     * Version: 1.0
     */
     void Update() {
         if (MySnake.isGameOver) {
@@ -64,6 +66,7 @@ public class GameOver : MonoBehaviour {
      * Description: Stops the game. Read the actual score. Show gameover-window.
      * Parameter: score (string) from getScorefield() function from scoreController.cs
      * Return: -
+     * Version: 1.0
     */
     public void GameOverStopGame() {
         Time.timeScale = 0f;
@@ -86,6 +89,7 @@ public class GameOver : MonoBehaviour {
      * Description: Stops the game. Show game-win-window.
      * Parameter: score (string) from getScorefield() function from scoreController.cs
      * Return: -
+     * Version: 1.0
     */
     public void WinStopGame() {
         Time.timeScale = 0f;
@@ -103,6 +107,7 @@ public class GameOver : MonoBehaviour {
      * Description: deletes old visible snake-bodyparts of dead snake
      * Parameter: -
      * Return: -
+     * Version: 1.0
     */
     public void DestroyOldBodyParts() {
         GameObject[] bodyPartsToDestroy = GameObject.FindGameObjectsWithTag("SnakeBodyPart");
@@ -116,6 +121,7 @@ public class GameOver : MonoBehaviour {
      * Description: Sets all settings to default and starts a new game. 
      * Parameter: -
      * Return: -
+     * Version: 1.0
     */
     public void StartNewGame() {
         MySnake.isGameOver = false;

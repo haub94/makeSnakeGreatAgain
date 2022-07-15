@@ -1,4 +1,4 @@
-/******************************************************************************
+/**********************************************************************************************************************
 Name:           SoundManager
 Description:    The script manages to play backgroundmusic and the option to
                 pause it by clicking the speaker buttons. The players choice 
@@ -7,7 +7,7 @@ Author(s):      Daniel Rittrich
 Date:           2022-05-24
 Version:        V1.0
 TODO:           - 
-******************************************************************************/
+**********************************************************************************************************************/
 
 using System.Collections;
 using System.Collections.Generic;
@@ -27,6 +27,7 @@ public class SoundManager : MonoBehaviour {
      * Description: checks for sound settings and initialize settings for gamestart
      * Parameter: -
      * Return: -
+     * Version: 1.0
     */
     void Start() {
         if (!PlayerPrefs.HasKey("muted")) {
@@ -45,6 +46,7 @@ public class SoundManager : MonoBehaviour {
      * Description: handles the changes for sound-settings (sound on/off)
      * Parameter: -
      * Return: -
+     * Version: 1.0
      * Code-Quelle: https://www.youtube.com/watch?v=AFcHsKd_aMo (zuletzt aufgerufen am 08.07.2022)
     */
     public void SoundOnOff() {
@@ -65,6 +67,7 @@ public class SoundManager : MonoBehaviour {
      * Description: changes the icons for sound on/off in game and in settings 
      * Parameter: -
      * Return: -
+     * Version: 1.0
     */
     private void UpdateButtonIcon() {
         if (muted == false) {
@@ -86,6 +89,7 @@ public class SoundManager : MonoBehaviour {
      * Description: load the last setting for sound on/off from playerprefs 
      * Parameter: -
      * Return: -
+     * Version: 1.0
     */
     private void Load() {
         muted = PlayerPrefs.GetInt("muted") == 1;
@@ -96,6 +100,7 @@ public class SoundManager : MonoBehaviour {
      * Description: save the setting for sound on/off in playerprefs
      * Parameter: -
      * Return: -
+     * Version: 1.0
     */
     private void Save() {
         PlayerPrefs.SetInt("muted", muted ? 1 : 0);

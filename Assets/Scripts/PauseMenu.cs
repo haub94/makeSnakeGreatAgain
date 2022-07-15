@@ -1,4 +1,4 @@
-/******************************************************************************
+/**********************************************************************************************************************
 Name:           PauseMenu
 Description:    The script manages the menue-window and all menue-sub-windows.
                 Also it manages the option to start the game and pause the 
@@ -7,7 +7,7 @@ Author(s):      Daniel Rittrich
 Date:           2022-05-24
 Version:        V1.2
 TODO:           - 
-******************************************************************************/
+**********************************************************************************************************************/
 
 using System.Collections;
 using System.Collections.Generic;
@@ -48,6 +48,7 @@ public class PauseMenu : MonoBehaviour {
      * Description: Set trigger for start and pause. Show menu buttons and windows. Initialize clickevents for buttons.  
      * Parameter: -
      * Return: -
+     * Version: 1.0
     */
     void Start() {
         gamePaused = true;
@@ -78,6 +79,7 @@ public class PauseMenu : MonoBehaviour {
      * Description: checks for pressed ESC button  
      * Parameter: -
      * Return: -
+     * Version: 1.0
     */
     void Update() {
         if (gameStarted && Input.GetKeyDown(KeyCode.Escape)) {
@@ -90,6 +92,7 @@ public class PauseMenu : MonoBehaviour {
      * Description: checks for gamePaused (bool) and pause or resume the game  
      * Parameter: gamePaused (bool)
      * Return: -
+     * Version: 1.0
     */
     public void PauseOrResume() {
         if (gamePaused) {
@@ -105,6 +108,7 @@ public class PauseMenu : MonoBehaviour {
      * Description: starts the first game 
      * Parameter: -
      * Return: -
+     * Version: 1.0
     */
     public void StartGame() {
         gameStarted = true;
@@ -116,6 +120,7 @@ public class PauseMenu : MonoBehaviour {
      * Description: pauses the game and open the pause-menu
      * Parameter: -
      * Return: -
+     * Version: 1.0
     */
     public void Pause() {
         Time.timeScale = 0f;
@@ -137,6 +142,7 @@ public class PauseMenu : MonoBehaviour {
      * Description: resume the game and closes the pause-menu 
      * Parameter: -
      * Return: -
+     * Version: 1.0
     */
     public void Resume() {
         gamePaused = false;
@@ -156,6 +162,7 @@ public class PauseMenu : MonoBehaviour {
      * Description: show settings window 
      * Parameter: -
      * Return: -
+     * Version: 1.0
     */
     public void PressSettingsButton() {
         einstellungsMenu.SetActive(true);
@@ -169,6 +176,7 @@ public class PauseMenu : MonoBehaviour {
      * Description: show manual window
      * Parameter: -
      * Return: -
+     * Version: 1.0
     */
     public void PressManualButton() {
         einstellungsMenu.SetActive(false);
@@ -182,6 +190,7 @@ public class PauseMenu : MonoBehaviour {
      * Description: show highscore window
      * Parameter: -
      * Return: -
+     * Version: 1.0
     */
     public void PressHighscoreButton() {
         einstellungsMenu.SetActive(false);
@@ -195,6 +204,7 @@ public class PauseMenu : MonoBehaviour {
      * Description: show credits window
      * Parameter: -
      * Return: -
+     * Version: 1.0
     */
     public void PressCreditsButton() {
         einstellungsMenu.SetActive(false);
