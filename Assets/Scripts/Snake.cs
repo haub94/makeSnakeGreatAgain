@@ -18,12 +18,12 @@ using CodeMonkey.Utils;
 
 public class Snake : MonoBehaviour {
 
-    public enum GameStatus {  // Create GameStatus to run Update() - Le Xuan
+    public enum GameStatus {  //Tran Le Xuan: Create GameStatus to run Update()
         Continue,
         Stop
     }
 
-    public GameStatus gameStatus; // Store private GameStatus - Le Xuan 
+    public GameStatus gameStatus; //Tran Le Xuan: Store private GameStatus 
     public Vector2Int gridMoveDirection;
     public Vector2Int gridPosition;
     private LevelGrid levelGrid;
@@ -73,7 +73,7 @@ public class Snake : MonoBehaviour {
         snakeBodySize = 0;
         snakeMovePositionList.Clear();
         snakeBodyPartList.Clear();
-        gameStatus = GameStatus.Continue; // gameStatus equal out continue - Le Xuan
+        gameStatus = GameStatus.Continue; //Tran Le Xuan: gameStatus equal out continue
         scoreControllerScript = 
             GameObject.Find("Scorefield").GetComponent<scoreController>(); //Haubold: link to scoreController script
         scoreControllerScript.setRefreshDone(false);    //Haubold: reset the done variable from the refreshing
@@ -81,7 +81,7 @@ public class Snake : MonoBehaviour {
     }
 
     private void Update() {
-        switch (gameStatus) { // Running Update - Le Xuan
+        switch (gameStatus) { //Tran Le Xuan: Add switch case for GameStatus
             case GameStatus.Continue:
                 HandleInput();
                 HandleGridMovement();
@@ -150,7 +150,7 @@ public class Snake : MonoBehaviour {
                     FunctionTimer.Create(worldSprite.DestroySelf, gridMoveTimerMax);
                 }*/
 
-                // Snake collides with itself - Le Xuan
+                //Tran Le Xuan: Snake collides with itself
                 for (int i = 0; i < snakeMovePositionList.Count; i++) {
                     Vector2Int snakeMovePosition = snakeMovePositionList[i];
                     if (gridPosition == snakeMovePosition) {
