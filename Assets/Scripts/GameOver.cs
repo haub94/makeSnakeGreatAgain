@@ -38,7 +38,7 @@ public class GameOver : MonoBehaviour {
      * Version: 1.0
     */
     public void Start() {
-        // Daniel - 20.06.2022 - Zugriff auf Variablen aus anderem Script
+        // Daniel Rittrich - 20.06.2022 - Zugriff auf Variablen aus anderem Script
         MyScore = GameObject.Find("Scorefield").GetComponent<scoreController>();
         MyPauseMenu = GameObject.Find("Pause - Menu - Manager").GetComponent<PauseMenu>();
         MySnake = GameObject.Find("Snake").GetComponent<Snake>();

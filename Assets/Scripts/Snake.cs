@@ -3,7 +3,7 @@ Name:
 Description:    
                
 Author(s):      Adel Kharbout
-                Haubold Markus (only the interaction with the scoreController 
+                Haubold Markus Markus (only the interaction with the scoreController 
                 object)
 Date:          
 Version:        V1.0 
@@ -34,22 +34,22 @@ public class Snake : MonoBehaviour {
     public List<snakeBodyPart> snakeBodyPartList;
     public bool isGameOver;
     PauseMenu myPauseMenu;
-    /*GameHandler mygamehandler;  //Emily: please refer Improving Note: CollisionCheckBoarder()*/
+    /*GameHandler mygamehandler;  //Herzner Emily: please refer Improving Note: CollisionCheckBoarder()*/
 
     public PauseMenu MyPauseMenu { get => myPauseMenu; set => myPauseMenu = value; }
-    /*public GameHandler MyGameHandler { get => mygamehandler; set => mygamehandler = value; } //Emily - please refer Improving Note: at CollisionCheckBoarder()*/
+    /*public GameHandler MyGameHandler { get => mygamehandler; set => mygamehandler = value; } //Herzner Emily - please refer Improving Note: at CollisionCheckBoarder()*/
     private int stepDistancePositive = 12;
     private int stepDistanceNegative = -12;
     private float timePerStep = .1f;
-    private scoreController scoreControllerScript; //Haubold: scoreController object
-    private const int maxLength = 90; //Haubold: max parts of the snake
+    private scoreController scoreControllerScript; //Haubold Markus: scoreController object
+    private const int maxLength = 90; //Haubold Markus: max parts of the snake
     private bool checkIfIsFirstStart = true;
 
 
     public void Start() {
-        MyPauseMenu = GameObject.Find("Pause - Menu - Manager").GetComponent<PauseMenu>(); // Daniel - 06.06.2022 - Zugriff auf Variable aus PauseMenu Script
-        /* gamehandler = GameObject.Find("GameHandler").GetComponent<GameHandler>();    //Emily: link GameHandler.cs for passing gamefield-scale
-         UnityEngine.Debug.Log("mygamefieldwith " + mygamefieldWidth);                  //Emily: please refer improving Note: CollisionCheckBoarder()
+        MyPauseMenu = GameObject.Find("Pause - Menu - Manager").GetComponent<PauseMenu>(); // Rittrich Daniel - 06.06.2022 - Zugriff auf Variable aus PauseMenu Script
+        /* gamehandler = GameObject.Find("GameHandler").GetComponent<GameHandler>();    //Herzner Emily: link GameHandler.cs for passing gamefield-scale
+         UnityEngine.Debug.Log("mygamefieldwith " + mygamefieldWidth);                  //Herzner Emily: please refer improving Note: CollisionCheckBoarder()
          UnityEngine.Debug.Log("mygamefieldheight " + mygamefieldHeight); */
     }
 
@@ -75,9 +75,9 @@ public class Snake : MonoBehaviour {
         snakeBodyPartList.Clear();
         gameStatus = GameStatus.Continue; //Tran Le Xuan: gameStatus equal out continue
         scoreControllerScript = 
-            GameObject.Find("Scorefield").GetComponent<scoreController>(); //Haubold: link to scoreController script
-        scoreControllerScript.setRefreshDone(false);    //Haubold: reset the done variable from the refreshing
-        scoreControllerScript.setRunRefreshHighscoreList(false);    //Haubold: reset the run variable from refreshing
+            GameObject.Find("Scorefield").GetComponent<scoreController>(); //Haubold Markus: link to scoreController script
+        scoreControllerScript.setRefreshDone(false);    //Haubold Markus: reset the done variable from the refreshing
+        scoreControllerScript.setRunRefreshHighscoreList(false);    //Haubold Markus: reset the run variable from refreshing
     }
 
     private void Update() {
@@ -85,16 +85,16 @@ public class Snake : MonoBehaviour {
             case GameStatus.Continue:
                 HandleInput();
                 HandleGridMovement();
-                CollisionCheckBoarder();  //Emily: call CollisionCheckBoarder function every frame
+                CollisionCheckBoarder();  //Herzner Emily: call CollisionCheckBoarder function every frame
                 break;
             case GameStatus.Stop:
                 break;
         }
     }
 
-    // Daniel - 05.06.2022 - Werte geaendert fuer Movement in groesseren Schritten ( 1 -> 50 )           !!!!!! Werte muessen aber noch an das Grid angepasst werden
+    // Rittrich Daniel - 05.06.2022 - Werte geaendert fuer Movement in groesseren Schritten ( 1 -> 50 )           !!!!!! Werte muessen aber noch an das Grid angepasst werden
     private void HandleInput() {
-        if (!MyPauseMenu.gamePaused) { // <- if-Befehl sperrt Bewegung wenn im Pausemenu - Daniel - 06.06.2022
+        if (!MyPauseMenu.gamePaused) { // <- if-Befehl sperrt Bewegung wenn im Pausemenu - Rittrich Daniel - 06.06.2022
                                                       
             if (Input.GetKeyDown(KeyCode.UpArrow)) {
                 if (gridMoveDirection.y != stepDistanceNegative) {
@@ -124,7 +124,7 @@ public class Snake : MonoBehaviour {
     }
 
     private void HandleGridMovement() {
-        if (!MyPauseMenu.gamePaused) { // <- if-Befehl sperrt Bewegung wenn im Pausemenu - Daniel - 06.06.2022
+        if (!MyPauseMenu.gamePaused) { // <- if-Befehl sperrt Bewegung wenn im Pausemenu - Rittrich Daniel - 06.06.2022
 
             gridMoveTimer += Time.deltaTime;
             if (gridMoveTimer >= gridMoveTimerMax) {
@@ -136,7 +136,7 @@ public class Snake : MonoBehaviour {
                 bool snakeAteFood = levelGrid.TrySnakeEatFood(gridPosition);
                 if (snakeAteFood) {
                     snakeBodySize++;
-                    scoreControllerScript.setScorefield(snakeBodySize, maxLength); //Haubold: write length to 
+                    scoreControllerScript.setScorefield(snakeBodySize, maxLength); //Haubold Markus: write length to 
                                                                                    //scoreController (calc act score)
                     CreateSnakeBody();
                 }
@@ -202,16 +202,16 @@ public class Snake : MonoBehaviour {
         private Vector2Int gridPosition;
         private Transform transform;
         public snakeBodyPart(int bodyIndex) {
-            Vector2 bodyPartScale = new Vector2(35.0f, 35.0f); //Haubold: scalefactor for bodyparts-sprite
+            Vector2 bodyPartScale = new Vector2(35.0f, 35.0f); //Haubold Markus: scalefactor for bodyparts-sprite
 
             GameObject snakeBodyGameObject = new GameObject("SnakeBody", typeof(SpriteRenderer));
             snakeBodyGameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.i.snakeBodySprite;
             snakeBodyGameObject.GetComponent<SpriteRenderer>().sortingOrder = -bodyIndex;
-            //Haubold: set sprite to layer 4
+            //Haubold Markus: set sprite to layer 4
             snakeBodyGameObject.GetComponent<Renderer>().sortingOrder = 4;
-            //Haubold: scale sprite of the bodyparts
+            //Haubold Markus: scale sprite of the bodyparts
             snakeBodyGameObject.GetComponent<Renderer>().transform.localScale = bodyPartScale;
-            //Daniel - set a tag to every bodypart
+            //Rittrich Daniel - set a tag to every bodypart
             snakeBodyGameObject.tag = "SnakeBodyPart";
 
             transform = snakeBodyGameObject.transform;
@@ -228,10 +228,9 @@ public class Snake : MonoBehaviour {
 
 
 
-   /* Author: Emily Herzner
+   /* Author: Herzner Emily Herzner
     * Description: Check if Sneak-Head collides with boarder, if so calls GameOver()
-    * Parameter <gridPosition.x>: current coordinate x of Snake-Head
-    * Parameter <gridPosition.y>: current coordinate y of Snake-Head 
+    * Parameter: -
     * Return: true (nothing changes) or false (Gameover();)
     * Version: 1.0
    */
@@ -252,8 +251,7 @@ public class Snake : MonoBehaviour {
      * --> GameHandler.cs was edited, current Values are unuseable for this function
     */
     /*
-     * Author: Daniel Rittrich (Verion 2)
-     *         (Emily: support version 1 revised by Daniel) 
+     * Author: Rittrich Daniel Rittrich (Verion 2); Herzner Emily Herzner (support version 1 revised by Rittrich Daniel) 
      * Description: set isGameOver (bool) to true  
      * Parameter: -
      * Return: -
@@ -262,7 +260,7 @@ public class Snake : MonoBehaviour {
     public void Gameover() {
        isGameOver = true;
 
-        //Haubold: call the refresh-function from scoreController
+        //Haubold Markus: call the refresh-function from scoreController
         if (!scoreControllerScript.getRefreshDone()) {
             scoreControllerScript.setRunRefreshHighscoreList(true); 
             UnityEngine.Debug.Log("refresh calles from gameover");

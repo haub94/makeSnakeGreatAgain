@@ -32,7 +32,7 @@ public class NameInputPlayerOne : MonoBehaviour {
     public GameObject startscreenTitel;
     public GameObject startscreenButtonEinzelspieler;
     public GameObject startscreenButtonMehrspieler;
-    private scoreController scoreControllerScript; //Haubold: scoreController object
+    private scoreController scoreControllerScript; //Haubold Markus: scoreController object
 
     /*
      * Author: Daniel Rittrich 
@@ -44,7 +44,7 @@ public class NameInputPlayerOne : MonoBehaviour {
     void Awake() {
         nameInputFieldTMP.characterLimit = 12;
         scoreControllerScript = 
-            GameObject.Find("Scorefield").GetComponent<scoreController>(); //Haubold: link to  script
+            GameObject.Find("Scorefield").GetComponent<scoreController>(); //Haubold Markus: link to  object scoreController
     }
 
     /*
@@ -72,7 +72,7 @@ public class NameInputPlayerOne : MonoBehaviour {
     */
     public void SetName() {
         namePlayerOne = nameInputFieldTMP.text;
-        scoreControllerScript.setPlayerName(namePlayerOne); //Haubold: call setter from scoreController for playername
+        scoreControllerScript.setPlayerName(namePlayerOne); //Haubold Markus: call setter from scoreController for playername
     }
 
     /*
