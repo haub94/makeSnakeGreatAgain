@@ -22,11 +22,12 @@ TODO:          - Implement great stuff
 
 ##functionheader-style
 /*
- * Author(s): Name(s) from the author(s) (Haubold Markus; Riitrich Daniel)
+ * Author(s): Name(s) from the author(s) (Haubold Markus; Rittrich Daniel)
  * Description: Describe the function in a short sentence
- * Parameter <var1>: Describe the use of the parameter
- * Parameter <var2>: Describe the use of the parameter
+ * Parameter var1: Describe the use of the parameter
+ * Parameter var2: Describe the use of the parameter
  * Return: Describe what the function returns (if there is no return: -)
+ * Version: x.y
 */
 
 ##getter-sytle
